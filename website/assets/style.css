@@ -161,3 +161,5 @@ footer .fine{border-top:1px solid rgba(255,255,255,.12);padding-top:20px;font-fa
   .spon-grid{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:560px){section.block{padding:56px 0}}
+
+.map-embed{width:100%;aspect-ratio:16/10;border:0;border-radius:14px;display:block}
