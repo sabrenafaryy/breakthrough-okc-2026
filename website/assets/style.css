@@ -218,3 +218,6 @@ footer .fine{border-top:1px solid rgba(255,255,255,.12);padding-top:20px;font-fa
 .tier{display:flex;flex-direction:column;align-items:center}
 .tier ul{width:100%}
 .tier a.btn,.tier a.btn-ghost{margin-top:auto}
+
+/* consistent gap so bottom-aligned tier buttons don't touch the benefit list */
+.tier ul{margin-bottom:18px}
