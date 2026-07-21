@@ -165,7 +165,7 @@ footer .fine{border-top:1px solid rgba(255,255,255,.12);padding-top:20px;font-fa
 .map-embed{width:100%;aspect-ratio:16/10;border:0;border-radius:14px;display:block}
 
 /* HERO with skyline bg */
-.hero.bg{background:linear-gradient(rgba(26,37,64,.82),rgba(26,37,64,.90)), url('skyline-hero.webp') center/cover no-repeat}
+.hero.bg{background:linear-gradient(rgba(26,37,64,.52),rgba(26,37,64,.68) 55%,rgba(26,37,64,.82)), url('skyline-hero.webp') center/cover no-repeat}
 /* IMAGE BAND */
 .imgband{position:relative;color:#fff;text-align:center;background:linear-gradient(rgba(36,49,80,.72),rgba(26,37,64,.80)), url('skyline-band.webp') center/cover no-repeat}
 .imgband .in{max-width:720px;margin:0 auto;padding:78px 24px}
