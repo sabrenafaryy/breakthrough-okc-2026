@@ -45,7 +45,7 @@ section.block{padding:76px 0}
 .sec-head p{color:#4a5468;font-size:16px}
 
 /* PAGE HEADER (inner pages) */
-.pagehead{background:var(--navy);color:#fff;padding:66px 0 8px;position:relative;overflow:hidden}
+.pagehead{background:var(--navy);color:#fff;padding:66px 0 0;position:relative;overflow:hidden}
 .pagehead:before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle at 1px 1px,rgba(255,255,255,.05) 1px,transparent 0);background-size:36px 36px;opacity:.6}
 .pagehead .in{position:relative;text-align:center;max-width:760px;margin:0 auto}
 .pagehead .eyebrow{color:#ff9d94}
@@ -221,3 +221,11 @@ footer .fine{border-top:1px solid rgba(255,255,255,.12);padding-top:20px;font-fa
 
 /* consistent gap so bottom-aligned tier buttons don't touch the benefit list */
 .tier ul{margin-bottom:18px}
+
+/* FAQ accordion */
+.faq details{background:#fff;border:1.5px solid #e7e7ea;border-radius:12px;margin-bottom:12px;overflow:hidden}
+.faq summary{list-style:none;cursor:pointer;padding:20px 24px;font-family:var(--font-head);font-weight:800;text-transform:uppercase;font-size:15px;color:var(--navy);display:flex;justify-content:space-between;align-items:center;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary .pm{flex:0 0 auto;color:var(--red);font-size:22px;transition:transform .2s}
+.faq details[open] summary .pm{transform:rotate(45deg)}
+.faq .ans{padding:0 24px 22px;color:#4a5468;font-size:15px;line-height:1.6}
