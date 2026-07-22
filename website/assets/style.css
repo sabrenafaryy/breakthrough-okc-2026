@@ -240,3 +240,9 @@ footer .fine{border-top:1px solid rgba(255,255,255,.12);padding-top:20px;font-fa
 /* sponsors-page partner tiles -> navy with logo */
 .spon{background:var(--navy);border:1.5px solid var(--navy)}
 .spon img{max-height:48px;max-width:80%;object-fit:contain;display:block}
+
+/* footer social */
+.fsocial{margin-top:16px;display:flex;gap:12px}
+.fsocial a{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.08);color:#c3cbe0;transition:background .2s,color .2s}
+.fsocial a:hover{background:var(--coral);color:#fff}
+.fsocial svg{width:20px;height:20px}
