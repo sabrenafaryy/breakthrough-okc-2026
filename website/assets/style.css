@@ -246,3 +246,6 @@ footer .fine{border-top:1px solid rgba(255,255,255,.12);padding-top:20px;font-fa
 .fsocial a{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.08);color:#c3cbe0;transition:background .2s,color .2s}
 .fsocial a:hover{background:var(--coral);color:#fff}
 .fsocial svg{width:20px;height:20px}
+
+/* hero "presented by" credit */
+.hero .presented{margin-top:16px;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.13em;font-size:11.5px;color:rgba(255,255,255,.82);font-weight:700}
