@@ -229,3 +229,14 @@ footer .fine{border-top:1px solid rgba(255,255,255,.12);padding-top:20px;font-fa
 .faq summary .pm{flex:0 0 auto;color:var(--red);font-size:22px;transition:transform .2s}
 .faq details[open] summary .pm{transform:rotate(45deg)}
 .faq .ans{padding:0 24px 22px;color:#4a5468;font-size:15px;line-height:1.6}
+
+/* SPONSOR / EXHIBITOR logo tiles (navy so white logos read) */
+.logo-row{display:flex;flex-wrap:wrap;justify-content:center;gap:18px;max-width:920px;margin:0 auto}
+.logo-tile{background:var(--navy);border-radius:12px;display:flex;align-items:center;justify-content:center;padding:22px 26px;min-height:104px;width:250px}
+.logo-tile img{max-height:56px;max-width:100%;object-fit:contain;display:block}
+/* exhibitor marquee tiles -> navy with logo */
+.marquee-item{background:var(--navy);border:none}
+.marquee-item img{max-height:52px;max-width:82%;object-fit:contain;display:block}
+/* sponsors-page partner tiles -> navy with logo */
+.spon{background:var(--navy);border:1.5px solid var(--navy)}
+.spon img{max-height:48px;max-width:80%;object-fit:contain;display:block}
