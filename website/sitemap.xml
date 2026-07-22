@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://breakthroughokc.com/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://breakthroughokc.com/register.html</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://breakthroughokc.com/about.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://breakthroughokc.com/speakers.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://breakthroughokc.com/agenda.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://breakthroughokc.com/venue.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://breakthroughokc.com/sponsors.html</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://breakthroughokc.com/contact.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://breakthroughokc.com/privacy-policy.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://breakthroughokc.com/terms-conditions.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://breakthroughokc.com/sponsorship-agreement.html</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://breakthroughokc.com/tickets/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://breakthroughokc.com/about/</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://breakthroughokc.com/speakers/</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://breakthroughokc.com/agenda/</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://breakthroughokc.com/venue/</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://breakthroughokc.com/sponsors/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://breakthroughokc.com/contact/</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://breakthroughokc.com/privacy-policy/</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://breakthroughokc.com/terms-conditions/</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://breakthroughokc.com/sponsorship-agreement/</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
 </urlset>
