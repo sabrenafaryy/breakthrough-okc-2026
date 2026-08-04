@@ -288,6 +288,8 @@
 <script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1535008514154135');fbq('track','PageView');</script>
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1535008514154135&ev=PageView&noscript=1"/></noscript>
 <!-- End Meta Pixel Code -->
+<!-- ViewContent: ticket intent -->
+<script>fbq("track","ViewContent",{content_name:"Breakthrough OKC 2026 — Ticket",content_category:"Event",value:175.00,currency:"USD"});</script>
 </head>
 <body>
 
@@ -612,5 +614,7 @@
 </script>
 <div class="stickybar"><span>⏳ Tickets <b>$175</b> · rises to $197 Sept 6</span><a href="https://registration.breakthroughokc.com/contact-info" class="btn">Register →</a></div>
 <script>window.addEventListener('scroll',function(){var b=document.querySelector('.stickybar');if(b)b.classList.toggle('show',window.scrollY>640);},{passive:true});</script>
+<!-- Carry fbclid + UTMs to the registration subdomain -->
+<script>document.addEventListener("DOMContentLoaded",function(){var qs=window.location.search;if(!qs)return;var incoming=new URLSearchParams(qs);document.querySelectorAll('a[href*="registration.breakthroughokc.com"]').forEach(function(a){try{var url=new URL(a.href);incoming.forEach(function(v,k){if(!url.searchParams.has(k))url.searchParams.set(k,v);});a.href=url.toString();}catch(e){}});});</script>
 </body>
 </html>
