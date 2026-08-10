@@ -1,6 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- Breakthrough OKC attribution v2 -->
+<script>
+/* Captures ad params on first landing, survives internal navigation,
+   and stamps every registration link so GHL never logs a bare self-referral. */
+(function () {
+  var KEY = 'btokc_attr';
+  var COOKIE = 'btokc_attr';
+  var KEEP = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','utm_id',
+              'fbclid','gclid','ttclid','msclkid','wbraid','gbraid','li_fat_id','epik','ref'];
+
+  function readCookie(n) {
+    var m = document.cookie.match('(^|;)\\s*' + n + '\\s*=\\s*([^;]+)');
+    return m ? decodeURIComponent(m.pop()) : '';
+  }
+  function writeCookie(n, v) {
+    var d = new Date(); d.setTime(d.getTime() + 90 * 864e5);
+    document.cookie = n + '=' + encodeURIComponent(v) + ';expires=' + d.toUTCString() +
+      ';path=/;domain=.breakthroughokc.com;SameSite=Lax';
+  }
+  function load() {
+    var raw = '';
+    try { raw = sessionStorage.getItem(KEY) || ''; } catch (e) {}
+    if (!raw) raw = readCookie(COOKIE);
+    try { return raw ? JSON.parse(raw) : null; } catch (e) { return null; }
+  }
+  function save(o) {
+    var raw = JSON.stringify(o);
+    try { sessionStorage.setItem(KEY, raw); } catch (e) {}
+    writeCookie(COOKIE, raw);
+  }
+
+  // --- 1. What did this pageview bring in? ---
+  var incoming = {};
+  var qs = new URLSearchParams(window.location.search);
+  KEEP.forEach(function (k) { if (qs.get(k)) incoming[k] = qs.get(k); });
+
+  var refHost = '';
+  try {
+    if (document.referrer) refHost = new URL(document.referrer).hostname.replace(/^www\./, '');
+  } catch (e) {}
+  var internal = refHost.indexOf('breakthroughokc.com') !== -1;
+
+  var hasCampaign = !!(incoming.utm_source || incoming.fbclid || incoming.gclid ||
+                       incoming.ttclid || incoming.msclkid || incoming.utm_id);
+  var stored = load();
+  var coldEntry = !internal && !stored;
+
+  if (hasCampaign || coldEntry) {
+    var attr = {};
+    KEEP.forEach(function (k) { if (incoming[k]) attr[k] = incoming[k]; });
+
+    if (!attr.utm_source) {
+      if (attr.fbclid) { attr.utm_source = 'facebook'; attr.utm_medium = attr.utm_medium || 'paid_social'; }
+      else if (attr.gclid || attr.wbraid || attr.gbraid) { attr.utm_source = 'google'; attr.utm_medium = attr.utm_medium || 'cpc'; }
+      else if (refHost) { attr.utm_source = refHost; attr.utm_medium = attr.utm_medium || 'referral'; }
+      else { attr.utm_source = 'direct'; attr.utm_medium = attr.utm_medium || 'none'; }
+    }
+    if (!attr.utm_medium) attr.utm_medium = attr.fbclid ? 'paid_social' : 'unknown';
+
+    attr.landing_page = window.location.pathname;
+    attr.entry_referrer = refHost || '(none)';
+    attr.first_seen = new Date().toISOString().slice(0, 10);
+    save(attr);
+    stored = attr;
+  }
+
+  if (!stored) return;
+
+  // --- 2. Stamp every registration link, on every page ---
+  function decorate(a) {
+    if (!a || !a.href || a.href.indexOf('registration.breakthroughokc.com') === -1) return;
+    try {
+      var u = new URL(a.href);
+      Object.keys(stored).forEach(function (k) {
+        if (k === 'landing_page' || k === 'entry_referrer' || k === 'first_seen') return;
+        if (!u.searchParams.has(k)) u.searchParams.set(k, stored[k]);
+      });
+      if (!u.searchParams.has('utm_click_page')) {
+        u.searchParams.set('utm_click_page', window.location.pathname);
+      }
+      if (!u.searchParams.has('utm_landing_page')) {
+        u.searchParams.set('utm_landing_page', stored.landing_page || '/');
+      }
+      a.href = u.toString();
+    } catch (e) {}
+  }
+
+  function decorateAll() {
+    document.querySelectorAll('a[href*="registration.breakthroughokc.com"]').forEach(decorate);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', decorateAll);
+  } else {
+    decorateAll();
+  }
+
+  // Safety net: links added late, or clicked before the sweep ran.
+  document.addEventListener('click', function (e) {
+    var a = e.target && e.target.closest ? e.target.closest('a') : null;
+    if (a) decorate(a);
+  }, true);
+
+  window.btokcAttribution = stored;
+})();
+</script>
 <meta name="facebook-domain-verification" content="4ctv2trw2aa59misg8j9b3dret4z2l" />
 
 <meta charset="UTF-8" />
@@ -101,7 +207,6 @@
   </div>
 </footer>
 <script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6a2867f27b092d06b904c8d0" data-source="WEB_USER"></script>
-<!-- Carry fbclid + UTMs to the registration subdomain -->
-<script>document.addEventListener("DOMContentLoaded",function(){var qs=window.location.search;if(!qs)return;var incoming=new URLSearchParams(qs);document.querySelectorAll('a[href*="registration.breakthroughokc.com"]').forEach(function(a){try{var url=new URL(a.href);incoming.forEach(function(v,k){if(!url.searchParams.has(k))url.searchParams.set(k,v);});a.href=url.toString();}catch(e){}});});</script>
+
 </body>
 </html>
