@@ -157,7 +157,7 @@
 <section class="hero bg"><div class="wrap in">
   <div class="eyebrow">// For Wholesalers</div>
   <h1>You Have The Deal. <span class="r">You Don't Have The Buyer.</span></h1>
-  <p>That's the whole business — and a list you haven't spoken to in a year isn't a list. September 26 you shake hands with active buyers, in person, all day.</p>
+  <p>That's the whole business — and a list you haven't spoken to in a year isn't a list. September 26 is built for buyers: flippers sourcing inventory, landlords adding doors, builders looking for lots, and the lenders who fund them.</p>
   <p class="presented">September 26, 2026 · Champion Convention Center, Oklahoma City</p>
   <div class="cta2"><a href="https://registration.breakthroughokc.com/contact-info" class="btn btn-lg">Claim Your Seat — $175 →</a><a href="/agenda/" class="btn btn-lg btn-ghost">See The Full Day</a></div>
 </div>
@@ -200,7 +200,7 @@
     panel takes questions on it in person.</p></div>
   <div style="border:2px solid var(--navy);border-radius:14px;padding:32px 28px;max-width:900px;margin:0 auto;text-align:center">
     <h3 style="margin-bottom:12px">What You'll Leave With</h3>
-    <p style="max-width:66ch;margin:0 auto">Bring your buy box questions and a stack of cards. Spend the day working the floor with active buyers and find out what each of them is actually purchasing right now.</p>
+    <p style="max-width:66ch;margin:0 auto">Bring your buy box questions and a stack of cards. The vendor floor is open all day and the room is built around the people who buy what you find.</p>
   </div>
   <div class="center" style="margin-top:30px"><a href="https://registration.breakthroughokc.com/contact-info" class="btn btn-lg">Claim Your Seat — $175 →</a>
     <div class="js-pre-rise" style="font-family:var(--font-mono);font-size:12px;color:#6b7890;margin-top:12px">$175 until September 5, 11:59 p.m. · $197 from September 6</div>
@@ -219,63 +219,9 @@
   </div>
 </div></section>
 
-<section class="block fr-sec" id="fieldbrief">
-  <style>
-    .fr-sec{background:var(--navy);color:var(--white);padding:60px 0 66px}
-    .fr-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:52px;align-items:start}
-    .fr-sec .eyebrow{color:var(--red);margin-bottom:14px}
-    .fr-sec h2{font-family:var(--font-display);color:var(--white);
-      font-size:clamp(26px,3.2vw,40px);line-height:1.08;margin:0 0 16px}
-    .fr-lede{font-family:var(--font-body);font-size:17px;line-height:1.6;
-      color:#D6DBE6;margin:0 0 26px;max-width:52ch}
-    .fr-free{display:inline-block;font-family:var(--font-mono);font-size:12px;
-      letter-spacing:.12em;text-transform:uppercase;color:var(--white);
-      border:1px solid rgba(255,255,255,.28);border-radius:2px;padding:7px 12px}
-    .fr-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);
-      border-radius:10px;padding:26px 24px 18px}
-    .fr-card h3{font-family:var(--font-head);font-weight:800;color:var(--white);
-      font-size:19px;line-height:1.25;margin:0 0 6px}
-    .fr-card p{font-family:var(--font-body);font-size:14px;line-height:1.5;
-      color:#C3CAD8;margin:0 0 16px}
-    /* GHL parks the iframe offscreen until it loads, so the wrapper reserves the space. */
-    .fr-formwrap{min-height:430px;display:block}
-    .fr-form{width:100%;border:0;border-radius:8px;display:block;min-height:430px}
-    .fr-note{font-family:var(--font-body);font-size:12.5px;line-height:1.5;
-      color:#9AA4B8;margin:12px 0 0;text-align:center}
-    @media (max-width:900px){.fr-grid{grid-template-columns:1fr;gap:34px}.fr-lede{max-width:none}}
-  </style>
-  <div class="wrap"><div class="fr-grid">
-    <div>
-      <div class="eyebrow">// Free Field Brief</div>
-      <h2>Not Ready For A Seat? Take The Field Brief.</h2>
-      <p class="fr-lede">The free short version of the funding map — ten programs, the next deadlines,
-        and the three lookups to run before your next offer. PDF, straight to your inbox.</p>
-      <span class="fr-free">Free · No ticket required</span>
-    </div>
-    <div class="fr-card">
-      <h3>Send me the field brief</h3>
-      <p>Enter your email and we'll send it over. That's the whole ask.</p>
-      <!-- GHL form embed. Replace FORM_ID_HERE with the field-brief form's ID.
-           GHL source value for this form: "BOKC — Funding Brief opt-in (wholesalers)". -->
-      <div class="fr-formwrap">
-      <iframe
-        src="https://api.leadconnectorhq.com/widget/form/FORM_ID_HERE"
-        id="inline-FORM_ID_HERE"
-        class="fr-form"
-        style="width:100%;border:none;border-radius:8px;display:block"
-        data-layout="{'id':'INLINE'}"
-        data-trigger-type="alwaysShow"
-        data-activation-type="alwaysActivated"
-        data-deactivation-type="neverDeactivate"
-        data-form-name="BOKC — Funding Brief opt-in (wholesalers)"
-        data-layout-iframe-id="inline-FORM_ID_HERE"
-        title="Funding Field Brief opt-in"></iframe>
-      </div>
-      <script src="https://link.msgsndr.com/js/form_embed.js"></script>
-      <p class="fr-note">We'll email the field brief straight over. No spam, unsubscribe anytime.</p>
-    </div>
-  </div></div>
-</section>
+<!-- Field-brief opt-in intentionally omitted: no GHL form ID yet.
+     Set GHL_FIELD_BRIEF_FORM_ID in tools/build-persona-pages.py and re-run to enable.
+     Gate first: the field-brief PDF names Darrell Beavers and Shannon Entz. -->
 <section class="block ctaband"><div class="wrap">
   <div class="eyebrow" style="color:#ffd8d3">// One Saturday</div>
   <h2>Ready To Claim Your Seat?</h2><p>Tickets $175<span class="js-pre-rise"> — price rises to $197 on September 6</span>.</p>

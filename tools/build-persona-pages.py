@@ -49,6 +49,13 @@ CHAT = slice_between(HOME, '<script src="https://widgets.leadconnectorhq.com/loa
 PRICE_SWITCH = slice_between(HOME, "<!-- §4 price switch", "</script>")
 
 REG = "https://registration.breakthroughokc.com/contact-info"
+
+# The GHL field-brief form ID. While this is None the opt-in section is OMITTED entirely —
+# a 430px card wired to a dead form is worse than no card on pages taking paid spend.
+# Set it to the real ID and re-run to switch the section on across all five pages.
+# ⚠️ Before switching it on: the field-brief PDF names Darrell Beavers and Shannon Entz, whose
+# public naming is gated on Marty's written OK. Produce an un-named variant first.
+GHL_FIELD_BRIEF_FORM_ID = None
 CLOUD = slice_between(SPEAKERS, '<div class="cloud">', "</div>")
 
 # Sources. Each link must actually contain the claim it is attached to — a citation that
@@ -89,13 +96,20 @@ SRC = {
         "https://www.ohfa.org/2026/08/urban-set-aside-paused/",
         "OHFA notice: urban set-aside paused, Aug 7, 2026",
     ),
-    # NOT a public-document citation. OHFA's developer page lists the programs but publishes
-    # none of OHTF's terms — the 2%/24mo/95% figures come from material OHFA sent directly.
-    # Label it as that; never dress it up as a public source.
+    # OHFA publishes all of this on the OHTF program page and the applications posted there:
+    # 120% AMI on the page itself; 2% / 24 months / 95% of TDC in the posted 2024 final
+    # application; the 2026 redline shows 95 struck to 90. Verified against
+    # 30-Research/Verify-OHFA-2026-08-26.md, which quotes each one.
     "ohtf": (
-        "https://www.ohfa.org/developers/",
-        "Terms confirmed directly with OHFA Housing Development, Aug 2026 — "
-        "OHFA does not publish them; confirm current terms with the agency",
+        "https://www.ohfa.org/oklahoma-housing-trust-fund/",
+        "OHFA Oklahoma Housing Trust Fund program page and the applications posted on it — "
+        "120% AMI on the page; 2% / 24 months / 95% of TDC in the 2024 final application; "
+        "the 2026 redline cuts 95% to 90% · accessed Aug 27, 2026",
+    ),
+    # The five-year recapture is the half of the flipper caveat the IEC deck does not cover.
+    "recapture": (
+        "https://www.law.cornell.edu/uscode/text/26/50",
+        "26 U.S.C. §50(a) — five-year recapture on the rehabilitation credit · accessed Aug 27, 2026",
     ),
 }
 
@@ -165,9 +179,10 @@ PERSONAS = [
             ),
         ],
         "proof_head": "The Money That Works When You're Adding Doors",
-        "proof_lede": "Two state programs worth knowing before your next <b>build or substantial rehab</b> — "
-                      "this is development finance, not money for buying an existing building. Both are real "
-                      "and current, and both carry conditions you need to read before you get excited.",
+        "proof_lede": "Two state programs worth knowing before your next build — and, for the Trust Fund, "
+                      "a substantial rehab. <b>The Housing Stability Program funds new construction and "
+                      "adaptive reuse only, not rehab.</b> This is development finance either way, not money "
+                      "for buying an existing building, and both carry conditions worth reading first.",
         "proof": [
             stat_card(
                 "2% / 24 months",
@@ -179,9 +194,10 @@ PERSONAS = [
             ),
             stat_card(
                 "0% interest",
-                "The Housing Stability Program lends <b>construction</b> money at zero percent for 24 months, "
-                "then prime + 4%. <b>Rural applications are open now; the urban set-aside has been paused since "
-                "Aug 7, 2026</b> until repayments replenish the fund.",
+                "The Housing Stability Program lends <b>construction</b> money at zero percent on a 24-month "
+                "collateralised recourse loan — construction has to start within 180 days, and the rate goes "
+                "to prime + 4% if it is not repaid in the term. <b>Rural applications are open now; the urban "
+                "set-aside has been paused since Aug 7, 2026</b> until repayments replenish the fund.",
                 "hsp", "hsp_pause",
             ),
             stat_card(
@@ -202,7 +218,7 @@ PERSONAS = [
             ),
             speaker_card(
                 "ben", "Ben Allgeyer", "Keynote · Scaling",
-                "500+ deals · all 50 states · 6 companies · Kansas City, MO",
+                "500+ deals in 8 years · all 50 states · Kansas City, MO",
                 "He scaled, learned what doing it wrong costs, and rebuilt lean. He closes the day on the real "
                 "price of scaling and how to build a portfolio that holds.",
             ),
@@ -252,7 +268,7 @@ PERSONAS = [
                 "federal 20%. <b>Read the catch before you get excited: it requires an income-producing use "
                 "and carries a five-year federal recapture, so a short-hold flip forfeits it.</b> This is the "
                 "number that makes people run the rehab-and-hold version of a deal for the first time.",
-                "historic",
+                "historic", "recapture",
             ),
             stat_card(
                 "$39.7M",
@@ -280,7 +296,7 @@ PERSONAS = [
             ),
             speaker_card(
                 "ben", "Ben Allgeyer", "Keynote · Scaling",
-                "500+ deals · all 50 states · 6 companies · Kansas City, MO",
+                "500+ deals in 8 years · all 50 states · Kansas City, MO",
                 "500+ deals across all 50 states, and a hard lesson in scaling the wrong way. He closes on "
                 "building a deal flow that doesn't depend on you hunting every week.",
             ),
@@ -298,7 +314,8 @@ PERSONAS = [
         "eyebrow": "// For Wholesalers",
         "h1": 'You Have The Deal. <span class="r">You Don\'t Have The Buyer.</span>',
         "lede": "That's the whole business — and a list you haven't spoken to in a year isn't a list. "
-                "September 26 you shake hands with active buyers, in person, all day.",
+                "September 26 is built for buyers: flippers sourcing inventory, landlords adding doors, "
+                "builders looking for lots, and the lenders who fund them.",
         "problem_head": "The Only Problem You Actually Have",
         "problems": [
             plain_card(
@@ -351,8 +368,8 @@ PERSONAS = [
                 "systems side — directly useful if finding sellers is your other half.",
             ),
         ],
-        "takehome": "Bring your buy box questions and a stack of cards. Spend the day working the floor with "
-                    "active buyers and find out what each of them is actually purchasing right now.",
+        "takehome": "Bring your buy box questions and a stack of cards. The vendor floor is open all day and the "
+                    "room is built around the people who buy what you find.",
     },
     {
         "slug": "new-investors",
@@ -409,7 +426,7 @@ PERSONAS = [
         "speakers": [
             speaker_card(
                 "ben", "Ben Allgeyer", "Keynote · Scaling",
-                "500+ deals · all 50 states · 6 companies · Kansas City, MO",
+                "500+ deals in 8 years · all 50 states · Kansas City, MO",
                 "He scaled, learned the hard way what doing it wrong costs, and rebuilt smaller — simpler "
                 "operations, fewer moving parts, systems that surface deals without him hunting. You get the "
                 "rebuilt version, the one that's already been stress-tested.",
@@ -486,7 +503,7 @@ PERSONAS = [
             ),
             speaker_card(
                 "ben", "Ben Allgeyer", "Keynote · Scaling",
-                "500+ deals · all 50 states · 6 companies · Kansas City, MO",
+                "500+ deals in 8 years · all 50 states · Kansas City, MO",
                 "500+ deals across all 50 states — he has bought in markets he didn't live in, and closes the "
                 "day on the systems that make remote ownership survivable.",
             ),
@@ -497,16 +514,20 @@ PERSONAS = [
     },
 ]
 
-FINE_PRINT_NOTE = (
-    "Program details, deadlines and dollar figures reflect agency-published information verified "
-    "August 2026 and can change without notice — always confirm current terms with the administering "
-    "agency. Nothing on this site is an offer of financing, legal, tax or investment advice, and no "
-    "investment return is promised or implied."
-)
+# NOTE: the fine print is not injected here — it arrives inside the lifted FOOTER, which already
+# carries it. Do not add a second copy.
 
 
 def optin(slug):
-    """Field-brief capture. FORM_ID_HERE stays a placeholder until Sabrena creates the GHL forms."""
+    """Field-brief capture. Returns empty until a real GHL form ID exists — see
+    GHL_FIELD_BRIEF_FORM_ID above."""
+    if not GHL_FIELD_BRIEF_FORM_ID:
+        return (
+            "\n<!-- Field-brief opt-in intentionally omitted: no GHL form ID yet.\n"
+            "     Set GHL_FIELD_BRIEF_FORM_ID in tools/build-persona-pages.py and re-run to enable.\n"
+            "     Gate first: the field-brief PDF names Darrell Beavers and Shannon Entz. -->"
+        )
+    fid = GHL_FIELD_BRIEF_FORM_ID
     return f"""
 <section class="block fr-sec" id="fieldbrief">
   <style>
@@ -544,12 +565,12 @@ def optin(slug):
     <div class="fr-card">
       <h3>Send me the field brief</h3>
       <p>Enter your email and we'll send it over. That's the whole ask.</p>
-      <!-- GHL form embed. Replace FORM_ID_HERE with the field-brief form's ID.
+      <!-- GHL form embed.
            GHL source value for this form: "BOKC — Funding Brief opt-in ({slug})". -->
       <div class="fr-formwrap">
       <iframe
-        src="https://api.leadconnectorhq.com/widget/form/FORM_ID_HERE"
-        id="inline-FORM_ID_HERE"
+        src="https://api.leadconnectorhq.com/widget/form/{fid}"
+        id="inline-{fid}"
         class="fr-form"
         style="width:100%;border:none;border-radius:8px;display:block"
         data-layout="{{'id':'INLINE'}}"
@@ -557,7 +578,7 @@ def optin(slug):
         data-activation-type="alwaysActivated"
         data-deactivation-type="neverDeactivate"
         data-form-name="BOKC — Funding Brief opt-in ({slug})"
-        data-layout-iframe-id="inline-FORM_ID_HERE"
+        data-layout-iframe-id="inline-{fid}"
         title="Funding Field Brief opt-in"></iframe>
       </div>
       <script src="https://link.msgsndr.com/js/form_embed.js"></script>
