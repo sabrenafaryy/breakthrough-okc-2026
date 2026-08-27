@@ -51,7 +51,10 @@ PRICE_SWITCH = slice_between(HOME, "<!-- §4 price switch", "</script>")
 REG = "https://registration.breakthroughokc.com/contact-info"
 CLOUD = slice_between(SPEAKERS, '<div class="cloud">', "</div>")
 
-# Verified sources. Every one of these was fetched and checked 2026-08-27.
+# Sources. Each link must actually contain the claim it is attached to — a citation that
+# does not carry the figure is worse than none. The FRED and Census links below are
+# single-metro / single-city series, so they support the OKC figure ONLY: do not hang a
+# national comparison on them without adding the matching national series as its own source.
 SRC = {
     "pop": (
         "https://fred.stlouisfed.org/series/OKCPOP",
@@ -80,9 +83,19 @@ SRC = {
         "OHFA Housing Stability Program fact sheets, Jan 2026, plus OHFA's Aug 7, 2026 pause notice"
         " · accessed Aug 27, 2026",
     ),
+    # OHFA's Aug 7 2026 notice that the HSP urban set-aside is paused. The fact sheets PDF
+    # predates the pause and reads as if urban money is open, so the pause needs its own link.
+    "hsp_pause": (
+        "https://www.ohfa.org/2026/08/urban-set-aside-paused/",
+        "OHFA notice: urban set-aside paused, Aug 7, 2026",
+    ),
+    # NOT a public-document citation. OHFA's developer page lists the programs but publishes
+    # none of OHTF's terms — the 2%/24mo/95% figures come from material OHFA sent directly.
+    # Label it as that; never dress it up as a public source.
     "ohtf": (
         "https://www.ohfa.org/developers/",
-        "OHFA developer financing (Housing Trust Fund) · accessed Aug 27, 2026",
+        "Terms confirmed directly with OHFA Housing Development, Aug 2026 — "
+        "OHFA does not publish them; confirm current terms with the agency",
     ),
 }
 
@@ -93,12 +106,16 @@ SRC_STYLE = (
 STAT_STYLE = "font-family:var(--font-head);font-weight:900;font-size:34px;color:var(--navy);line-height:1"
 
 
-def stat_card(stat, body, src_key):
-    href, label = SRC[src_key]
+def stat_card(stat, body, *src_keys):
+    """A stat card. Pass more than one source key when a claim rests on more than one
+    document — every clickable source must actually contain the thing it is cited for."""
+    links = "".join(
+        f'<a href="{SRC[k][0]}" target="_blank" rel="noopener" style="{SRC_STYLE}">Source: {SRC[k][1]}</a>'
+        for k in src_keys
+    )
     return (
         f'<div class="fcard"><div style="{STAT_STYLE}">{stat}</div>'
-        f'<p style="margin-top:12px">{body}</p>'
-        f'<a href="{href}" target="_blank" rel="noopener" style="{SRC_STYLE}">Source: {label}</a></div>'
+        f'<p style="margin-top:12px">{body}</p>{links}</div>'
     )
 
 
@@ -132,9 +149,9 @@ PERSONAS = [
         "problem_head": "The Wall Every Landlord Hits",
         "problems": [
             plain_card(
-                "The bank says no at door seven",
-                "Conventional lending thins out exactly where your portfolio starts getting interesting. "
-                "The programs built for that jump are public, and almost nobody applies to them.",
+                "Conventional lending thins out",
+                "It gets harder exactly where your portfolio starts getting interesting. The public programs "
+                "built for that jump exist, and most landlords in this state have never looked at them.",
             ),
             plain_card(
                 "Nobody can tell you who decides",
@@ -147,23 +164,25 @@ PERSONAS = [
                 "whole decision — and they are never on the front page.",
             ),
         ],
-        "proof_head": "The Money That Works Above Door Six",
-        "proof_lede": "Two state programs worth knowing before your next acquisition. Both real, both current, "
-                      "both carrying conditions you need to read before you get excited.",
+        "proof_head": "The Money That Works When You're Adding Doors",
+        "proof_lede": "Two state programs worth knowing before your next <b>build or substantial rehab</b> — "
+                      "this is development finance, not money for buying an existing building. Both are real "
+                      "and current, and both carry conditions you need to read before you get excited.",
         "proof": [
             stat_card(
                 "2% / 24 months",
                 "The state's construction loan through the Oklahoma Housing Trust Fund reaches up to 95% of "
-                "total development cost. It is a small and largely committed pool, which is exactly why timing "
-                "and application order matter.",
+                "total development cost under current rules, for households up to 120% of area median income. "
+                "It is a small and largely committed pool, and the posted 2026 draft would cut coverage to 90% "
+                "— which is exactly why timing and application order matter.",
                 "ohtf",
             ),
             stat_card(
                 "0% interest",
-                "The Housing Stability Program lends construction money at zero percent for 24 months, then "
-                "prime + 4%. <b>Rural applications are open now; the urban set-aside has been paused since "
+                "The Housing Stability Program lends <b>construction</b> money at zero percent for 24 months, "
+                "then prime + 4%. <b>Rural applications are open now; the urban set-aside has been paused since "
                 "Aug 7, 2026</b> until repayments replenish the fund.",
-                "hsp",
+                "hsp", "hsp_pause",
             ),
             stat_card(
                 "$39.7M",
@@ -184,8 +203,8 @@ PERSONAS = [
             speaker_card(
                 "ben", "Ben Allgeyer", "Keynote · Scaling",
                 "500+ deals · all 50 states · 6 companies · Kansas City, MO",
-                "Scaled, lost $1M doing it wrong, rebuilt lean. He closes the day on what scaling actually "
-                "costs and how to build a portfolio that holds.",
+                "He scaled, learned what doing it wrong costs, and rebuilt lean. He closes the day on the real "
+                "price of scaling and how to build a portfolio that holds.",
             ),
         ],
         "takehome": "Bring one building or one target. Leave knowing which capital door to test first, what "
@@ -196,12 +215,12 @@ PERSONAS = [
         "utm": "persona-flip",
         "nav": "Fix & Flip",
         "title": "For Fix & Flip Investors | Breakthrough OKC 2026",
-        "desc": "Five people bidding on every house you find? September 26, Katie Neason teaches buying the "
+        "desc": "Everyone bidding on the same finished listing? September 26, Katie Neason teaches buying the "
                 "tired building two years before the street turns.",
         "eyebrow": "// For Fix &amp; Flip Investors",
         "h1": 'Everyone Else Is Bidding <span class="r">On The Finished One.</span>',
-        "lede": "Same listings, same five bidders, same margin getting thinner every year. There is a different "
-                "way to source, and September 26 is where it gets taught.",
+        "lede": "Same listings, same bidders, same margin getting thinner every year. There is a different way "
+                "to source, and September 26 is where it gets taught.",
         "problem_head": "Why The Margin Keeps Shrinking",
         "problems": [
             plain_card(
@@ -215,34 +234,39 @@ PERSONAS = [
                 "committed to turning it. Then it's the only cheap thing left.",
             ),
             plain_card(
-                "Rehab money is treated as one option",
-                "Hard money is what most flippers know. It is not the only structure available for a real "
-                "rehab in this state, and the alternatives change which deals pencil.",
+                "You've never priced the hold",
+                "Some of the buildings you pass on are worth keeping rather than selling — and the money that "
+                "rewards holding is a different set of doors than the hard money you already know.",
             ),
         ],
-        "proof_head": "The Tool Almost Nobody In This State Uses",
-        "proof_lede": "If your rehabs are substantial and the building has history, there is a credit sitting "
-                      "there that six people in the entire state were approved for.",
+        "proof_head": "What The Map Actually Says To A Flipper",
+        "proof_lede": "Straight answer: most public housing money in this state is development and "
+                      "affordable-housing finance, and a short-hold flip does not qualify for it. What the day "
+                      "gives you is the map of which doors are real for you — and which one is worth changing "
+                      "your exit for.",
         "proof": [
             stat_card(
                 "6 people",
-                "That's how many claimants statewide were approved for the historic rehab credit in 2023, the "
-                "most recent full year reported — a credit worth a combined 40% of qualified rehab costs when "
-                "Oklahoma's 20% is stacked with the federal 20%. It suits real rehabs, not cosmetic refreshes: "
-                "qualified spending has to exceed the building's adjusted basis.",
+                "That's how many claimants statewide were approved for the historic rehab credit in 2023 — a "
+                "credit worth a combined 40% of qualified rehab costs when Oklahoma's 20% is stacked with the "
+                "federal 20%. <b>Read the catch before you get excited: it requires an income-producing use "
+                "and carries a five-year federal recapture, so a short-hold flip forfeits it.</b> This is the "
+                "number that makes people run the rehab-and-hold version of a deal for the first time.",
                 "historic",
             ),
             stat_card(
                 "$39.7M",
                 "Of the NE Renaissance TIF districts' $50M project budget, $39.7M is still unallocated per the "
-                "city's FY25 report — budget capacity against future increment, not cash at closing. Knowing "
-                "where a district's boundary falls is part of reading which street turns.",
+                "city's FY25 report — budget capacity against future increment, not cash at closing. You are "
+                "unlikely to tap it on a flip, but knowing where a district's boundary sits is part of reading "
+                "which street turns next.",
                 "tif",
             ),
             stat_card(
                 "$316,450",
-                "The median home listing price in the OKC metro in July 2026, against a national median of "
-                "$428,950 that month. Cheap basis is why the rehab math still works here.",
+                "The median home listing price in the OKC metro in July 2026. A low basis is why the rehab "
+                "math still works in this market — and why the margin is worth defending with better sourcing "
+                "rather than a higher bid.",
                 "price",
             ),
         ],
@@ -251,19 +275,18 @@ PERSONAS = [
             speaker_card(
                 "katie", "Katie Neason", "Keynote · Redevelopment",
                 "Downtown redeveloper · Bryan, TX",
-                "She buys the tired building on the tired street two years before it turns, and has done it for "
-                "fifteen years. She opens the day teaching the Redevelopment Advantage Framework — the method, "
-                "not the story.",
+                "She buys the tired building on the tired street two years before it turns. She opens the day "
+                "teaching the Redevelopment Advantage Framework — the method, not the story.",
             ),
             speaker_card(
                 "ben", "Ben Allgeyer", "Keynote · Scaling",
                 "500+ deals · all 50 states · 6 companies · Kansas City, MO",
-                "500+ deals across all 50 states, and a $1M lesson in scaling the wrong way. He closes on "
+                "500+ deals across all 50 states, and a hard lesson in scaling the wrong way. He closes on "
                 "building a deal flow that doesn't depend on you hunting every week.",
             ),
         ],
         "takehome": "Bring one street or one building you keep driving past. Leave with the framework to read "
-                    "it, the rehab-credit test to run against it, and the people to call about both.",
+                    "it, an honest read on whether it is a flip or a hold, and the people to call about both.",
     },
     {
         "slug": "wholesalers",
@@ -328,8 +351,8 @@ PERSONAS = [
                 "systems side — directly useful if finding sellers is your other half.",
             ),
         ],
-        "takehome": "Bring your buy box questions and a stack of cards. Leave with a pocket of buyers who took "
-                    "yours in person, and know what each of them is actually purchasing right now.",
+        "takehome": "Bring your buy box questions and a stack of cards. Spend the day working the floor with "
+                    "active buyers and find out what each of them is actually purchasing right now.",
     },
     {
         "slug": "new-investors",
@@ -340,8 +363,8 @@ PERSONAS = [
                 "it — plus the complete Oklahoma funding map with your seat.",
         "eyebrow": "// If You're New To This",
         "h1": 'Where Do You Even Find <span class="r">The First Deal?</span>',
-        "lede": "Everyone in the room on September 26 has already done the thing you haven't. You get their "
-                "systems, the funding map, and a full day to ask the questions you can't Google.",
+        "lede": "September 26 puts you in a room of operators who are past deal one. You get their systems, "
+                "the funding map, and a full day to ask the questions you can't Google.",
         "problem_head": "What Actually Stops People At Deal One",
         "problems": [
             plain_card(
@@ -365,20 +388,20 @@ PERSONAS = [
         "proof": [
             stat_card(
                 "+13,700",
-                "Metro residents added in a year — 0.9% growth against 0.6% for U.S. metro areas overall. "
-                "More people is the demand side of every strategy you might pick.",
+                "Metro residents added in a year, 0.9% growth. More people is the demand side of every "
+                "strategy you might pick.",
                 "pop",
             ),
             stat_card(
                 "$316,450",
-                "Median home listing price in the OKC metro, July 2026. The national median that month was "
-                "$428,950 — the entry price here is meaningfully lower, which matters most on your first deal.",
+                "Median home listing price in the OKC metro, July 2026 — a low entry price, which matters "
+                "more on your first deal than on any deal after it.",
                 "price",
             ),
             stat_card(
                 "41%",
-                "Of Oklahoma City households rent, against roughly 35% nationally. That's the tenant pool "
-                "behind any buy-and-hold strategy you're considering.",
+                "Of Oklahoma City households rent — the tenant pool behind any buy-and-hold strategy you're "
+                "considering.",
                 "rent",
             ),
         ],
@@ -387,15 +410,15 @@ PERSONAS = [
             speaker_card(
                 "ben", "Ben Allgeyer", "Keynote · Scaling",
                 "500+ deals · all 50 states · 6 companies · Kansas City, MO",
-                "He scaled, lost $1M doing it the wrong way, and rebuilt smaller — simpler operations, fewer "
-                "moving parts, systems that surface deals without him hunting. You get the rebuilt version, "
-                "the one that's already been stress-tested.",
+                "He scaled, learned the hard way what doing it wrong costs, and rebuilt smaller — simpler "
+                "operations, fewer moving parts, systems that surface deals without him hunting. You get the "
+                "rebuilt version, the one that's already been stress-tested.",
             ),
             speaker_card(
                 "katie", "Katie Neason", "Keynote · Redevelopment",
                 "Downtown redeveloper · Bryan, TX",
-                "Fifteen years of buying what nobody else can see yet. Her framework is the clearest answer in "
-                "the room to \"how do I find a deal nobody's bidding on?\"",
+                "She buys what nobody else can see yet. Her framework is the clearest answer in the room to "
+                "\"how do I find a deal nobody's bidding on?\"",
             ),
         ],
         "takehome": "Bring the question you're most embarrassed to ask. Leave with a first capital door to test, "
@@ -406,13 +429,12 @@ PERSONAS = [
         "utm": "persona-oos",
         "nav": "Out-Of-State",
         "title": "For Out-Of-State Investors | Breakthrough OKC 2026",
-        "desc": "You've run Oklahoma City on a spreadsheet. You've never stood in it. September 26 you meet the "
-                "lenders, managers and contractors who actually operate here.",
+        "desc": "You've run Oklahoma City on a spreadsheet. You've never stood in it. September 26 you meet "
+                "the lenders, property managers and contractors who actually operate here.",
         "eyebrow": "// For Out-Of-State Investors",
         "h1": 'You\'ve Run Oklahoma City On A Spreadsheet. <span class="r">You\'ve Never Stood In It.</span>',
-        "lede": "The numbers work from a thousand miles away. What they can't tell you is who to trust on the "
-                "ground. September 26 is one Saturday that answers both — and you'll leave knowing whether to "
-                "buy here or stop looking.",
+        "lede": "The numbers work from a thousand miles away. What they can't tell you is who to trust on "
+                "the ground. September 26 is one Saturday in the room with the people who operate here.",
         "problem_head": "What A Spreadsheet Can't Price",
         "problems": [
             plain_card(
@@ -437,20 +459,20 @@ PERSONAS = [
         "proof": [
             stat_card(
                 "+13,700",
-                "Metro residents added in a year — 0.9% growth, against 0.6% for U.S. metro areas overall. "
-                "Growth is the demand under every rent roll you're modelling.",
+                "Metro residents added in a year, 0.9% growth. That is the demand under every rent roll "
+                "you're modelling.",
                 "pop",
             ),
             stat_card(
                 "41%",
-                "Of Oklahoma City households rent, against roughly 35% nationally. A structurally large tenant "
-                "pool, which is the part of your model most sensitive to being wrong.",
+                "Of Oklahoma City households rent — a structurally large tenant pool, and the part of your "
+                "model most sensitive to being wrong.",
                 "rent",
             ),
             stat_card(
                 "$316,450",
-                "Median metro listing price in July 2026 against a $428,950 national median — the basis "
-                "advantage that put this market on your list in the first place.",
+                "Median metro listing price in July 2026 — the low basis that put this market on your list "
+                "in the first place.",
                 "price",
             ),
         ],
@@ -470,7 +492,8 @@ PERSONAS = [
             ),
         ],
         "takehome": "Bring the market questions your spreadsheet can't settle. Leave with the operators' read on "
-                    "this metro, a shortlist of people who work here, and a clear yes or no on buying in.",
+                    "this metro, a shortlist of people who actually operate here, and much better questions than the "
+                    "ones your spreadsheet can answer.",
     },
 ]
 
