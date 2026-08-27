@@ -403,7 +403,7 @@
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1535008514154135&ev=PageView&noscript=1"/></noscript>
 <!-- End Meta Pixel Code -->
 <!-- ViewContent: ticket intent -->
-<script>fbq("track","ViewContent",{content_name:"Breakthrough OKC 2026 — Ticket",content_category:"Event",value:175.00,currency:"USD"});</script>
+<script>fbq("track","ViewContent",{content_name:"Breakthrough OKC 2026 — Ticket",content_category:"Event",value:(Date.now()>=new Date("2026-09-06T00:00:00-05:00").getTime()?197.00:175.00),currency:"USD"});</script>
 </head>
 <body>
 
@@ -754,7 +754,7 @@
     <div class="eyebrow"><span class="js-pre-rise">// Price Rises To $197 On September 6</span><span class="js-post-rise">// September 26 · Oklahoma City</span></div>
     <h2>Lock In Your Seat — $175</h2>
     <div class="date">Breakthrough Wealth Building Summit · September 26, 2026 · OKC</div>
-    <div style="font-family:var(--font-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#ffd8d3;margin:8px 0 2px">250 seats · 3 keynote strategists · 1 full day</div>
+    <div style="font-family:var(--font-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#ffd8d3;margin:8px 0 2px">3 keynote strategists · 1 full day</div>
     <div class="cd-label" id="cd-label">⏳ Price rises to $197 in</div>
     <div class="countdown" id="countdown">
       <div class="cd-unit"><div class="n" id="cd-days">--</div><div class="l">Days</div></div>
@@ -807,6 +807,14 @@
     document.documentElement.classList.add(post ? "post-rise" : "pre-rise");
     window.btokcTicketPrice = post ? 197 : 175;
     if (!post) return;
+    // JSON-LD is unreachable by the text walker above, so patch the Offer directly —
+    // otherwise the Google rich result advertises $175 after the price rises.
+    document.querySelectorAll('script[type="application/ld+json"]').forEach(function(s){
+      try {
+        var j = JSON.parse(s.textContent);
+        if (j && j.offers && j.offers.price === "175") { j.offers.price = "197"; delete j.offers.validThrough; s.textContent = JSON.stringify(j); }
+      } catch (e) {}
+    });
     var w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false), n;
     while ((n = w.nextNode())) {
       if (n.nodeValue.indexOf("$175") !== -1) n.nodeValue = n.nodeValue.split("$175").join("$197");
