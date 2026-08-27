@@ -207,10 +207,10 @@
   </style>
   <div class="sec-head center"><div class="eyebrow">// Here's Your Day</div><h2>Built For The Seat You're Sitting In</h2></div>
   <div class="persona-grid">
-    <div class="fcard"><h3>If You Already Own Rentals</h3><p>Your day covers the state's 2% construction loan — 24 months, up to 95% of total development cost — the agency loans that carry the 6-doors-to-60-units jump, and the rent rules that come with each, plus the panel to ask about your building specifically.</p><a href="https://www.ohfa.org/developers/" target="_blank" rel="noopener" class="persona-src">Source: OHFA developer financing (Housing Trust Fund) · accessed Aug 27, 2026 — a small, largely committed pool</a><a href="https://registration.breakthroughokc.com/contact-info" class="btn">Claim Your Seat →</a></div>
+    <div class="fcard"><h3>If You Already Own Rentals</h3><p>Your day covers the state's 2% construction loan — 24 months, up to 95% of total development cost — the agency loans that carry the 6-doors-to-60-units jump, and the rent rules that come with each, plus the panel to ask about your building specifically.</p><a href="https://www.ohfa.org/oklahoma-housing-trust-fund/" target="_blank" rel="noopener" class="persona-src">Source: OHFA Oklahoma Housing Trust Fund program page and the applications posted on it — 120% AMI on the page; 2% / 24 months / 95% of TDC in the 2024 final application; the 2026 redline cuts 95% to 90% · accessed Aug 27, 2026</a><a href="https://registration.breakthroughokc.com/contact-info" class="btn">Claim Your Seat →</a></div>
     <div class="fcard"><h3>If You Build Houses</h3><p>The state lends construction money at 0% for 24 months (then prime + 4%), with no dollar award cap for homebuilders — inside real parameters: 5–25 homes per application, 10% of the cost from you, HUD 234 price limits and a 3-year owner-occupancy deed restriction. Rural is open now, urban is paused. The manual walks the application; the day puts the people who run it in front of you.</p><a href="https://www.ohfa.org/wp-content/uploads/2026/01/HSP-Fact-Sheets-1.pdf" target="_blank" rel="noopener" class="persona-src">Source: OHFA HSP fact sheets, Jan 2026</a><a href="https://registration.breakthroughokc.com/contact-info" class="btn">Claim Your Seat →</a></div>
-    <div class="fcard"><h3>If You Wholesale</h3><p>One Saturday, a room full of buy-and-hold investors, builders and flippers actively looking for their next deal. Bring your buyer list home heavier.</p><a href="https://registration.breakthroughokc.com/contact-info" class="btn">Claim Your Seat →</a></div>
-    <div class="fcard"><h3>If You're An Agent Who Serves Investors</h3><p>Your investor clients will be in this room. So will the funding programs that make their next purchase pencil — knowing this map is a service nobody else on the listing appointment offers.</p><a href="https://registration.breakthroughokc.com/contact-info" class="btn">Claim Your Seat →</a></div>
+    <div class="fcard"><h3>If You Wholesale</h3><p>One Saturday built for buyers: flippers sourcing inventory, landlords adding doors, builders looking for lots, and the lenders who fund them. The vendor floor is open all day.</p><a href="https://registration.breakthroughokc.com/contact-info" class="btn">Claim Your Seat →</a></div>
+    <div class="fcard"><h3>If You're An Agent Who Serves Investors</h3><p>This is the room your investor clients work in — and the funding programs that make their next purchase pencil. Knowing this map is a service nobody else on the listing appointment offers.</p><a href="https://registration.breakthroughokc.com/contact-info" class="btn">Claim Your Seat →</a></div>
   </div>
 </div></section>
 
@@ -280,86 +280,7 @@
 </section>
 <!-- §2e Field-brief catch — GHL iframe, same pattern as the tickets opt-in.
      Replace FORM_ID_HERE with the real GHL form ID (form source value: "BOKC — Funding Brief opt-in (homepage)"). -->
-<section class="block fr-sec" id="fieldbrief">
-  <style>
-    .fr-sec{background:var(--navy);color:var(--white);padding:64px 0 70px}
-    .fr-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:52px;align-items:start}
-    .fr-sec .eyebrow{color:var(--red);font-family:var(--font-mono);font-size:13px;
-      letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px}
-    .fr-sec h2{font-family:var(--font-display);color:var(--white);
-      font-size:clamp(28px,3.4vw,44px);line-height:1.06;margin:0 0 16px}
-    .fr-lede{font-family:var(--font-body);font-size:17px;line-height:1.6;
-      color:#D6DBE6;margin:0 0 26px;max-width:52ch}
-    .fr-list{list-style:none;margin:0 0 26px;padding:0}
-    .fr-list li{position:relative;padding:0 0 14px 30px;font-family:var(--font-body);
-      font-size:16px;line-height:1.5;color:#E8EBF2}
-    .fr-list li:before{content:"→";position:absolute;left:0;top:0;
-      color:var(--red);font-family:var(--font-mono);font-weight:700}
-    .fr-list b{color:var(--white)}
-    .fr-free{display:inline-block;font-family:var(--font-mono);font-size:12px;
-      letter-spacing:.12em;text-transform:uppercase;color:var(--white);
-      border:1px solid rgba(255,255,255,.28);border-radius:2px;padding:7px 12px}
-    .fr-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);
-      border-radius:10px;padding:26px 24px 18px}
-    .fr-card h3{font-family:var(--font-head);font-weight:800;color:var(--white);
-      font-size:19px;line-height:1.25;margin:0 0 6px}
-    .fr-card p{font-family:var(--font-body);font-size:14px;line-height:1.5;
-      color:#C3CAD8;margin:0 0 16px}
-    /* GHL's form_embed.js parks the iframe offscreen until the form loads,
-       so the wrapper — not the iframe — reserves the space. */
-    .fr-formwrap{min-height:430px;display:block}
-    .fr-form{width:100%;border:0;border-radius:8px;display:block;min-height:430px}
-    .fr-note{font-family:var(--font-body);font-size:12.5px;line-height:1.5;
-      color:#9AA4B8;margin:12px 0 0;text-align:center}
-    @media (max-width:900px){
-      .fr-grid{grid-template-columns:1fr;gap:34px}
-      .fr-sec{padding:48px 0 54px}
-      .fr-lede{max-width:none}
-    }
-  </style>
-  <div class="wrap">
-    <div class="fr-grid">
-      <div>
-        <div class="eyebrow">// Free Field Brief</div>
-        <h2>Not Ready For A Seat? Take The Field Brief.</h2>
-        <p class="fr-lede">
-          The free short version of the funding map — ten programs, the next deadlines,
-          and the three lookups to run before your next offer. We'll send the PDF.
-        </p>
-        <ul class="fr-list">
-          <li><b>Ten programs worth knowing</b> — city, state and federal, in plain language.</li>
-          <li><b>The next deadlines</b> — the funding windows coming up this quarter.</li>
-          <li><b>Three lookups to run tonight</b> — before your next offer.</li>
-        </ul>
-        <span class="fr-free">Free · No ticket required</span>
-      </div>
-      <div class="fr-card">
-        <h3>Send me the field brief</h3>
-        <p>Enter your email and we'll send it over. That's the whole ask.</p>
-        <!-- GHL form embed. Replace FORM_ID_HERE with the field-brief form's ID.
-             GHL source value for this form: "BOKC — Funding Brief opt-in (homepage)". -->
-        <div class="fr-formwrap">
-        <iframe
-          src="https://api.leadconnectorhq.com/widget/form/FORM_ID_HERE"
-          id="inline-FORM_ID_HERE"
-          class="fr-form"
-          style="width:100%;border:none;border-radius:8px;display:block"
-          data-layout="{'id':'INLINE'}"
-          data-trigger-type="alwaysShow"
-          data-activation-type="alwaysActivated"
-          data-deactivation-type="neverDeactivate"
-          data-form-name="BOKC — Funding Brief opt-in (homepage)"
-          data-layout-iframe-id="inline-FORM_ID_HERE"
-          title="Funding Field Brief opt-in"></iframe>
-        </div>
-        <script src="https://link.msgsndr.com/js/form_embed.js"></script>
-        <p class="fr-note">
-          We'll email the field brief straight over. No spam, unsubscribe anytime.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
+<!-- Field-brief opt-in removed until the GHL form exists: it was wired to a FORM_ID_HERE placeholder that renders a dead 430px card on a page taking ad spend. Restore the markup from git (commit 93b93e5) once the form ID is real, and produce an un-named field brief first; the PDF names both gated panelists. See client _STATE.md. -->
 
 <section class="block ctaband"><div class="wrap">
   <div class="eyebrow" style="color:#ffd8d3">// Seats Are Limited</div>

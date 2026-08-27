@@ -179,10 +179,10 @@ PERSONAS = [
             ),
         ],
         "proof_head": "The Money That Works When You're Adding Doors",
-        "proof_lede": "Two state programs worth knowing before your next build — and, for the Trust Fund, "
-                      "a substantial rehab. <b>The Housing Stability Program funds new construction and "
-                      "adaptive reuse only, not rehab.</b> This is development finance either way, not money "
-                      "for buying an existing building, and both carry conditions worth reading first.",
+        "proof_lede": "Two state programs worth knowing before your next build or substantial rehab. "
+                      "<b>The Housing Stability Program funds new construction and adaptive reuse only</b> — "
+                      "check the Trust Fund's own eligible-activities list, linked below, before assuming a "
+                      "project qualifies. Both carry conditions worth reading before you plan around either.",
         "proof": [
             stat_card(
                 "2% / 24 months",
@@ -523,9 +523,8 @@ def optin(slug):
     GHL_FIELD_BRIEF_FORM_ID above."""
     if not GHL_FIELD_BRIEF_FORM_ID:
         return (
-            "\n<!-- Field-brief opt-in intentionally omitted: no GHL form ID yet.\n"
-            "     Set GHL_FIELD_BRIEF_FORM_ID in tools/build-persona-pages.py and re-run to enable.\n"
-            "     Gate first: the field-brief PDF names Darrell Beavers and Shannon Entz. -->"
+            "\n<!-- Field-brief opt-in omitted: no form ID configured. "
+            "See GHL_FIELD_BRIEF_FORM_ID in tools/build-persona-pages.py. -->"
         )
     fid = GHL_FIELD_BRIEF_FORM_ID
     return f"""
