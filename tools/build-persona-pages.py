@@ -689,7 +689,7 @@ def build(p):
 <section class="block"><div class="wrap">
   <div class="sec-head center"><div class="eyebrow">// Your Ticket</div><h2>Everything Included</h2></div>
   <div class="grid3">
-    <div class="fcard"><h3>The Full Day</h3><p>Three keynotes — see the deal, fund it, scale it — plus the
+    <div class="fcard"><h3>The Full Day</h3><p>Three keynotes — see the deal, leverage it, scale it — plus the
       expert panel Q&amp;A on the Oklahoma City market.</p></div>
     <div class="fcard"><h3>The Funding Manual</h3><p>30 verified programs, 12 dated funding windows into 2027,
       application paths, direct contacts and a glossary.</p></div>
