@@ -9,8 +9,13 @@ lifted verbatim out of the live pages so these never drift from the rest of the
 site. Persona copy lives in PERSONAS below — edit there, re-run, commit.
 
 House-rule constraints baked in and NOT to be relaxed without a checker pass:
-  * No panelist names (Darrell Beavers / Shannon Entz). Their appearance is
-    gated on Marty's written OK — say "the expert panel".
+  * Darrell Beavers and Shannon Entz were CLEARED for public use 2026-08-27 and
+    may be named. Still say "the expert panel", never "city leaders", and never
+    overstate Shannon — she implements, she does not control city funds.
+  * Program terms stay OFF the site (option 3, settled 2026-08-30). A static page
+    cannot qualify a claim: "0% interest" is true for a builder and false for the
+    landlord adding door seven. Sell the room, the people and the manual.
+    MARKET figures stay — they describe the city, not a program's eligibility.
   * Every number carries its source link and access date.
   * No attendance number. 250 is venue capacity, never attendance.
   * No investment-return promise.
@@ -54,7 +59,7 @@ REG = "https://registration.breakthroughokc.com/contact-info"
 # a 430px card wired to a dead form is worse than no card on pages taking paid spend.
 # Set it to the real ID and re-run to switch the section on across all five pages.
 # ⚠️ Before switching it on: the field-brief PDF names Darrell Beavers and Shannon Entz, whose
-# public naming is gated on Marty's written OK. Produce an un-named variant first.
+# Set to the real GHL form ID to switch the opt-in section on across every page.
 GHL_FIELD_BRIEF_FORM_ID = None
 CLOUD = slice_between(SPEAKERS, '<div class="cloud">', "</div>")
 
@@ -137,6 +142,16 @@ def plain_card(title, body):
     return f'<div class="fcard"><h3>{title}</h3><p>{body}</p></div>'
 
 
+def person_stat_card(stat, body):
+    """A big-number card for a fact about a PERSON — no source link, because these are
+    biographical facts from Darrell's own material, not program eligibility claims.
+    Do NOT put program terms in one of these; that is what option 3 removed."""
+    return (
+        f'<div class="fcard"><div style="{STAT_STYLE}">{stat}</div>'
+        f'<p style="margin-top:12px">{body}</p></div>'
+    )
+
+
 def speaker_card(slug, name, role, cred, body):
     return (
         f'<div class="spk"><div class="ph"><img src="/assets/{slug}.webp" alt="{name}" /></div>'
@@ -148,6 +163,161 @@ def speaker_card(slug, name, role, cred, body):
 # --- persona content ---------------------------------------------------------
 # "utm" is the utm_content slug the matching ad should use.
 PERSONAS = [
+    {
+        "slug": "builders",
+        "utm": "persona-builder",
+        "nav": "Builders",
+        "title": "For Small Builders | Breakthrough OKC 2026",
+        "desc": "The bank wants 30% down. Oklahoma runs seven housing finance programs, and the man "
+                "who administers all seven takes questions on September 26 in Oklahoma City.",
+        "eyebrow": "// For Small Builders &amp; Developers",
+        "h1": 'The Bank Wants 30% Down. <span class="r">There Are Six Other Doors.</span>',
+        "lede": "Oklahoma runs seven housing finance programs. Most builders in this state have never had "
+                "them laid out in one place — which one funds what, who actually qualifies, and which "
+                "window is open this month. On September 26 the man who administers all seven is in the "
+                "room, and he takes questions.",
+        "problem_head": "One Build At A Time Is A Ceiling",
+        "problems": [
+            plain_card(
+                "The down payment is the whole constraint",
+                "Your deal pencils. Your equity doesn't stretch to the next one until this one closes. "
+                "That's a financing problem wearing a deal problem's coat.",
+            ),
+            plain_card(
+                "Public money looks like it's for someone else",
+                "Bigger developers, nonprofits, syndicators. Some of it is. Some of it was written for a "
+                "builder putting up five houses, and nobody tells you which is which.",
+            ),
+            plain_card(
+                "The window matters more than the program",
+                "Some programs take applications continuously. Some pause. Some have one deadline a year. "
+                "Which door is open in which month is most of the game, and it changes.",
+            ),
+        ],
+        "proof_head": "The Man Who Administers Them",
+        "proof_lede": "Not a summary of the programs — the person responsible for them, in the room, "
+                      "answering the question you actually have about the build you're actually planning.",
+        # Facts about Darrell, not eligibility claims about programs. That is why they survive
+        # option 3. Do not add program terms to these.
+        "proof": [
+            person_stat_card(
+                "Seven programs",
+                "Darrell Beavers has administrative responsibility for seven of Oklahoma's housing finance "
+                "programs. Four federal, three state. Different income rules, different cycles, different "
+                "qualification bars.",
+            ),
+            person_stat_card(
+                "Since 1991",
+                "He has been at the Oklahoma Housing Finance Agency for over three decades, and he wrote "
+                "<i>The Affordable Housing Handbook</i>. He is also an active real estate broker and "
+                "investor, which is why he explains this in deal terms rather than agency terms.",
+            ),
+            person_stat_card(
+                "48,000+ units",
+                "Affordable housing units financed through the programs he administers.",
+            ),
+        ],
+        "speakers_head": "The Man Who Runs Them, And The Man Who Runs Four At Once",
+        "speakers": [
+            speaker_card(
+                "darrell", "Darrell Beavers", "Expert Panel · Oklahoma Housing Finance Agency",
+                "Housing Development Director · at OHFA since 1991 · 48,000+ affordable housing units financed",
+                "On September 26 he walks the room through all seven programs — what each funds, who "
+                "qualifies, and what to say when you call. Then he takes live questions.",
+            ),
+            speaker_card(
+                "cameron", "Cameron Burke", "Keynote · Leverage",
+                "4 companies · 75+ units · 150+ home sales a year · Oklahoma City, OK",
+                "He did every job in the business himself for two years before he could afford anyone "
+                "else. His keynote is the structure underneath running more than one thing at a time: "
+                "what he hired first, what he systemized, and the order he did it in.",
+            ),
+        ],
+        "takehome": "Bring one lot and one build you can't start yet. Leave with the seven programs "
+                    "written down in the Oklahoma Investor Funding Manual, the deadline calendar, direct "
+                    "contacts — and the answer to the question you asked out loud.",
+    },
+    {
+        "slug": "agents",
+        "utm": "persona-agent",
+        "nav": "Agents",
+        "title": "For Real Estate Agents | Breakthrough OKC 2026",
+        "desc": "A retail client transacts once. An investor transacts, refers and comes back — for the "
+                "agent who can read a deal. September 26, Oklahoma City.",
+        "eyebrow": "// For Real Estate Agents",
+        "h1": 'An Investor Works Out In <span class="r">One Conversation</span> Whether You Can Read A Deal.',
+        "lede": "Cap rate. ARV. What the rehab actually costs here. Which lenders close in Oklahoma. Miss "
+                "on that and they stop replying. Hit it and you're the one they call next time — and the "
+                "one they name when someone in their group asks who to use. September 26 is a day among "
+                "the people who decide that.",
+        "problem_head": "Why Investors Don't Call You Back",
+        "problems": [
+            plain_card(
+                "A retail client transacts once",
+                "Then disappears for five years. An investor transacts, refers, sells and comes back. Same "
+                "license, completely different business, and almost nobody makes the switch on purpose.",
+            ),
+            plain_card(
+                "You're sending listings",
+                "They already have alerts. They already ran the numbers. Forwarding inventory they've seen "
+                "is the exact behavior that says you're not in this with them.",
+            ),
+            plain_card(
+                "You have nothing they don't have",
+                "They read the market. They know their lenders. The gap you can fill is the thing they "
+                "don't have time to go find — and nobody's shown you where that is either.",
+            ),
+        ],
+        "proof_head": "Three Things You Can Say On Monday",
+        "proof_lede": "Every figure below is published, dated and linked. Learn the sources, not just the "
+                      "numbers — knowing where a figure comes from is what separates an agent who reads "
+                      "the market from one who repeats it.",
+        "proof": [
+            stat_card(
+                "+13,700",
+                "Metro residents added in a year, 0.9% growth. The demand side of whatever strategy your "
+                "client is running, and the first thing they'll test you on.",
+                "pop",
+            ),
+            stat_card(
+                "$316,450",
+                "Median metro listing price, July 2026. The low basis is why out-of-state money keeps "
+                "arriving, and it's behind half the questions you'll get from a client who doesn't live here.",
+                "price",
+            ),
+            stat_card(
+                "41%",
+                "Of Oklahoma City households rent. The tenant pool behind every buy-and-hold conversation "
+                "you'll have this year.",
+                "rent",
+            ),
+            plain_card(
+                "Thirty programs they've never heard of",
+                "Every seat includes the Oklahoma Investor Funding Manual: 30 public funding programs "
+                "across city, state and federal layers, verified against the agencies' own documents, "
+                "with the deadline calendar and direct contacts. Being the agent who knows this exists is "
+                "the kind of thing an investor client remembers.",
+            ),
+        ],
+        "speakers_head": "The Two Sessions That Change The Conversation",
+        "speakers": [
+            speaker_card(
+                "cameron", "Cameron Burke", "Keynote · Leverage",
+                "4 companies · 75+ units · 150+ home sales a year · Oklahoma City, OK",
+                "He sits on both sides of your table: a team selling 150+ homes a year, and 75+ rental "
+                "units he owns himself. The clearest look you'll get at how an investor actually decides.",
+            ),
+            speaker_card(
+                "darrell", "Darrell Beavers", "Expert Panel · Oklahoma Housing Finance Agency",
+                "Housing Development Director · at OHFA since 1991 · 48,000+ affordable housing units financed",
+                "The session you'll be quoting to clients for the next year — what money exists in this "
+                "state, who qualifies, and how you get from interested to funded.",
+            ),
+        ],
+        "takehome": "Bring the client conversation you keep losing. Leave able to have it — with the "
+                    "funding manual, the vocabulary, and a day's worth of introductions to people who buy "
+                    "for a living.",
+    },
     {
         "slug": "buy-and-hold",
         "utm": "persona-buyhold",
@@ -178,43 +348,47 @@ PERSONAS = [
                 "whole decision — and they are never on the front page.",
             ),
         ],
-        "proof_head": "The Money That Works When You're Adding Doors",
-        "proof_lede": "Two state programs worth knowing before your next build or substantial rehab. "
-                      "<b>The Housing Stability Program funds new construction and adaptive reuse only</b> — "
-                      "check the Trust Fund's own eligible-activities list, linked below, before assuming a "
-                      "project qualifies. Both carry conditions worth reading before you plan around either.",
+        "proof_head": "The Man Who Runs The State's Housing Money",
+        "proof_eyebrow": "// Who Answers It",
+        "proof_lede": "There are around thirty public funding programs in this state and almost nobody has "
+                      "had them laid out in one place. We are not going to tell you which one fits your "
+                      "building — a webpage can't do that honestly. The man who administers seven of them "
+                      "can, and he takes questions.",
         "proof": [
-            stat_card(
-                "2% / 24 months",
-                "The state's construction loan through the Oklahoma Housing Trust Fund reaches up to 95% of "
-                "total development cost under current rules, for households up to 120% of area median income. "
-                "It is a small and largely committed pool, and the posted 2026 draft would cut coverage to 90% "
-                "— which is exactly why timing and application order matter.",
-                "ohtf",
-            ),
-            stat_card(
-                "0% interest",
-                "The Housing Stability Program lends <b>construction</b> money at zero percent on a 24-month "
-                "collateralised recourse loan — construction has to start within 180 days, and the rate goes "
-                "to prime + 4% if it is not repaid in the term. <b>Rural applications are open now; the urban "
-                "set-aside has been paused since Aug 7, 2026</b> until repayments replenish the fund.",
-                "hsp", "hsp_pause",
+            person_stat_card(
+                "Seven programs",
+                "Darrell Beavers has administrative responsibility for seven of Oklahoma's housing finance "
+                "programs. Whether any of them fits a building you already own depends on what you're doing "
+                "with it — which is exactly the kind of question the panel exists to answer out loud.",
             ),
             stat_card(
                 "$39.7M",
-                "Of the NE Renaissance TIF districts' $50M project budget, $39.7M is still unallocated per the "
-                "city's own FY25 report. That is budget capacity against future increment, not cash at closing — "
-                "and the distinction is worth understanding before you plan around it.",
+                "Of the NE Renaissance TIF districts' $50M project budget, $39.7M is still unallocated per "
+                "the city's FY25 report. That is budget capacity against future increment, not cash at "
+                "closing — but where a district's boundary sits is worth knowing before you buy near one.",
                 "tif",
             ),
+            plain_card(
+                "Thirty programs, written down",
+                "Every seat includes the Oklahoma Investor Funding Manual — 30 public funding programs "
+                "across city, state and federal layers, verified against the agencies' own documents, with "
+                "the deadline calendar and direct contacts. The manual is the map; the day is the guided tour.",
+            ),
         ],
-        "speakers_head": "Who You'll Learn It From",
+        "speakers_head": "The Man Who Runs The Money, And The Man Who Runs Four Companies",
         "speakers": [
             speaker_card(
+                "darrell", "Darrell Beavers", "Expert Panel · Oklahoma Housing Finance Agency",
+                "Housing Development Director · at OHFA since 1991 · 48,000+ affordable housing units financed",
+                "He administers seven of Oklahoma's housing finance programs and is an active broker and "
+                "investor himself. On September 26 he takes live questions about the building you actually own.",
+            ),
+            speaker_card(
                 "cameron", "Cameron Burke", "Keynote · Leverage",
-                "4 companies · 75+ units · 150+ home sales/yr · Oklahoma City, OK",
+                "4 companies · 75+ units · 150+ home sales a year · Oklahoma City, OK",
                 "Runs 75+ rentals alongside three other companies. His keynote is the systems and delegation "
-                "that let a portfolio grow without swallowing your week.",
+                "that let a portfolio grow without swallowing your week — the answer if the ceiling you hit "
+                "was time rather than capital.",
             ),
             speaker_card(
                 "ben", "Ben Allgeyer", "Keynote · Scaling",
@@ -246,8 +420,8 @@ PERSONAS = [
             ),
             plain_card(
                 "The tired building looks like a problem",
-                "It is a problem — until you can read which street turns next and what public money is already "
-                "committed to turning it. Then it's the only cheap thing left.",
+                "It is a problem — until you can read which street turns next and what public money is "
+                "<i>planned</i> for turning it. Then it's the only cheap thing left.",
             ),
             plain_card(
                 "You've never priced the hold",
@@ -255,34 +429,32 @@ PERSONAS = [
                 "rewards holding is a different set of doors than the hard money you already know.",
             ),
         ],
-        "proof_head": "What The Map Actually Says To A Flipper",
-        "proof_lede": "Straight answer: most public housing money in this state is development and "
-                      "affordable-housing finance, and a short-hold flip does not qualify for it. What the day "
-                      "gives you is the map of which doors are real for you — and which one is worth changing "
-                      "your exit for.",
+        "proof_head": "Reading The Block Before The Comps Move",
+        "proof_eyebrow": "// What Katie Teaches",
+        "proof_lede": "Straight answer on public money: most of it is affordable and workforce housing "
+                      "finance, and a short-hold flip does not qualify. What is useful to you is knowing "
+                      "where it is planned — because that is a signal about a street, months before it "
+                      "shows up in a comp.",
         "proof": [
-            stat_card(
-                "6 people",
-                "That's how many claimants statewide were approved for the historic rehab credit in 2023 — a "
-                "credit worth a combined 40% of qualified rehab costs when Oklahoma's 20% is stacked with the "
-                "federal 20%. <b>Read the catch before you get excited: it requires an income-producing use "
-                "and carries a five-year federal recapture, so a short-hold flip forfeits it.</b> This is the "
-                "number that makes people run the rehab-and-hold version of a deal for the first time.",
-                "historic", "recapture",
+            plain_card(
+                "The Redevelopment Advantage Framework",
+                "Katie Neason's method for looking at a tired building on a tired street and reading what "
+                "it becomes. She has been buying that way for years and teaches the framework itself on "
+                "September 26 — the method, not the highlight reel.",
             ),
             stat_card(
                 "$39.7M",
-                "Of the NE Renaissance TIF districts' $50M project budget, $39.7M is still unallocated per the "
-                "city's FY25 report — budget capacity against future increment, not cash at closing. You are "
-                "unlikely to tap it on a flip, but knowing where a district's boundary sits is part of reading "
-                "which street turns next.",
+                "Of the NE Renaissance TIF districts' $50M project budget, $39.7M is still unallocated per "
+                "the city's FY25 report — budget capacity against future increment, not cash at closing, "
+                "and not money you can apply for on a flip. It is a map of where the city has <b>planned</b> "
+                "to spend, and district boundaries are public.",
                 "tif",
             ),
             stat_card(
                 "$316,450",
                 "The median home listing price in the OKC metro in July 2026. A low basis is why the rehab "
-                "math still works in this market — and why the margin is worth defending with better sourcing "
-                "rather than a higher bid.",
+                "math still works in this market — and why the margin is worth defending with better "
+                "sourcing rather than a higher bid.",
                 "price",
             ),
         ],
@@ -312,7 +484,7 @@ PERSONAS = [
         "desc": "You have the deal. You don't have the buyer. September 26 puts you in a room of flippers, "
                 "landlords, builders and the lenders funding them — vendor floor open all day.",
         "eyebrow": "// For Wholesalers",
-        "h1": 'You Have The Deal. <span class="r">You Don\'t Have The Buyer.</span>',
+        "h1": 'A List You Haven\'t Called In A Year <span class="r">Isn\'t A List.</span>',
         "lede": "That's the whole business — and a list you haven't spoken to in a year isn't a list. "
                 "September 26 is built for buyers: flippers sourcing inventory, landlords adding doors, "
                 "builders looking for lots, and the lenders who fund them.",
@@ -334,23 +506,25 @@ PERSONAS = [
                 "knowing who actually funds what changes which deals you chase.",
             ),
         ],
-        "proof_head": "Who's Actually In The Room",
-        "proof_lede": "Not a number. A composition — the people who buy what you find, and the ones who fund them.",
+        "proof_head": "The Shape Of The Day",
+        "proof_eyebrow": "// Where The Room Is Open",
+        "proof_lede": "The reason to come is the time between things. Here is where the day actually "
+                      "leaves room to work — and who is standing in it.",
         "proof": [
             plain_card(
-                "Flippers who need inventory",
-                "The whole day is built for investors sourcing their next project. Inventory is their bottleneck "
-                "and you are holding it.",
+                "The exhibitor floor, open all day",
+                "Not a corridor you pass through twice. It runs the length of the day, so a conversation "
+                "that starts at the coffee table can finish properly at lunch.",
             ),
             plain_card(
-                "Landlords adding doors &amp; builders looking for lots",
-                "Buy-and-hold operators scaling their portfolios, and builders who need dirt. Two different buy "
-                "boxes, both in the room, both worth a card.",
+                "Real gaps between the keynotes",
+                "Three keynotes and an expert panel, deliberately not stacked end to end. The gaps are "
+                "where a card changes hands.",
             ),
             plain_card(
-                "The lenders funding all of it",
-                "A sponsor and exhibitor hall open the entire day — contractors, lenders and title people, "
-                "working the floor rather than sitting through slides.",
+                "Who is standing in them",
+                "Flippers sourcing their next project, landlords adding doors, builders looking for lots, "
+                "and the lenders and title people they already work with.",
             ),
         ],
         "speakers_head": "The Stage, Between The Handshakes",
@@ -379,7 +553,7 @@ PERSONAS = [
         "desc": "Where do you even find the first deal? September 26 is a full day with operators who've done "
                 "it — plus the complete Oklahoma funding map with your seat.",
         "eyebrow": "// If You're New To This",
-        "h1": 'Where Do You Even Find <span class="r">The First Deal?</span>',
+        "h1": 'You\'ve Known Enough To Start <span class="r">For Two Years.</span>',
         "lede": "September 26 puts you in a room of operators who are past deal one. You get their systems, "
                 "the funding map, and a full day to ask the questions you can't Google.",
         "problem_head": "What Actually Stops People At Deal One",
@@ -390,14 +564,15 @@ PERSONAS = [
                 "Oklahoma rents, or Oklahoma programs. Local is the only version that matters to you.",
             ),
             plain_card(
-                "You don't know what you don't know",
-                "Not the strategy — the mechanics. Who lends, what a deal looks like on paper, what the "
-                "paperwork asks for, and which questions signal that you've done this before.",
+                "You've read enough",
+                "Reading more is the thing that feels like progress. Another podcast, another thread, "
+                "another course — none of it is the step you haven't taken, and some of it is a way of "
+                "not taking it.",
             ),
             plain_card(
                 "You've never met anyone who's done it",
-                "The fastest way past deal one is proximity to people on deal fifty. That is the part a course "
-                "cannot sell you and a room can.",
+                "The fastest way past deal one is proximity to people on deal fifty — close enough to ask the "
+                "small question you would never post publicly.",
             ),
         ],
         "proof_head": "Why Oklahoma City, In Three Numbers",
@@ -430,6 +605,13 @@ PERSONAS = [
                 "He scaled, learned the hard way what doing it wrong costs, and rebuilt smaller — simpler "
                 "operations, fewer moving parts, systems that surface deals without him hunting. You get the "
                 "rebuilt version, the one that's already been stress-tested.",
+            ),
+            speaker_card(
+                "cameron", "Cameron Burke", "Keynote · Leverage",
+                "4 companies · 75+ units · 150+ home sales a year · Oklahoma City, OK",
+                "He started at 18 with no sphere and no capital, and did every job himself for two years "
+                "before he could afford anyone else. If the question is where you begin with nothing, he "
+                "is the closest answer in the room.",
             ),
             speaker_card(
                 "katie", "Katie Neason", "Keynote · Redevelopment",
@@ -465,32 +647,35 @@ PERSONAS = [
                 "difference between a performing asset and a slow bleed — and you're hiring them sight unseen.",
             ),
             plain_card(
-                "You're late to what's already funded",
-                "Public money commits years before it shows up in a price. Reading the layer takes local "
-                "context that a listing site will never give you.",
+                "You can't read the room from a listing site",
+                "Which builders actually deliver, which lenders actually close here, which property manager "
+                "answers the phone in February. None of that publishes, and all of it decides your return.",
             ),
         ],
-        "proof_head": "Why The Spreadsheet Keeps Pointing Here",
-        "proof_lede": "Every figure below is published, dated and linked to its source — check them yourself "
-                      "before you book anything.",
+        "proof_head": "The People You'd Otherwise Hire Sight Unseen",
+        "proof_eyebrow": "// Who's On The Floor",
+        "proof_lede": "The market figures already work or you wouldn't be reading this — <b>+13,700 metro "
+                      "residents added in a year</b>, a <b>$316,450</b> median list price, <b>41%</b> of "
+                      "households renting, all sourced below. What a spreadsheet can't hand you is the "
+                      "three relationships your return actually rests on. Those are standing on the "
+                      "exhibitor floor all day.",
         "proof": [
-            stat_card(
-                "+13,700",
-                "Metro residents added in a year, 0.9% growth. That is the demand under every rent roll "
-                "you're modelling.",
-                "pop",
+            plain_card(
+                "Lenders who close in Oklahoma",
+                "Not a national call center. People who fund deals in this metro, who you can ask directly "
+                "what they will and won't lend on — before you need them on a clock.",
+            ),
+            plain_card(
+                "Contractors and property managers",
+                "The two hires that quietly decide whether a remote rental performs or slowly bleeds. You "
+                "get to meet them in person instead of picking from reviews a thousand miles away.",
             ),
             stat_card(
-                "41%",
-                "Of Oklahoma City households rent — a structurally large tenant pool, and the part of your "
-                "model most sensitive to being wrong.",
-                "rent",
-            ),
-            stat_card(
-                "$316,450",
-                "Median metro listing price in July 2026 — the low basis that put this market on your list "
-                "in the first place.",
-                "price",
+                "+13,700 · $316,450 · 41%",
+                "Metro residents added in a year (0.9% growth) · median metro listing price, July 2026 · "
+                "share of Oklahoma City households that rent. Every one published, dated and linked — "
+                "check them yourself before you book anything.",
+                "pop", "price", "rent",
             ),
         ],
         "speakers_head": "Who You'll Learn It From",
@@ -523,8 +708,7 @@ def optin(slug):
     GHL_FIELD_BRIEF_FORM_ID above."""
     if not GHL_FIELD_BRIEF_FORM_ID:
         return (
-            "\n<!-- Field-brief opt-in omitted: no form ID configured. "
-            "See GHL_FIELD_BRIEF_FORM_ID in tools/build-persona-pages.py. -->"
+            "\n<!-- opt-in pending -->"
         )
     fid = GHL_FIELD_BRIEF_FORM_ID
     return f"""
@@ -656,7 +840,7 @@ def build(p):
 </div></section>
 
 <section class="block tint"><div class="wrap">
-  <div class="sec-head center"><div class="eyebrow">// The Evidence</div><h2>{p['proof_head']}</h2><p>{p['proof_lede']}</p></div>
+  <div class="sec-head center"><div class="eyebrow">{p.get('proof_eyebrow', '// The Evidence')}</div><h2>{p['proof_head']}</h2><p>{p['proof_lede']}</p></div>
   <div class="grid3">
     {chr(10).join('    ' + c for c in p['proof'])}
   </div>
@@ -670,8 +854,6 @@ def build(p):
   <div class="center" style="margin-top:32px"><a href="/speakers/" class="btn btn-ghost">Meet All The Speakers</a></div>
 </div></section>
 
-<!-- FUNDING MANUAL — UNGATED VERSION. Do NOT add panelist names here; the named
-     copy is gated on Marty's written OK (see PR #7 and the build brief §2d). -->
 <section class="block tint"><div class="wrap">
   <div class="sec-head center"><div class="eyebrow">// With Your Seat</div><h2>The Complete Oklahoma Investor Funding Manual</h2>
     <p>30 public funding programs across city, state and federal layers, verified against the agencies' own
