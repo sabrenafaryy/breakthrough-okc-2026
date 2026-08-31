@@ -54,7 +54,7 @@ PRICE_SWITCH = slice_between(HOME, "<!-- §4 price switch", "</script>")
 LOGO_ROW = slice_between(HOME, '<div class="logo-row">', "</div>\n  </div>")
 MARQUEE = slice_between(HOME, '<div class="marquee">', "</div></div>")
 
-REG = "https://registration.breakthroughokc.com/contact-info"
+REG = "https://registration.breakthroughokc.com/check-out"
 
 # The GHL field-brief form ID. While this is None the opt-in section is OMITTED entirely —
 # a 430px card wired to a dead form is worse than no card on pages taking paid spend.
