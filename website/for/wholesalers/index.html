@@ -179,6 +179,34 @@
   .proof-band .fcard>div:first-child{color:var(--red) !important}   /* the stat numeral */
   .proof-band .fcard a{color:#9fb2cc !important}
 
+  /* THE TWO TAKE-HOMES — the strongest tangible thing in the offer, so it gets real size
+     and an actual picture of the document rather than another prose card. */
+  .hero-takehomes{max-width:60ch;margin:18px auto 0;font-size:15px;line-height:1.5;color:#e8ecf5}
+  .hero-takehomes b{color:#fff}
+  .takehome-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:stretch}
+  .th-card{background:#fff;border:1px solid #e4e7ee;border-radius:16px;overflow:hidden;
+    display:flex;flex-direction:column;box-shadow:0 10px 30px rgba(36,49,80,.08)}
+  .th-ph{background:#eef1f6;border-bottom:1px solid #e4e7ee;aspect-ratio:760/472;overflow:hidden;
+    display:flex;align-items:center;justify-content:center}
+  .th-ph img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+  /* No screen of the Playbook exists yet, so this is a designed stand-in — not a fake screenshot. */
+  .th-ph-playbook{background:var(--navy);position:relative}
+  .th-ph-playbook:after{content:"";position:absolute;inset:0;
+    background:radial-gradient(circle at 78% 22%, rgba(230,68,55,.5), transparent 58%)}
+  .th-ph-label{position:relative;z-index:1;font-family:var(--font-head);font-weight:900;color:#fff;
+    font-size:clamp(20px,2.4vw,30px);line-height:1.12;letter-spacing:-.01em;text-transform:uppercase;
+    text-align:center;padding:0 18px}
+  .th-ph-label span{color:var(--red)}
+  .th-body{padding:26px 26px 28px}
+  .th-body h3{font-size:20px;margin:0 0 10px}
+  .th-body p{margin:0 0 10px}
+  .th-kicker{font-family:var(--font-mono);font-size:12.5px;color:var(--red);
+    text-transform:uppercase;letter-spacing:.06em;margin:0}
+  .th-band{margin-top:26px;background:var(--navy);color:#fff;border-radius:14px;padding:26px 24px;
+    text-align:center;font-family:var(--font-head);font-weight:900;text-transform:uppercase;
+    font-size:clamp(17px,2.1vw,25px);line-height:1.25}
+  @media(max-width:860px){.takehome-grid{grid-template-columns:1fr}}
+
   /* INCLUDED — red checks so it reads as a list of things you get, not more prose cards */
   .incl-grid .fcard{border-left:3px solid var(--red)}
   .incl-grid .fcard h3:before{content:"✓ ";color:var(--red);font-weight:900}
@@ -189,6 +217,8 @@
   <p>That's the whole business — and a list you haven't spoken to in a year isn't a list. September 26 is built for buyers: flippers sourcing inventory, landlords adding doors, builders looking for lots, and the lenders who fund them.</p>
   <p class="presented">September 26, 2026 · Champion Convention Center, Oklahoma City</p>
   <div class="cta2"><a href="https://registration.breakthroughokc.com/check-out" class="btn btn-lg">Claim Your Seat — $175 →</a><a href="/agenda/" class="btn btn-lg btn-ghost">See The Full Day</a></div>
+  <p class="hero-takehomes"><b>Both take-homes come with your seat:</b> the Wealth Building Playbook you fill
+    out live, and the Oklahoma Investor Funding Manual you'll still be using next year.</p>
 </div>
 <div class="cloud"><svg viewBox="0 0 1200 80" preserveAspectRatio="none"><path fill="#fff" d="M0,80 V44 C30,12 78,12 108,40 C128,16 164,8 198,32 C224,4 282,8 318,38 C348,12 398,10 438,40 C470,14 520,12 560,36 C600,8 660,10 700,38 C740,14 800,12 840,38 C880,12 940,10 980,36 C1020,10 1080,12 1120,40 C1150,20 1180,22 1200,40 L1200,80 Z"/></svg></div>
 </section>
@@ -199,6 +229,38 @@
         <div class="fcard"><h3>Your list has gone cold</h3><p>Names in a spreadsheet aren't buyers. Buyers are people who took your card, remember your face, and pick up when you call about a property that fits what they told you they want.</p></div>
     <div class="fcard"><h3>You don't know what they're buying now</h3><p>Buy boxes move. The flipper who wanted cosmetic rehabs last year wants lots this year, and you find that out in conversation, not in a blast email.</p></div>
     <div class="fcard"><h3>The lenders decide what closes</h3><p>A buyer who can't fund can't close. The lenders working this metro are in the same building — knowing who actually funds what changes which deals you chase.</p></div>
+  </div>
+</div></section>
+
+<!-- §5 THE TWO TAKE-HOMES — a pair, always together. The Playbook turns the day into your
+     plan; the Manual makes the money findable after. Moved to position 3 per the build spec. -->
+<section class="block tint"><div class="wrap">
+  <div class="sec-head center"><div class="eyebrow">// With Your Seat</div>
+    <h2>Two Things Leave The Building With You</h2>
+    <p>One you build during the day. One you use for the next three years. Notes get lost — these don't.</p></div>
+  <div class="takehome-grid">
+    <div class="th-card">
+      <div class="th-ph th-ph-playbook"><div class="th-ph-label">Digital<br />Wealth Building<br /><span>Playbook</span></div></div>
+      <div class="th-body">
+        <h3>The Digital Wealth Building Playbook</h3>
+        <p>An interactive workbook you fill out <b>live, while the strategists teach</b> — your deal, your
+          numbers, your next steps, in your own words. Bring a laptop or a tablet.</p>
+        <p class="th-kicker">Walk out with a plan, not a pile of notes.</p>
+      </div>
+    </div>
+    <div class="th-card">
+      <div class="th-ph"><img src="/assets/manual-cover.webp" alt="The Oklahoma Investor Funding Manual" /></div>
+      <div class="th-body">
+        <h3>The Oklahoma Investor Funding Manual</h3>
+        <p>Thirty public funding programs across the city, state and federal layers — verified against the
+          agencies' own documents, with the deadline calendar and the direct contacts.</p>
+        <p class="th-kicker">The map stays useful long after the room empties.</p>
+      </div>
+    </div>
+  </div>
+  <div class="th-band">The Playbook turns the day into your plan.<br />The Manual makes the money findable after.</div>
+  <div class="center" style="margin-top:30px"><a href="https://registration.breakthroughokc.com/check-out" class="btn btn-lg">Claim Your Seat — $175 →</a>
+    <div class="js-pre-rise" style="font-family:var(--font-mono);font-size:12px;color:#6b7890;margin-top:12px">$175 until September 5, 11:59 p.m. · $197 from September 6</div>
   </div>
 </div></section>
 
@@ -213,29 +275,17 @@
 
 <section class="block"><div class="wrap">
   <div class="sec-head center"><div class="eyebrow">// The Lineup</div><h2>The Stage, Between The Handshakes</h2></div>
-  <div class="spk-grid two">
+  <div class="spk-grid">
         <div class="spk"><div class="ph"><img src="/assets/katie.webp" alt="Katie Neason" /></div><div class="b"><div class="r">Keynote · Redevelopment</div><h3>Katie Neason</h3><div class="cred">Downtown redeveloper · Bryan, TX</div><p>Opens the day on the Redevelopment Advantage Framework — which tells you what the buyers in this room will be hunting next.</p></div></div>
     <div class="spk"><div class="ph"><img src="/assets/cameron.webp" alt="Cameron Burke" /></div><div class="b"><div class="r">Keynote · Leverage</div><h3>Cameron Burke</h3><div class="cred">4 companies · 75+ units · 150+ home sales/yr · Oklahoma City, OK</div><p>Runs a 150+ homes-a-year sales operation in this metro. His keynote is the marketing and systems side — directly useful if finding sellers is your other half.</p></div></div>
+    <div class="spk"><div class="ph"><img src="/assets/ben.webp" alt="Ben Allgeyer" /></div><div class="b"><div class="r">Closing Keynote · Scale</div><h3>Ben Allgeyer</h3><div class="cred">500+ deals in 8 years, all 50 states · 6 companies</div><p>500+ deals across all 50 states, so he has been on the buying end of a lot of what you are selling. His closing keynote is what breaks when volume grows faster than the system behind it — the exact wall a wholesaler hits after a good quarter.</p></div></div>
   </div>
   <div class="center" style="margin-top:32px"><a href="/speakers/" class="btn btn-ghost">Meet All The Speakers</a></div>
 </div></section>
 
+
+
 <section class="block tint"><div class="wrap">
-  <div class="sec-head center"><div class="eyebrow">// With Your Seat</div><h2>The Complete Oklahoma Investor Funding Manual</h2>
-    <p>30 public funding programs across city, state and federal layers, verified against the agencies' own
-    documents, with the deadline calendar and direct program contacts — included with your seat. The expert
-    panel takes questions on it in person.</p></div>
-  <div style="border:2px solid var(--navy);border-radius:14px;padding:32px 28px;max-width:900px;margin:0 auto;text-align:center">
-    <h3 style="margin-bottom:12px">What You'll Leave With</h3>
-    <p style="max-width:66ch;margin:0 auto">Bring your buy box questions and a stack of cards. The vendor floor is open all day and the room is built around the people who buy what you find.</p>
-  </div>
-  <div class="center" style="margin-top:30px"><a href="https://registration.breakthroughokc.com/check-out" class="btn btn-lg">Claim Your Seat — $175 →</a>
-    <div class="js-pre-rise" style="font-family:var(--font-mono);font-size:12px;color:#6b7890;margin-top:12px">$175 until September 5, 11:59 p.m. · $197 from September 6</div>
-  </div>
-</div></section>
-
-
-<section class="block"><div class="wrap">
   <div class="sec-head center"><div class="eyebrow">// Partners</div><h2>Sponsors &amp; The Exhibitor Hall</h2>
     <p>The exhibitor hall runs the length of the day. Lenders, title people and the buyers they work with are all in the same room, and nobody is gatekeeping the introductions.</p></div>
   <div class="logo-row">
@@ -251,7 +301,7 @@
 <div class="wrap"><div class="center" style="margin-top:26px"><a href="/sponsors/" class="btn btn-ghost">Exhibit Or Sponsor</a></div></div>
 </section>
 
-<section class="block tint"><div class="wrap">
+<section class="block"><div class="wrap">
   <div class="sec-head center"><div class="eyebrow">// Your Ticket</div><h2>Everything Included</h2></div>
   <div class="grid3 incl-grid">
     <div class="fcard"><h3>The Full Day</h3><p>Three keynotes — see the deal, leverage it, scale it — plus the

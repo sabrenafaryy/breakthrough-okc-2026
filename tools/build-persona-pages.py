@@ -561,6 +561,13 @@ PERSONAS = [
                 "Runs a 150+ homes-a-year sales operation in this metro. His keynote is the marketing and "
                 "systems side — directly useful if finding sellers is your other half.",
             ),
+            speaker_card(
+                "ben", "Ben Allgeyer", "Closing Keynote · Scale",
+                "500+ deals in 8 years, all 50 states · 6 companies",
+                "500+ deals across all 50 states, so he has been on the buying end of a lot of what you "
+                "are selling. His closing keynote is what breaks when volume grows faster than the system "
+                "behind it — the exact wall a wholesaler hits after a good quarter.",
+            ),
         ],
         "takehome": "Bring your buy box questions and a stack of cards. The vendor floor is open all day and the "
                     "room is built around the people who buy what you find.",
@@ -805,7 +812,7 @@ def floor_block(p):
     """Sponsors + exhibitor floor. Logos are lifted from the live homepage, so this page
     can never name a partner the homepage doesn't already name. Do not hand-add names here."""
     return f"""
-<section class="block"><div class="wrap">
+<section class="block tint"><div class="wrap">
   <div class="sec-head center"><div class="eyebrow">// Partners</div><h2>Sponsors &amp; The Exhibitor Hall</h2>
     <p>{p.get('floor_line', 'Contractors, lenders and partners are in the exhibitor hall all day &mdash; not a corridor you pass through twice.')}</p></div>
   {LOGO_ROW}
@@ -894,6 +901,34 @@ def build(p):
   .proof-band .fcard>div:first-child{{color:var(--red) !important}}   /* the stat numeral */
   .proof-band .fcard a{{color:#9fb2cc !important}}
 
+  /* THE TWO TAKE-HOMES — the strongest tangible thing in the offer, so it gets real size
+     and an actual picture of the document rather than another prose card. */
+  .hero-takehomes{{max-width:60ch;margin:18px auto 0;font-size:15px;line-height:1.5;color:#e8ecf5}}
+  .hero-takehomes b{{color:#fff}}
+  .takehome-grid{{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:stretch}}
+  .th-card{{background:#fff;border:1px solid #e4e7ee;border-radius:16px;overflow:hidden;
+    display:flex;flex-direction:column;box-shadow:0 10px 30px rgba(36,49,80,.08)}}
+  .th-ph{{background:#eef1f6;border-bottom:1px solid #e4e7ee;aspect-ratio:760/472;overflow:hidden;
+    display:flex;align-items:center;justify-content:center}}
+  .th-ph img{{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}}
+  /* No screen of the Playbook exists yet, so this is a designed stand-in — not a fake screenshot. */
+  .th-ph-playbook{{background:var(--navy);position:relative}}
+  .th-ph-playbook:after{{content:"";position:absolute;inset:0;
+    background:radial-gradient(circle at 78% 22%, rgba(230,68,55,.5), transparent 58%)}}
+  .th-ph-label{{position:relative;z-index:1;font-family:var(--font-head);font-weight:900;color:#fff;
+    font-size:clamp(20px,2.4vw,30px);line-height:1.12;letter-spacing:-.01em;text-transform:uppercase;
+    text-align:center;padding:0 18px}}
+  .th-ph-label span{{color:var(--red)}}
+  .th-body{{padding:26px 26px 28px}}
+  .th-body h3{{font-size:20px;margin:0 0 10px}}
+  .th-body p{{margin:0 0 10px}}
+  .th-kicker{{font-family:var(--font-mono);font-size:12.5px;color:var(--red);
+    text-transform:uppercase;letter-spacing:.06em;margin:0}}
+  .th-band{{margin-top:26px;background:var(--navy);color:#fff;border-radius:14px;padding:26px 24px;
+    text-align:center;font-family:var(--font-head);font-weight:900;text-transform:uppercase;
+    font-size:clamp(17px,2.1vw,25px);line-height:1.25}}
+  @media(max-width:860px){{.takehome-grid{{grid-template-columns:1fr}}}}
+
   /* INCLUDED — red checks so it reads as a list of things you get, not more prose cards */
   .incl-grid .fcard{{border-left:3px solid var(--red)}}
   .incl-grid .fcard h3:before{{content:"✓ ";color:var(--red);font-weight:900}}
@@ -904,6 +939,8 @@ def build(p):
   <p>{p['lede']}</p>
   <p class="presented">September 26, 2026 · Champion Convention Center, Oklahoma City</p>
   <div class="cta2"><a href="{REG}" class="btn btn-lg">Claim Your Seat — $175 →</a><a href="/agenda/" class="btn btn-lg btn-ghost">See The Full Day</a></div>
+  <p class="hero-takehomes"><b>Both take-homes come with your seat:</b> the Wealth Building Playbook you fill
+    out live, and the Oklahoma Investor Funding Manual you'll still be using next year.</p>
 </div>
 {CLOUD}
 </section>
@@ -912,6 +949,38 @@ def build(p):
   <div class="sec-head center"><div class="eyebrow">// The Problem</div><h2>{p['problem_head']}</h2></div>
   <div class="grid3 prob-grid">
     {chr(10).join('    ' + c for c in p['problems'])}
+  </div>
+</div></section>
+
+<!-- §5 THE TWO TAKE-HOMES — a pair, always together. The Playbook turns the day into your
+     plan; the Manual makes the money findable after. Moved to position 3 per the build spec. -->
+<section class="block tint"><div class="wrap">
+  <div class="sec-head center"><div class="eyebrow">// With Your Seat</div>
+    <h2>Two Things Leave The Building With You</h2>
+    <p>One you build during the day. One you use for the next three years. Notes get lost — these don't.</p></div>
+  <div class="takehome-grid">
+    <div class="th-card">
+      <div class="th-ph th-ph-playbook"><div class="th-ph-label">Digital<br />Wealth Building<br /><span>Playbook</span></div></div>
+      <div class="th-body">
+        <h3>The Digital Wealth Building Playbook</h3>
+        <p>An interactive workbook you fill out <b>live, while the strategists teach</b> — your deal, your
+          numbers, your next steps, in your own words. Bring a laptop or a tablet.</p>
+        <p class="th-kicker">Walk out with a plan, not a pile of notes.</p>
+      </div>
+    </div>
+    <div class="th-card">
+      <div class="th-ph"><img src="/assets/manual-cover.webp" alt="The Oklahoma Investor Funding Manual" /></div>
+      <div class="th-body">
+        <h3>The Oklahoma Investor Funding Manual</h3>
+        <p>Thirty public funding programs across the city, state and federal layers — verified against the
+          agencies' own documents, with the deadline calendar and the direct contacts.</p>
+        <p class="th-kicker">The map stays useful long after the room empties.</p>
+      </div>
+    </div>
+  </div>
+  <div class="th-band">The Playbook turns the day into your plan.<br />The Manual makes the money findable after.</div>
+  <div class="center" style="margin-top:30px"><a href="{REG}" class="btn btn-lg">Claim Your Seat — $175 →</a>
+    <div class="js-pre-rise" style="font-family:var(--font-mono);font-size:12px;color:#6b7890;margin-top:12px">$175 until September 5, 11:59 p.m. · $197 from September 6</div>
   </div>
 </div></section>
 
@@ -930,23 +999,10 @@ def build(p):
   <div class="center" style="margin-top:32px"><a href="/speakers/" class="btn btn-ghost">Meet All The Speakers</a></div>
 </div></section>
 
-<section class="block tint"><div class="wrap">
-  <div class="sec-head center"><div class="eyebrow">// With Your Seat</div><h2>The Complete Oklahoma Investor Funding Manual</h2>
-    <p>30 public funding programs across city, state and federal layers, verified against the agencies' own
-    documents, with the deadline calendar and direct program contacts — included with your seat. The expert
-    panel takes questions on it in person.</p></div>
-  <div style="border:2px solid var(--navy);border-radius:14px;padding:32px 28px;max-width:900px;margin:0 auto;text-align:center">
-    <h3 style="margin-bottom:12px">What You'll Leave With</h3>
-    <p style="max-width:66ch;margin:0 auto">{p['takehome']}</p>
-  </div>
-  <div class="center" style="margin-top:30px"><a href="{REG}" class="btn btn-lg">Claim Your Seat — $175 →</a>
-    <div class="js-pre-rise" style="font-family:var(--font-mono);font-size:12px;color:#6b7890;margin-top:12px">$175 until September 5, 11:59 p.m. · $197 from September 6</div>
-  </div>
-</div></section>
 
 {floor_block(p)}
 
-<section class="block tint"><div class="wrap">
+<section class="block"><div class="wrap">
   <div class="sec-head center"><div class="eyebrow">// Your Ticket</div><h2>Everything Included</h2></div>
   <div class="grid3 incl-grid">
     <div class="fcard"><h3>The Full Day</h3><p>Three keynotes — see the deal, leverage it, scale it — plus the
