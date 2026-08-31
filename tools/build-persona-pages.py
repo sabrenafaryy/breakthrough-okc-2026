@@ -220,7 +220,7 @@ PERSONAS = [
                 "Affordable housing units financed through the programs he administers.",
             ),
         ],
-        "speakers_head": "The Two People Who Run Oklahoma's Housing Money — And A Builder Who Scaled",
+        "speakers_head": "The Two Who Run The Money, And The One Who Picks The Block",
         "speakers": [
             speaker_card(
                 "darrell", "Darrell Beavers", "Expert Panel · Oklahoma Housing Finance Agency",
@@ -233,9 +233,9 @@ PERSONAS = [
                 "She implements Oklahoma City's housing strategy — what the city is actually doing on housing, block by block, inside the city limits. If your lot is in OKC she is the person to ask, and on September 26 she takes live questions too.",
             ),
             speaker_card(
-                "cameron", "Cameron Burke", "Keynote · Leverage",
-                "4 companies · 75+ units · 150+ home sales a year · Oklahoma City, OK",
-                "He did every job in the business himself for two years before he could afford anyone else. His keynote is the structure underneath running more than one thing at a time: what he hired first, what he systemized, and the order he did it in.",
+                "katie", "Katie Neason", "Keynote · Redevelopment",
+                "$15M portfolio · downtown redeveloper · Bryan, TX",
+                "She builds where nobody else is building yet — reading a tired block and putting up what it needs before the comps move. Her Redevelopment Advantage Framework is the method for choosing where to break ground, which is the decision that makes or costs you the most.",
             ),
         ],
         "takehome": "Bring one lot and one build you can't start yet. Leave with the seven programs "
