@@ -2,3 +2,6 @@ User-agent: *
 Allow: /
 
 Sitemap: https://breakthroughokc.com/sitemap.xml
+
+# Ad creatives — hosted only so Meta's uploader can fetch them. Not site content.
+Disallow: /assets/ads/
