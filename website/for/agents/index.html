@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Breakthrough OKC attribution v2 -->
+<script>
+/* Captures ad params on first landing, survives internal navigation,
+   and stamps every registration link so GHL never logs a bare self-referral. */
+(function () {
+  var KEY = 'btokc_attr';
+  var COOKIE = 'btokc_attr';
+  var KEEP = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','utm_id',
+              'fbclid','gclid','ttclid','msclkid','wbraid','gbraid','li_fat_id','epik','ref'];
+
+  function readCookie(n) {
+    var m = document.cookie.match('(^|;)\\s*' + n + '\\s*=\\s*([^;]+)');
+    return m ? decodeURIComponent(m.pop()) : '';
+  }
+  function writeCookie(n, v) {
+    var d = new Date(); d.setTime(d.getTime() + 90 * 864e5);
+    document.cookie = n + '=' + encodeURIComponent(v) + ';expires=' + d.toUTCString() +
+      ';path=/;domain=.breakthroughokc.com;SameSite=Lax';
+  }
+  function load() {
+    var raw = '';
+    try { raw = sessionStorage.getItem(KEY) || ''; } catch (e) {}
+    if (!raw) raw = readCookie(COOKIE);
+    try { return raw ? JSON.parse(raw) : null; } catch (e) { return null; }
+  }
+  function save(o) {
+    var raw = JSON.stringify(o);
+    try { sessionStorage.setItem(KEY, raw); } catch (e) {}
+    writeCookie(COOKIE, raw);
+  }
+
+  // --- 1. What did this pageview bring in? ---
+  var incoming = {};
+  var qs = new URLSearchParams(window.location.search);
+  KEEP.forEach(function (k) { if (qs.get(k)) incoming[k] = qs.get(k); });
+
+  var refHost = '';
+  try {
+    if (document.referrer) refHost = new URL(document.referrer).hostname.replace(/^www\./, '');
+  } catch (e) {}
+  var internal = refHost.indexOf('breakthroughokc.com') !== -1;
+
+  var hasCampaign = !!(incoming.utm_source || incoming.fbclid || incoming.gclid ||
+                       incoming.ttclid || incoming.msclkid || incoming.utm_id);
+  var stored = load();
+  var coldEntry = !internal && !stored;
+
+  if (hasCampaign || coldEntry) {
+    var attr = {};
+    KEEP.forEach(function (k) { if (incoming[k]) attr[k] = incoming[k]; });
+
+    if (!attr.utm_source) {
+      if (attr.fbclid) { attr.utm_source = 'facebook'; attr.utm_medium = attr.utm_medium || 'paid_social'; }
+      else if (attr.gclid || attr.wbraid || attr.gbraid) { attr.utm_source = 'google'; attr.utm_medium = attr.utm_medium || 'cpc'; }
+      else if (refHost) { attr.utm_source = refHost; attr.utm_medium = attr.utm_medium || 'referral'; }
+      else { attr.utm_source = 'direct'; attr.utm_medium = attr.utm_medium || 'none'; }
+    }
+    if (!attr.utm_medium) attr.utm_medium = attr.fbclid ? 'paid_social' : 'unknown';
+
+    attr.landing_page = window.location.pathname;
+    attr.entry_referrer = refHost || '(none)';
+    attr.first_seen = new Date().toISOString().slice(0, 10);
+    save(attr);
+    stored = attr;
+  }
+
+  if (!stored) return;
+
+  // --- 2. Stamp every registration link, on every page ---
+  function decorate(a) {
+    if (!a || !a.href || a.href.indexOf('registration.breakthroughokc.com') === -1) return;
+    try {
+      var u = new URL(a.href);
+      Object.keys(stored).forEach(function (k) {
+        if (k === 'landing_page' || k === 'entry_referrer' || k === 'first_seen') return;
+        if (!u.searchParams.has(k)) u.searchParams.set(k, stored[k]);
+      });
+      if (!u.searchParams.has('utm_click_page')) {
+        u.searchParams.set('utm_click_page', window.location.pathname);
+      }
+      if (!u.searchParams.has('utm_landing_page')) {
+        u.searchParams.set('utm_landing_page', stored.landing_page || '/');
+      }
+      a.href = u.toString();
+    } catch (e) {}
+  }
+
+  function decorateAll() {
+    document.querySelectorAll('a[href*="registration.breakthroughokc.com"]').forEach(decorate);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', decorateAll);
+  } else {
+    decorateAll();
+  }
+
+  // Safety net: links added late, or clicked before the sweep ran.
+  document.addEventListener('click', function (e) {
+    var a = e.target && e.target.closest ? e.target.closest('a') : null;
+    if (a) decorate(a);
+  }, true);
+
+  window.btokcAttribution = stored;
+})();
+</script>
+<meta name="facebook-domain-verification" content="4ctv2trw2aa59misg8j9b3dret4z2l" />
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>For Real Estate Agents | Breakthrough OKC 2026</title>
+<meta name="description" content="A retail client transacts once. An investor transacts, refers and comes back — for the agent who can read a deal. September 26, Oklahoma City." />
+<link rel="canonical" href="https://breakthroughokc.com/for/agents/" />
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png" />
+<link rel="apple-touch-icon" href="/assets/favicon-180.png" />
+<meta name="theme-color" content="#1A2540" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Breakthrough OKC 2026" />
+<meta property="og:title" content="For Real Estate Agents | Breakthrough OKC 2026" />
+<meta property="og:description" content="A retail client transacts once. An investor transacts, refers and comes back — for the agent who can read a deal. September 26, Oklahoma City." />
+<meta property="og:url" content="https://breakthroughokc.com/for/agents/" />
+<meta property="og:image" content="https://breakthroughokc.com/assets/og-image.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="For Real Estate Agents | Breakthrough OKC 2026" />
+<meta name="twitter:description" content="A retail client transacts once. An investor transacts, refers and comes back — for the agent who can read a deal. September 26, Oklahoma City." />
+<meta name="twitter:image" content="https://breakthroughokc.com/assets/og-image.jpg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/assets/style.css?v=2" />
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Event","name":"BREAKTHROUGH OKC: The 2026 Real Estate Investors Wealth Building Summit","startDate":"2026-09-26T08:00:00-05:00","endDate":"2026-09-26T18:00:00-05:00","eventAttendanceMode":"https://schema.org/OfflineEventAttendanceMode","eventStatus":"https://schema.org/EventScheduled","location":{"@type":"Place","name":"Champion Convention Center","address":{"@type":"PostalAddress","streetAddress":"737 S Meridian Ave","addressLocality":"Oklahoma City","addressRegion":"OK","postalCode":"73108","addressCountry":"US"}},"image":["https://breakthroughokc.com/assets/og-image.jpg"],"description":"A retail client transacts once. An investor transacts, refers and comes back — for the agent who can read a deal. September 26, Oklahoma City.","offers":{"@type":"Offer","price":"175","priceCurrency":"USD","availability":"https://schema.org/InStock","validThrough":"2026-09-05","url":"https://breakthroughokc.com/tickets/"},"organizer":{"@type":"Organization","name":"Oklahoma City Real Estate Investors Association (OKC REIA)","url":"https://breakthroughokc.com"}}</script>
+<script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window, document, "clarity", "script", "xqms9vb4zd");</script>
+<!-- Meta Pixel Code -->
+<script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1535008514154135');fbq('track','PageView');</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1535008514154135&ev=PageView&noscript=1"/></noscript>
+<!-- End Meta Pixel Code -->
+</head>
+<body>
+<div class="topbar">📍 September 26, 2026 · Oklahoma City &nbsp;|&nbsp; <b>⏳ Tickets $175<span class="js-pre-rise"> — rises to $197 on September 6</span></b></div>
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="nav-logo" href="/"><img src="/assets/logo.png" alt="Breakthrough OKC" /></a>
+    <nav class="nav-links"><a href="/">Home</a><a href="/about/">About</a><a href="/speakers/">Speakers</a><a href="/agenda/">Agenda</a><a href="/venue/">Venue</a><a href="/sponsors/">Sponsors</a><a href="/contact/">Contact</a></nav>
+    <div class="nav-cta">
+      <a href="https://registration.breakthroughokc.com/check-out" class="btn">Register</a>
+      <button class="menu-btn" aria-label="Menu" onclick="document.getElementById('mm').classList.toggle('open')">☰</button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mm"><a href="/">Home</a><a href="/about/">About</a><a href="/speakers/">Speakers</a><a href="/agenda/">Agenda</a><a href="/venue/">Venue</a><a href="/sponsors/">Sponsors</a><a href="/contact/">Contact</a><a href="https://registration.breakthroughokc.com/check-out">Register →</a></div>
+</header>
+
+<section class="hero bg"><div class="wrap in">
+  <div class="eyebrow">// For Real Estate Agents</div>
+  <h1>An Investor Works Out In <span class="r">One Conversation</span> Whether You Can Read A Deal.</h1>
+  <p>Cap rate. ARV. What the rehab actually costs here. Which lenders close in Oklahoma. Miss on that and they stop replying. Hit it and you're the one they call next time — and the one they name when someone in their group asks who to use. September 26 is a day among the people who decide that.</p>
+  <p class="presented">September 26, 2026 · Champion Convention Center, Oklahoma City</p>
+  <div class="cta2"><a href="https://registration.breakthroughokc.com/check-out" class="btn btn-lg">Claim Your Seat — $175 →</a><a href="/agenda/" class="btn btn-lg btn-ghost">See The Full Day</a></div>
+</div>
+<div class="cloud"><svg viewBox="0 0 1200 80" preserveAspectRatio="none"><path fill="#fff" d="M0,80 V44 C30,12 78,12 108,40 C128,16 164,8 198,32 C224,4 282,8 318,38 C348,12 398,10 438,40 C470,14 520,12 560,36 C600,8 660,10 700,38 C740,14 800,12 840,38 C880,12 940,10 980,36 C1020,10 1080,12 1120,40 C1150,20 1180,22 1200,40 L1200,80 Z"/></svg></div>
+</section>
+
+<section class="block"><div class="wrap">
+  <div class="sec-head center"><div class="eyebrow">// The Problem</div><h2>Why Investors Don't Call You Back</h2></div>
+  <div class="grid3">
+        <div class="fcard"><h3>A retail client transacts once</h3><p>Then disappears for five years. An investor transacts, refers, sells and comes back. Same license, completely different business, and almost nobody makes the switch on purpose.</p></div>
+    <div class="fcard"><h3>You're sending listings</h3><p>They already have alerts. They already ran the numbers. Forwarding inventory they've seen is the exact behavior that says you're not in this with them.</p></div>
+    <div class="fcard"><h3>You have nothing they don't have</h3><p>They read the market. They know their lenders. The gap you can fill is the thing they don't have time to go find — and nobody's shown you where that is either.</p></div>
+  </div>
+</div></section>
+
+<section class="block tint"><div class="wrap">
+  <div class="sec-head center"><div class="eyebrow">// The Evidence</div><h2>Three Things You Can Say On Monday</h2><p>Every figure below is published, dated and linked. Learn the sources, not just the numbers — knowing where a figure comes from is what separates an agent who reads the market from one who repeats it.</p></div>
+  <div class="grid3">
+        <div class="fcard"><div style="font-family:var(--font-head);font-weight:900;font-size:34px;color:var(--navy);line-height:1">+13,700</div><p style="margin-top:12px">Metro residents added in a year, 0.9% growth. The demand side of whatever strategy your client is running, and the first thing they'll test you on.</p><a href="https://fred.stlouisfed.org/series/OKCPOP" target="_blank" rel="noopener" style="font-family:var(--font-mono);font-size:11px;color:#6b7890;text-decoration:underline;display:inline-block;margin-top:12px">Source: U.S. Census Bureau, Vintage 2025 estimates · accessed Aug 27, 2026</a></div>
+    <div class="fcard"><div style="font-family:var(--font-head);font-weight:900;font-size:34px;color:var(--navy);line-height:1">$316,450</div><p style="margin-top:12px">Median metro listing price, July 2026. The low basis is why out-of-state money keeps arriving, and it's behind half the questions you'll get from a client who doesn't live here.</p><a href="https://fred.stlouisfed.org/series/MEDLISPRI36420" target="_blank" rel="noopener" style="font-family:var(--font-mono);font-size:11px;color:#6b7890;text-decoration:underline;display:inline-block;margin-top:12px">Source: Realtor.com listing data, July 2026 · accessed Aug 27, 2026</a></div>
+    <div class="fcard"><div style="font-family:var(--font-head);font-weight:900;font-size:34px;color:var(--navy);line-height:1">41%</div><p style="margin-top:12px">Of Oklahoma City households rent. The tenant pool behind every buy-and-hold conversation you'll have this year.</p><a href="https://www.census.gov/quickfacts/fact/table/oklahomacitycityoklahoma/PST045225" target="_blank" rel="noopener" style="font-family:var(--font-mono);font-size:11px;color:#6b7890;text-decoration:underline;display:inline-block;margin-top:12px">Source: U.S. Census Bureau, ACS 2020–2024 · accessed Aug 27, 2026</a></div>
+    <div class="fcard"><h3>Thirty programs they've never heard of</h3><p>Every seat includes the Oklahoma Investor Funding Manual: 30 public funding programs across city, state and federal layers, verified against the agencies' own documents, with the deadline calendar and direct contacts. Being the agent who knows this exists is the kind of thing an investor client remembers.</p></div>
+  </div>
+</div></section>
+
+<section class="block"><div class="wrap">
+  <div class="sec-head center"><div class="eyebrow">// The Lineup</div><h2>The Three Sessions That Change The Conversation</h2></div>
+  <div class="spk-grid">
+        <div class="spk"><div class="ph"><img src="/assets/cameron.webp" alt="Cameron Burke" /></div><div class="b"><div class="r">Keynote · Leverage</div><h3>Cameron Burke</h3><div class="cred">4 companies · 75+ units · 150+ home sales a year · Oklahoma City, OK</div><p>He sits on both sides of your table: a team selling 150+ homes a year, and 75+ rental units he owns himself. The clearest look you'll get at how an investor actually decides.</p></div></div>
+    <div class="spk"><div class="ph"><img src="/assets/darrell.webp" alt="Darrell Beavers" /></div><div class="b"><div class="r">Expert Panel · Oklahoma Housing Finance Agency</div><h3>Darrell Beavers</h3><div class="cred">Housing Development Director · at OHFA since 1991 · 48,000+ affordable housing units financed</div><p>The state layer, and the session you'll be quoting to clients for the next year — what money exists in Oklahoma, who qualifies, and how someone gets from interested to funded. He takes live questions.</p></div></div>
+    <div class="spk"><div class="ph"><img src="/assets/shannon.webp" alt="Shannon Entz" /></div><div class="b"><div class="r">Expert Panel · City of Oklahoma City</div><h3>Shannon Entz</h3><div class="cred">Housing Strategy Implementation Manager · 29 years in city planning</div><p>The city layer. She implements Oklahoma City's housing strategy, so what the city is working on in housing is a question you can put to her directly — and stop guessing at when a client asks.</p></div></div>
+  </div>
+  <div class="center" style="margin-top:32px"><a href="/speakers/" class="btn btn-ghost">Meet All The Speakers</a></div>
+</div></section>
+
+<section class="block tint"><div class="wrap">
+  <div class="sec-head center"><div class="eyebrow">// With Your Seat</div><h2>The Complete Oklahoma Investor Funding Manual</h2>
+    <p>30 public funding programs across city, state and federal layers, verified against the agencies' own
+    documents, with the deadline calendar and direct program contacts — included with your seat. The expert
+    panel takes questions on it in person.</p></div>
+  <div style="border:2px solid var(--navy);border-radius:14px;padding:32px 28px;max-width:900px;margin:0 auto;text-align:center">
+    <h3 style="margin-bottom:12px">What You'll Leave With</h3>
+    <p style="max-width:66ch;margin:0 auto">Bring the client conversation you keep losing. Leave able to have it — with the funding manual, the vocabulary, and a day's worth of introductions to people who buy for a living.</p>
+  </div>
+  <div class="center" style="margin-top:30px"><a href="https://registration.breakthroughokc.com/check-out" class="btn btn-lg">Claim Your Seat — $175 →</a>
+    <div class="js-pre-rise" style="font-family:var(--font-mono);font-size:12px;color:#6b7890;margin-top:12px">$175 until September 5, 11:59 p.m. · $197 from September 6</div>
+  </div>
+</div></section>
+
+
+<section class="block"><div class="wrap">
+  <div class="sec-head center"><div class="eyebrow">// Partners</div><h2>Sponsors &amp; The Exhibitor Hall</h2>
+    <p>The lenders, title people and contractors your investor clients already use &mdash; and the ones you will want to be able to name when a client asks you for a referral.</p></div>
+  <div class="logo-row">
+    <div class="logo-tile"><img src="/assets/logo-okc-abstract.webp?v=2" alt="Oklahoma City Abstract &amp; Title" /></div>
+    <div class="logo-tile"><img src="/assets/logo-fixedlending.png?v=2" alt="FixedLending" /></div>
+  </div>
+  <p class="center" style="color:#9aa3b5;font-family:var(--font-mono);font-size:12px;margin-top:22px">More partners announced soon.</p>
+</div>
+<div class="marquee"><div class="marquee-track">
+  <div class="marquee-item"><img src="/assets/logo-ats.webp?v=2" alt="Agent Transaction Solutions" /></div><div class="marquee-item"><img src="/assets/logo-horp.webp?v=2" alt="Haus of Reed &amp; Pyper" /></div><div class="marquee-item"><img src="/assets/logo-independence.webp?v=2" alt="Independence Funding" /></div><div class="marquee-item"><img src="/assets/logo-ats.webp?v=2" alt="Agent Transaction Solutions" /></div><div class="marquee-item"><img src="/assets/logo-horp.webp?v=2" alt="Haus of Reed &amp; Pyper" /></div><div class="marquee-item"><img src="/assets/logo-independence.webp?v=2" alt="Independence Funding" /></div><div class="marquee-item"><img src="/assets/logo-ats.webp?v=2" alt="Agent Transaction Solutions" /></div><div class="marquee-item"><img src="/assets/logo-horp.webp?v=2" alt="Haus of Reed &amp; Pyper" /></div><div class="marquee-item"><img src="/assets/logo-independence.webp?v=2" alt="Independence Funding" /></div>
+  <div class="marquee-item"><img src="/assets/logo-ats.webp?v=2" alt="Agent Transaction Solutions" /></div><div class="marquee-item"><img src="/assets/logo-horp.webp?v=2" alt="Haus of Reed &amp; Pyper" /></div><div class="marquee-item"><img src="/assets/logo-independence.webp?v=2" alt="Independence Funding" /></div><div class="marquee-item"><img src="/assets/logo-ats.webp?v=2" alt="Agent Transaction Solutions" /></div><div class="marquee-item"><img src="/assets/logo-horp.webp?v=2" alt="Haus of Reed &amp; Pyper" /></div><div class="marquee-item"><img src="/assets/logo-independence.webp?v=2" alt="Independence Funding" /></div><div class="marquee-item"><img src="/assets/logo-ats.webp?v=2" alt="Agent Transaction Solutions" /></div><div class="marquee-item"><img src="/assets/logo-horp.webp?v=2" alt="Haus of Reed &amp; Pyper" /></div><div class="marquee-item"><img src="/assets/logo-independence.webp?v=2" alt="Independence Funding" /></div>
+</div></div>
+<div class="wrap"><div class="center" style="margin-top:26px"><a href="/sponsors/" class="btn btn-ghost">Exhibit Or Sponsor</a></div></div>
+</section>
+
+<section class="block"><div class="wrap">
+  <div class="sec-head center"><div class="eyebrow">// Your Ticket</div><h2>Everything Included</h2></div>
+  <div class="grid3">
+    <div class="fcard"><h3>The Full Day</h3><p>Three keynotes — see the deal, leverage it, scale it — plus the
+      expert panel Q&amp;A on the Oklahoma City market.</p></div>
+    <div class="fcard"><h3>The Funding Manual</h3><p>30 verified programs, 12 dated funding windows into 2027,
+      application paths, direct contacts and a glossary.</p></div>
+    <div class="fcard"><h3>The Room</h3><p>Curated networking, a sponsor and exhibitor hall of contractors and
+      lenders, plus light breakfast and lunch — served.</p></div>
+  </div>
+</div></section>
+
+<!-- opt-in pending -->
+<section class="block ctaband"><div class="wrap">
+  <div class="eyebrow" style="color:#ffd8d3">// One Saturday</div>
+  <h2>Ready To Claim Your Seat?</h2><p>Tickets $175<span class="js-pre-rise"> — price rises to $197 on September 6</span>.</p>
+  <a href="https://registration.breakthroughokc.com/check-out" class="btn btn-lg">Register Now →</a>
+</div></section>
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="fcol" style="max-width:300px"><div class="flogo"><img src="/assets/logo-white.png?v=2" alt="Breakthrough OKC" /></div><p style="color:#8b96b0;font-size:13px">The 2026 Real Estate Investors Wealth Building Summit. September 26, 2026 · Champion Convention Center, Oklahoma City.</p><p style="color:#8b96b0;font-size:13px;margin-top:10px">Hosted by Oklahoma City Real Estate Investors Association (OKC REIA)<br /><a href="mailto:sabrena@safarymarketing.io" style="color:#c3cbe0">sabrena@safarymarketing.io</a> · 405-759-4005</p><div class="fsocial"><a href="https://www.facebook.com/OklahomaREIA" target="_blank" rel="noopener" aria-label="Follow OKC REIA on Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.99 3.66 9.13 8.44 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99C18.34 21.13 22 16.99 22 12z"/></svg></a><a href="https://www.instagram.com/okcreia" target="_blank" rel="noopener" aria-label="Follow OKC REIA on Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.3 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .3-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.3-1-.4-2.2-.1-1.3-.1-1.7-.1-4.9s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.3 2.2-.4 1.3-.1 1.7-.1 4.9-.1zm0 1.8c-3.1 0-3.5 0-4.8.1-1.1.1-1.7.2-2.1.4-.5.2-.9.4-1.3.8-.4.4-.6.8-.8 1.3-.2.4-.3 1-.4 2.1-.1 1.3-.1 1.7-.1 4.8s0 3.5.1 4.8c.1 1.1.2 1.7.4 2.1.2.5.4.9.8 1.3.4.4.8.6 1.3.8.4.2 1 .3 2.1.4 1.3.1 1.7.1 4.8.1s3.5 0 4.8-.1c1.1-.1 1.7-.2 2.1-.4.5-.2.9-.4 1.3-.8.4-.4.6-.8.8-1.3.2-.4.3-1 .4-2.1.1-1.3.1-1.7.1-4.8s0-3.5-.1-4.8c-.1-1.1-.2-1.7-.4-2.1-.2-.5-.4-.9-.8-1.3-.4-.4-.8-.6-1.3-.8-.4-.2-1-.3-2.1-.4-1.3-.1-1.7-.1-4.8-.1zm0 3.1a4.9 4.9 0 100 9.8 4.9 4.9 0 000-9.8zm0 8.1a3.2 3.2 0 110-6.4 3.2 3.2 0 010 6.4zm6.2-8.3a1.1 1.1 0 11-2.2 0 1.1 1.1 0 012.2 0z"/></svg></a></div></div>
+      <div class="fcol"><h4>Event</h4><a href="/about/">About</a><a href="/speakers/">Speakers</a><a href="/agenda/">Agenda</a><a href="/venue/">Venue</a><a href="https://www.facebook.com/share/18VZicuEmZ/" target="_blank" rel="noopener">Facebook Event</a></div>
+      <div class="fcol"><h4>Get Involved</h4><a href="/sponsors/">Sponsors</a><a href="/contact/">Contact</a><a href="https://registration.breakthroughokc.com/check-out">Register</a></div>
+      <div class="fcol"><h4>Legal</h4><a href="/privacy-policy/">Privacy Policy</a><a href="/terms-conditions/">Terms &amp; Conditions</a><a href="/sponsorship-agreement/">Sponsorship Agreement</a><a href="/contact/">Contact Us</a></div>
+    </div>
+    <div class="fine">© 2026 Breakthrough OKC. All rights reserved. Program details, deadlines and dollar figures reflect agency-published information verified August 2026 and can change without notice — always confirm current terms with the administering agency. Nothing on this site is an offer of financing, legal, tax or investment advice, and no investment return is promised or implied. This is an independent educational summit.</div>
+  </div>
+</footer>
+<script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6a2867f27b092d06b904c8d0" data-source="WEB_USER"></script>
+<!-- §4 price switch: on Sept 6 every rendered $175 becomes $197 and the "rises to" fragments hide — no manual edit needed.
+     GHL checkout pricing is separate and stays Sabrena's job. -->
+<style>.post-rise .js-pre-rise{display:none !important}</style>
+<script>
+  (function(){
+    var RISE = new Date("2026-09-06T00:00:00-05:00").getTime();
+    var post = Date.now() >= RISE;
+    document.documentElement.classList.add(post ? "post-rise" : "pre-rise");
+    window.btokcTicketPrice = post ? 197 : 175;
+    if (!post) return;
+    // JSON-LD is unreachable by the text walker above, so patch the Offer directly —
+    // otherwise the Google rich result advertises $175 after the price rises.
+    document.querySelectorAll('script[type="application/ld+json"]').forEach(function(s){
+      try {
+        var j = JSON.parse(s.textContent);
+        if (j && j.offers && j.offers.price === "175") { j.offers.price = "197"; delete j.offers.validThrough; s.textContent = JSON.stringify(j); }
+      } catch (e) {}
+    });
+    var w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false), n;
+    while ((n = w.nextNode())) {
+      if (n.nodeValue.indexOf("$175") !== -1) n.nodeValue = n.nodeValue.split("$175").join("$197");
+      else if (/^175\b/.test(n.nodeValue) && n.previousSibling &&
+               n.previousSibling.textContent === "$") n.nodeValue = n.nodeValue.replace(/^175\b/, "197");
+    }
+  })();
+</script>
+<!-- Meta pixel: ViewContent on load, Lead on registration-CTA click. Value follows the current
+     price. Delegated so attribution v2's stamped links are never rewritten. -->
+<script>
+  if (typeof fbq === "function") fbq("track","ViewContent",{content_name:"Breakthrough OKC 2026 — agents",content_category:"Event",value:(window.btokcTicketPrice||175),currency:"USD"});
+  document.addEventListener("click", function(e){
+    var a = e.target && e.target.closest ? e.target.closest("a") : null;
+    if (!a || !a.href || a.href.indexOf("registration.breakthroughokc.com") === -1) return;
+    if (typeof fbq === "function") fbq("track", "Lead", {value: window.btokcTicketPrice || 175, currency: "USD"});
+  }, true);
+</script>
+</body>
+</html>

@@ -11,4 +11,39 @@
   <url><loc>https://breakthroughokc.com/privacy-policy/</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
   <url><loc>https://breakthroughokc.com/terms-conditions/</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
   <url><loc>https://breakthroughokc.com/sponsorship-agreement/</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url>
+    <loc>https://breakthroughokc.com/for/buy-and-hold/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://breakthroughokc.com/for/fix-and-flip/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://breakthroughokc.com/for/wholesalers/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://breakthroughokc.com/for/new-investors/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://breakthroughokc.com/for/out-of-state/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://breakthroughokc.com/for/builders/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://breakthroughokc.com/for/agents/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>
