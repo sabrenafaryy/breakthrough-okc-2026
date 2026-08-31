@@ -19,8 +19,6 @@ House-rule constraints baked in and NOT to be relaxed without a checker pass:
   * Every number carries its source link and access date.
   * No attendance number. 250 is venue capacity, never attendance.
   * No investment-return promise.
-  * HSP: rural open, urban set-aside paused since Aug 7 2026; 0% for 24 months
-    then prime + 4%.
 """
 import pathlib
 import re
@@ -53,13 +51,14 @@ FOOTER = slice_between(HOME, "<footer>", "</footer>")
 CHAT = slice_between(HOME, '<script src="https://widgets.leadconnectorhq.com/loader.js"', "</script>")
 PRICE_SWITCH = slice_between(HOME, "<!-- §4 price switch", "</script>")
 
+LOGO_ROW = slice_between(HOME, '<div class="logo-row">', "</div>\n  </div>")
+MARQUEE = slice_between(HOME, '<div class="marquee">', "</div></div>")
+
 REG = "https://registration.breakthroughokc.com/contact-info"
 
 # The GHL field-brief form ID. While this is None the opt-in section is OMITTED entirely —
 # a 430px card wired to a dead form is worse than no card on pages taking paid spend.
-# Set it to the real ID and re-run to switch the section on across all five pages.
-# ⚠️ Before switching it on: the field-brief PDF names Darrell Beavers and Shannon Entz, whose
-# Set to the real GHL form ID to switch the opt-in section on across every page.
+# Set it to the real ID and re-run to switch the section on across every page.
 GHL_FIELD_BRIEF_FORM_ID = None
 CLOUD = slice_between(SPEAKERS, '<div class="cloud">', "</div>")
 
@@ -85,6 +84,9 @@ SRC = {
         "tax-increment-financing/fy25_annualtifreport.pdf",
         "City of OKC FY25 TIF Annual Report, as of June 30, 2025 · accessed Aug 27, 2026",
     ),
+    # ⚠️ RETIRED FROM THE SITE by option 3 (2026-08-30). These describe PROGRAM ELIGIBILITY,
+    # which a static page cannot qualify to a reader. Kept only so the values stay traceable.
+    # Do NOT attach any of the five below to a card. They are the panel's material.
     "historic": (
         "https://oklahoma.gov/content/dam/ok/en/omes/documents/IECPresentation20241010.pdf",
         "Oklahoma Incentive Evaluation Commission, Oct 2024 (state 20% + federal 26 U.S.C. §47 20%)"
@@ -165,6 +167,7 @@ def speaker_card(slug, name, role, cred, body):
 PERSONAS = [
     {
         "slug": "builders",
+        "floor_line": "The lenders, title people and trades you need on a build are standing on the floor all day. You can ask a lender what they will actually lend on before you need them on a clock.",
         "utm": "persona-builder",
         "nav": "Builders",
         "title": "For Small Builders | Breakthrough OKC 2026",
@@ -217,20 +220,22 @@ PERSONAS = [
                 "Affordable housing units financed through the programs he administers.",
             ),
         ],
-        "speakers_head": "The Man Who Runs Them, And The Man Who Runs Four At Once",
+        "speakers_head": "The Two People Who Run Oklahoma's Housing Money — And A Builder Who Scaled",
         "speakers": [
             speaker_card(
                 "darrell", "Darrell Beavers", "Expert Panel · Oklahoma Housing Finance Agency",
                 "Housing Development Director · at OHFA since 1991 · 48,000+ affordable housing units financed",
-                "On September 26 he walks the room through all seven programs — what each funds, who "
-                "qualifies, and what to say when you call. Then he takes live questions.",
+                "He administers seven of Oklahoma's housing finance programs and is an active real estate broker and investor himself, which is why he explains them in deal terms. On September 26 he walks the room through all seven — what each funds, who qualifies, what to say when you call — and takes live questions.",
+            ),
+            speaker_card(
+                "shannon", "Shannon Entz", "Expert Panel · City of Oklahoma City",
+                "Housing Strategy Implementation Manager · 29 years in city planning",
+                "She implements Oklahoma City's housing strategy — what the city is actually doing on housing, block by block, inside the city limits. If your lot is in OKC she is the person to ask, and on September 26 she takes live questions too.",
             ),
             speaker_card(
                 "cameron", "Cameron Burke", "Keynote · Leverage",
                 "4 companies · 75+ units · 150+ home sales a year · Oklahoma City, OK",
-                "He did every job in the business himself for two years before he could afford anyone "
-                "else. His keynote is the structure underneath running more than one thing at a time: "
-                "what he hired first, what he systemized, and the order he did it in.",
+                "He did every job in the business himself for two years before he could afford anyone else. His keynote is the structure underneath running more than one thing at a time: what he hired first, what he systemized, and the order he did it in.",
             ),
         ],
         "takehome": "Bring one lot and one build you can't start yet. Leave with the seven programs "
@@ -239,6 +244,7 @@ PERSONAS = [
     },
     {
         "slug": "agents",
+        "floor_line": "The lenders, title people and contractors your investor clients already use &mdash; and the ones you will want to be able to name when a client asks you for a referral.",
         "utm": "persona-agent",
         "nav": "Agents",
         "title": "For Real Estate Agents | Breakthrough OKC 2026",
@@ -299,19 +305,22 @@ PERSONAS = [
                 "the kind of thing an investor client remembers.",
             ),
         ],
-        "speakers_head": "The Two Sessions That Change The Conversation",
+        "speakers_head": "The Three Sessions That Change The Conversation",
         "speakers": [
             speaker_card(
                 "cameron", "Cameron Burke", "Keynote · Leverage",
                 "4 companies · 75+ units · 150+ home sales a year · Oklahoma City, OK",
-                "He sits on both sides of your table: a team selling 150+ homes a year, and 75+ rental "
-                "units he owns himself. The clearest look you'll get at how an investor actually decides.",
+                "He sits on both sides of your table: a team selling 150+ homes a year, and 75+ rental units he owns himself. The clearest look you'll get at how an investor actually decides.",
             ),
             speaker_card(
                 "darrell", "Darrell Beavers", "Expert Panel · Oklahoma Housing Finance Agency",
                 "Housing Development Director · at OHFA since 1991 · 48,000+ affordable housing units financed",
-                "The session you'll be quoting to clients for the next year — what money exists in this "
-                "state, who qualifies, and how you get from interested to funded.",
+                "The state layer, and the session you'll be quoting to clients for the next year — what money exists in Oklahoma, who qualifies, and how someone gets from interested to funded. He takes live questions.",
+            ),
+            speaker_card(
+                "shannon", "Shannon Entz", "Expert Panel · City of Oklahoma City",
+                "Housing Strategy Implementation Manager · 29 years in city planning",
+                "The city layer. She implements Oklahoma City's housing strategy, so what the city is working on in housing is a question you can put to her directly — and stop guessing at when a client asks.",
             ),
         ],
         "takehome": "Bring the client conversation you keep losing. Leave able to have it — with the "
@@ -320,6 +329,7 @@ PERSONAS = [
     },
     {
         "slug": "buy-and-hold",
+        "floor_line": "Property managers, lenders and contractors, in person, all day. The three hires that quietly decide whether door seven performs or eats your weekends.",
         "utm": "persona-buyhold",
         "nav": "Buy & Hold",
         "title": "For Buy & Hold Investors | Breakthrough OKC 2026",
@@ -375,26 +385,27 @@ PERSONAS = [
                 "the deadline calendar and direct contacts. The manual is the map; the day is the guided tour.",
             ),
         ],
-        "speakers_head": "The Man Who Runs The Money, And The Man Who Runs Four Companies",
+        "speakers_head": "The Panel That Answers The Money Question — And Two Operators Who Live It",
         "speakers": [
             speaker_card(
                 "darrell", "Darrell Beavers", "Expert Panel · Oklahoma Housing Finance Agency",
                 "Housing Development Director · at OHFA since 1991 · 48,000+ affordable housing units financed",
-                "He administers seven of Oklahoma's housing finance programs and is an active broker and "
-                "investor himself. On September 26 he takes live questions about the building you actually own.",
+                "He administers seven of Oklahoma's housing finance programs and is an active broker and investor himself. On September 26 he takes live questions about the building you actually own.",
+            ),
+            speaker_card(
+                "shannon", "Shannon Entz", "Expert Panel · City of Oklahoma City",
+                "Housing Strategy Implementation Manager · 29 years in city planning",
+                "She implements Oklahoma City's housing strategy, so what the city is doing in the neighborhoods you already own in is a question she can answer directly. She takes live questions on the day.",
             ),
             speaker_card(
                 "cameron", "Cameron Burke", "Keynote · Leverage",
                 "4 companies · 75+ units · 150+ home sales a year · Oklahoma City, OK",
-                "Runs 75+ rentals alongside three other companies. His keynote is the systems and delegation "
-                "that let a portfolio grow without swallowing your week — the answer if the ceiling you hit "
-                "was time rather than capital.",
+                "Runs 75+ rentals alongside three other companies. His keynote is the systems and delegation that let a portfolio grow without swallowing your week — the answer if the ceiling you hit was time rather than capital.",
             ),
             speaker_card(
-                "ben", "Ben Allgeyer", "Keynote · Scaling",
-                "500+ deals in 8 years · all 50 states · Kansas City, MO",
-                "He scaled, learned what doing it wrong costs, and rebuilt lean. He closes the day on the real "
-                "price of scaling and how to build a portfolio that holds.",
+                "katie", "Katie Neason", "Keynote · Redevelopment",
+                "$15M portfolio · downtown redeveloper · Bryan, TX",
+                "The other way to add doors: buy the tired building on the tired street and hold it while the street turns. Her Redevelopment Advantage Framework is how she reads which street does.",
             ),
         ],
         "takehome": "Bring one building or one target. Leave knowing which capital door to test first, what "
@@ -402,6 +413,7 @@ PERSONAS = [
     },
     {
         "slug": "fix-and-flip",
+        "floor_line": "Lenders who fund rehabs and the trades who finish them &mdash; on the floor all day, so you can have the conversation before the next one is under contract.",
         "utm": "persona-flip",
         "nav": "Fix & Flip",
         "title": "For Fix & Flip Investors | Breakthrough OKC 2026",
@@ -467,6 +479,13 @@ PERSONAS = [
                 "teaching the Redevelopment Advantage Framework — the method, not the story.",
             ),
             speaker_card(
+                "cameron", "Cameron Burke", "Keynote · Leverage",
+                "4 companies · 75+ units · 150+ home sales a year · Oklahoma City, OK",
+                "He runs flips in this metro alongside a sales team doing 150+ homes a year — so he sees "
+                "both what the finished product sells for and what it costs to get there. The closest read "
+                "you'll get on margin in this market.",
+            ),
+            speaker_card(
                 "ben", "Ben Allgeyer", "Keynote · Scaling",
                 "500+ deals in 8 years · all 50 states · Kansas City, MO",
                 "500+ deals across all 50 states, and a hard lesson in scaling the wrong way. He closes on "
@@ -478,6 +497,7 @@ PERSONAS = [
     },
     {
         "slug": "wholesalers",
+        "floor_line": "The exhibitor hall runs the length of the day. Lenders, title people and the buyers they work with are all in the same room, and nobody is gatekeeping the introductions.",
         "utm": "persona-wholesale",
         "nav": "Wholesalers",
         "title": "For Wholesalers | Breakthrough OKC 2026",
@@ -547,6 +567,7 @@ PERSONAS = [
     },
     {
         "slug": "new-investors",
+        "floor_line": "Lenders, contractors, title and property managers &mdash; the team you will eventually need, in one room, where you can ask a beginner question without it costing you anything.",
         "utm": "persona-new",
         "nav": "New Investors",
         "title": "New To Investing? | Breakthrough OKC 2026",
@@ -625,6 +646,7 @@ PERSONAS = [
     },
     {
         "slug": "out-of-state",
+        "floor_line": "This is the part you cannot do from a thousand miles away: meet the lender, the contractor and the property manager face to face before you hire any of them.",
         "utm": "persona-oos",
         "nav": "Out-Of-State",
         "title": "For Out-Of-State Investors | Breakthrough OKC 2026",
@@ -652,8 +674,8 @@ PERSONAS = [
                 "answers the phone in February. None of that publishes, and all of it decides your return.",
             ),
         ],
-        "proof_head": "The People You'd Otherwise Hire Sight Unseen",
-        "proof_eyebrow": "// Who's On The Floor",
+        "proof_head": "The Three Relationships Your Return Rests On",
+        "proof_eyebrow": "// The Part You Can't Do Remotely",
         "proof_lede": "The market figures already work or you wouldn't be reading this — <b>+13,700 metro "
                       "residents added in a year</b>, a <b>$316,450</b> median list price, <b>41%</b> of "
                       "households renting, all sourced below. What a spreadsheet can't hand you is the "
@@ -678,19 +700,27 @@ PERSONAS = [
                 "pop", "price", "rent",
             ),
         ],
-        "speakers_head": "Who You'll Learn It From",
+        "speakers_head": "The Locals You'd Otherwise Be Guessing About",
         "speakers": [
             speaker_card(
                 "cameron", "Cameron Burke", "Keynote · Leverage",
-                "4 companies · 75+ units · 150+ home sales/yr · Oklahoma City, OK",
-                "He operates in this metro every day — flips, 75+ rentals, and a sales team doing 150+ homes a "
-                "year. If you want the local operator's read, he is it.",
+                "4 companies · 75+ units · 150+ home sales a year · Oklahoma City, OK",
+                "He operates in this metro every day — flips, 75+ rentals, and a sales team doing 150+ homes a year. If you want the local operator's read, he is it.",
             ),
             speaker_card(
                 "ben", "Ben Allgeyer", "Keynote · Scaling",
                 "500+ deals in 8 years · all 50 states · Kansas City, MO",
-                "500+ deals across all 50 states — he has bought in markets he didn't live in, and closes the "
-                "day on the systems that make remote ownership survivable.",
+                "500+ deals across all 50 states — he has bought in markets he didn't live in, and closes the day on the systems that make remote ownership survivable.",
+            ),
+            speaker_card(
+                "darrell", "Darrell Beavers", "Expert Panel · Oklahoma Housing Finance Agency",
+                "Housing Development Director · at OHFA since 1991 · 48,000+ affordable housing units financed",
+                "The state layer. He administers seven of Oklahoma's housing finance programs, and if you are weighing whether to buy here at all, he is the person to ask what money exists and who qualifies — live, not from a website.",
+            ),
+            speaker_card(
+                "shannon", "Shannon Entz", "Expert Panel · City of Oklahoma City",
+                "Housing Strategy Implementation Manager · 29 years in city planning",
+                "The city layer, and the thing you genuinely cannot read from a thousand miles away. She implements Oklahoma City's housing strategy and takes live questions — including about the specific part of town you have been looking at.",
             ),
         ],
         "takehome": "Bring the market questions your spreadsheet can't settle. Leave with the operators' read on "
@@ -771,7 +801,24 @@ def optin(slug):
 </section>"""
 
 
+def floor_block(p):
+    """Sponsors + exhibitor floor. Logos are lifted from the live homepage, so this page
+    can never name a partner the homepage doesn't already name. Do not hand-add names here."""
+    return f"""
+<section class="block"><div class="wrap">
+  <div class="sec-head center"><div class="eyebrow">// Partners</div><h2>Sponsors &amp; The Exhibitor Hall</h2>
+    <p>{p.get('floor_line', 'Contractors, lenders and partners are in the exhibitor hall all day &mdash; not a corridor you pass through twice.')}</p></div>
+  {LOGO_ROW}
+  <p class="center" style="color:#9aa3b5;font-family:var(--font-mono);font-size:12px;margin-top:22px">More partners announced soon.</p>
+</div>
+{MARQUEE}
+<div class="wrap"><div class="center" style="margin-top:26px"><a href="/sponsors/" class="btn btn-ghost">Exhibit Or Sponsor</a></div></div>
+</section>"""
+
+
 def build(p):
+    # 3 cards look wrong in a 2-col grid (orphan on row 2); 4 look wrong in a 3-col grid.
+    spk_cls = "" if len(p["speakers"]) == 3 else " two"
     url = f"https://breakthroughokc.com/for/{p['slug']}/"
     ld = (
         '{"@context":"https://schema.org","@type":"Event",'
@@ -848,7 +895,7 @@ def build(p):
 
 <section class="block"><div class="wrap">
   <div class="sec-head center"><div class="eyebrow">// The Lineup</div><h2>{p['speakers_head']}</h2></div>
-  <div class="spk-grid two">
+  <div class="spk-grid{spk_cls}">
     {chr(10).join('    ' + c for c in p['speakers'])}
   </div>
   <div class="center" style="margin-top:32px"><a href="/speakers/" class="btn btn-ghost">Meet All The Speakers</a></div>
@@ -867,6 +914,8 @@ def build(p):
     <div class="js-pre-rise" style="font-family:var(--font-mono);font-size:12px;color:#6b7890;margin-top:12px">$175 until September 5, 11:59 p.m. · $197 from September 6</div>
   </div>
 </div></section>
+
+{floor_block(p)}
 
 <section class="block"><div class="wrap">
   <div class="sec-head center"><div class="eyebrow">// Your Ticket</div><h2>Everything Included</h2></div>
