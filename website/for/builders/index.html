@@ -154,6 +154,35 @@
   <div class="mobile-menu" id="mm"><a href="/">Home</a><a href="/about/">About</a><a href="/speakers/">Speakers</a><a href="/agenda/">Agenda</a><a href="/venue/">Venue</a><a href="/sponsors/">Sponsors</a><a href="/contact/">Contact</a><a href="https://registration.breakthroughokc.com/check-out">Register →</a></div>
 </header>
 
+<style>
+  /* ---- persona page visual system ----
+     The problem before this: seven sections running white / tint / white / tint / white / white
+     / red — five near-identical light blocks and the only color arriving last. */
+
+  /* PROBLEMS — numbered so three cards read as a sequence, not three identical boxes */
+  .prob-grid{counter-reset:prob}
+  .prob-grid .fcard{position:relative;padding-top:56px;border-top:3px solid var(--red)}
+  .prob-grid .fcard:before{counter-increment:prob;content:counter(prob,decimal-leading-zero);
+    position:absolute;top:16px;left:24px;font-family:var(--font-head);font-weight:900;
+    font-size:40px;line-height:1;color:var(--red);opacity:.9}
+
+  /* PROOF — the payload section. Navy band, white text, red numerals: the loudest beat
+     on the page after the hero, which is where the substance actually is. */
+  .proof-band{background:var(--navy)}
+  .proof-band .eyebrow{color:#ff9d94}
+  .proof-band h2{color:#fff}
+  .proof-band .sec-head p{color:#c3cbe0}
+  .proof-band .fcard{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16)}
+  .proof-band .fcard h3{color:#fff}
+  .proof-band .fcard p{color:#dfe4ee}
+  .proof-band .fcard b{color:#fff}
+  .proof-band .fcard>div:first-child{color:var(--red) !important}   /* the stat numeral */
+  .proof-band .fcard a{color:#9fb2cc !important}
+
+  /* INCLUDED — red checks so it reads as a list of things you get, not more prose cards */
+  .incl-grid .fcard{border-left:3px solid var(--red)}
+  .incl-grid .fcard h3:before{content:"✓ ";color:var(--red);font-weight:900}
+</style>
 <section class="hero bg"><div class="wrap in">
   <div class="eyebrow">// For Small Builders &amp; Developers</div>
   <h1>The Bank Wants 30% Down. <span class="r">There Are Six Other Doors.</span></h1>
@@ -166,14 +195,14 @@
 
 <section class="block"><div class="wrap">
   <div class="sec-head center"><div class="eyebrow">// The Problem</div><h2>One Build At A Time Is A Ceiling</h2></div>
-  <div class="grid3">
+  <div class="grid3 prob-grid">
         <div class="fcard"><h3>The down payment is the whole constraint</h3><p>Your deal pencils. Your equity doesn't stretch to the next one until this one closes. That's a financing problem wearing a deal problem's coat.</p></div>
     <div class="fcard"><h3>Public money looks like it's for someone else</h3><p>Bigger developers, nonprofits, syndicators. Some of it is. Some of it was written for a builder putting up five houses, and nobody tells you which is which.</p></div>
     <div class="fcard"><h3>The window matters more than the program</h3><p>Some programs take applications continuously. Some pause. Some have one deadline a year. Which door is open in which month is most of the game, and it changes.</p></div>
   </div>
 </div></section>
 
-<section class="block tint"><div class="wrap">
+<section class="block proof-band"><div class="wrap">
   <div class="sec-head center"><div class="eyebrow">// The Evidence</div><h2>The Man Who Administers Them</h2><p>Not a summary of the programs — the person responsible for them, in the room, answering the question you actually have about the build you're actually planning.</p></div>
   <div class="grid3">
         <div class="fcard"><div style="font-family:var(--font-head);font-weight:900;font-size:34px;color:var(--navy);line-height:1">Seven programs</div><p style="margin-top:12px">Darrell Beavers has administrative responsibility for seven of Oklahoma's housing finance programs. Four federal, three state. Different income rules, different cycles, different qualification bars.</p></div>
@@ -223,9 +252,9 @@
 <div class="wrap"><div class="center" style="margin-top:26px"><a href="/sponsors/" class="btn btn-ghost">Exhibit Or Sponsor</a></div></div>
 </section>
 
-<section class="block"><div class="wrap">
+<section class="block tint"><div class="wrap">
   <div class="sec-head center"><div class="eyebrow">// Your Ticket</div><h2>Everything Included</h2></div>
-  <div class="grid3">
+  <div class="grid3 incl-grid">
     <div class="fcard"><h3>The Full Day</h3><p>Three keynotes — see the deal, leverage it, scale it — plus the
       expert panel Q&amp;A on the Oklahoma City market.</p></div>
     <div class="fcard"><h3>Two Things You Take Home</h3><p>The <b>Oklahoma Investor Funding Manual</b> —

@@ -154,6 +154,35 @@
   <div class="mobile-menu" id="mm"><a href="/">Home</a><a href="/about/">About</a><a href="/speakers/">Speakers</a><a href="/agenda/">Agenda</a><a href="/venue/">Venue</a><a href="/sponsors/">Sponsors</a><a href="/contact/">Contact</a><a href="https://registration.breakthroughokc.com/check-out">Register →</a></div>
 </header>
 
+<style>
+  /* ---- persona page visual system ----
+     The problem before this: seven sections running white / tint / white / tint / white / white
+     / red — five near-identical light blocks and the only color arriving last. */
+
+  /* PROBLEMS — numbered so three cards read as a sequence, not three identical boxes */
+  .prob-grid{counter-reset:prob}
+  .prob-grid .fcard{position:relative;padding-top:56px;border-top:3px solid var(--red)}
+  .prob-grid .fcard:before{counter-increment:prob;content:counter(prob,decimal-leading-zero);
+    position:absolute;top:16px;left:24px;font-family:var(--font-head);font-weight:900;
+    font-size:40px;line-height:1;color:var(--red);opacity:.9}
+
+  /* PROOF — the payload section. Navy band, white text, red numerals: the loudest beat
+     on the page after the hero, which is where the substance actually is. */
+  .proof-band{background:var(--navy)}
+  .proof-band .eyebrow{color:#ff9d94}
+  .proof-band h2{color:#fff}
+  .proof-band .sec-head p{color:#c3cbe0}
+  .proof-band .fcard{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16)}
+  .proof-band .fcard h3{color:#fff}
+  .proof-band .fcard p{color:#dfe4ee}
+  .proof-band .fcard b{color:#fff}
+  .proof-band .fcard>div:first-child{color:var(--red) !important}   /* the stat numeral */
+  .proof-band .fcard a{color:#9fb2cc !important}
+
+  /* INCLUDED — red checks so it reads as a list of things you get, not more prose cards */
+  .incl-grid .fcard{border-left:3px solid var(--red)}
+  .incl-grid .fcard h3:before{content:"✓ ";color:var(--red);font-weight:900}
+</style>
 <section class="hero bg"><div class="wrap in">
   <div class="eyebrow">// For Out-Of-State Investors</div>
   <h1>You've Run Oklahoma City On A Spreadsheet. <span class="r">You've Never Stood In It.</span></h1>
@@ -166,14 +195,14 @@
 
 <section class="block"><div class="wrap">
   <div class="sec-head center"><div class="eyebrow">// The Problem</div><h2>What A Spreadsheet Can't Price</h2></div>
-  <div class="grid3">
+  <div class="grid3 prob-grid">
         <div class="fcard"><h3>You can't tell the streets apart</h3><p>Two addresses a mile apart can be completely different investments. That knowledge is local, it's held by people, and it doesn't publish.</p></div>
     <div class="fcard"><h3>Your team is your whole return</h3><p>Property manager, contractor, lender. Out of state, those three relationships are the difference between a performing asset and a slow bleed — and you're hiring them sight unseen.</p></div>
     <div class="fcard"><h3>You can't read the room from a listing site</h3><p>Which builders actually deliver, which lenders actually close here, which property manager answers the phone in February. None of that publishes, and all of it decides your return.</p></div>
   </div>
 </div></section>
 
-<section class="block tint"><div class="wrap">
+<section class="block proof-band"><div class="wrap">
   <div class="sec-head center"><div class="eyebrow">// The Part You Can't Do Remotely</div><h2>The Three Relationships Your Return Rests On</h2><p>The market figures already work or you wouldn't be reading this — <b>+13,700 metro residents added in a year</b>, a <b>$316,450</b> median list price, <b>41%</b> of households renting, all sourced below. What a spreadsheet can't hand you is the three relationships your return actually rests on. Those are standing on the exhibitor floor all day.</p></div>
   <div class="grid3">
         <div class="fcard"><h3>Lenders who close in Oklahoma</h3><p>Not a national call center. People who fund deals in this metro, who you can ask directly what they will and won't lend on — before you need them on a clock.</p></div>
@@ -224,9 +253,9 @@
 <div class="wrap"><div class="center" style="margin-top:26px"><a href="/sponsors/" class="btn btn-ghost">Exhibit Or Sponsor</a></div></div>
 </section>
 
-<section class="block"><div class="wrap">
+<section class="block tint"><div class="wrap">
   <div class="sec-head center"><div class="eyebrow">// Your Ticket</div><h2>Everything Included</h2></div>
-  <div class="grid3">
+  <div class="grid3 incl-grid">
     <div class="fcard"><h3>The Full Day</h3><p>Three keynotes — see the deal, leverage it, scale it — plus the
       expert panel Q&amp;A on the Oklahoma City market.</p></div>
     <div class="fcard"><h3>Two Things You Take Home</h3><p>The <b>Oklahoma Investor Funding Manual</b> —

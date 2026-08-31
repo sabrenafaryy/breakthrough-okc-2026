@@ -154,6 +154,35 @@
   <div class="mobile-menu" id="mm"><a href="/">Home</a><a href="/about/">About</a><a href="/speakers/">Speakers</a><a href="/agenda/">Agenda</a><a href="/venue/">Venue</a><a href="/sponsors/">Sponsors</a><a href="/contact/">Contact</a><a href="https://registration.breakthroughokc.com/check-out">Register →</a></div>
 </header>
 
+<style>
+  /* ---- persona page visual system ----
+     The problem before this: seven sections running white / tint / white / tint / white / white
+     / red — five near-identical light blocks and the only color arriving last. */
+
+  /* PROBLEMS — numbered so three cards read as a sequence, not three identical boxes */
+  .prob-grid{counter-reset:prob}
+  .prob-grid .fcard{position:relative;padding-top:56px;border-top:3px solid var(--red)}
+  .prob-grid .fcard:before{counter-increment:prob;content:counter(prob,decimal-leading-zero);
+    position:absolute;top:16px;left:24px;font-family:var(--font-head);font-weight:900;
+    font-size:40px;line-height:1;color:var(--red);opacity:.9}
+
+  /* PROOF — the payload section. Navy band, white text, red numerals: the loudest beat
+     on the page after the hero, which is where the substance actually is. */
+  .proof-band{background:var(--navy)}
+  .proof-band .eyebrow{color:#ff9d94}
+  .proof-band h2{color:#fff}
+  .proof-band .sec-head p{color:#c3cbe0}
+  .proof-band .fcard{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16)}
+  .proof-band .fcard h3{color:#fff}
+  .proof-band .fcard p{color:#dfe4ee}
+  .proof-band .fcard b{color:#fff}
+  .proof-band .fcard>div:first-child{color:var(--red) !important}   /* the stat numeral */
+  .proof-band .fcard a{color:#9fb2cc !important}
+
+  /* INCLUDED — red checks so it reads as a list of things you get, not more prose cards */
+  .incl-grid .fcard{border-left:3px solid var(--red)}
+  .incl-grid .fcard h3:before{content:"✓ ";color:var(--red);font-weight:900}
+</style>
 <section class="hero bg"><div class="wrap in">
   <div class="eyebrow">// For Wholesalers</div>
   <h1>A List You Haven't Called In A Year <span class="r">Isn't A List.</span></h1>
@@ -166,14 +195,14 @@
 
 <section class="block"><div class="wrap">
   <div class="sec-head center"><div class="eyebrow">// The Problem</div><h2>The Only Problem You Actually Have</h2></div>
-  <div class="grid3">
+  <div class="grid3 prob-grid">
         <div class="fcard"><h3>Your list has gone cold</h3><p>Names in a spreadsheet aren't buyers. Buyers are people who took your card, remember your face, and pick up when you call about a property that fits what they told you they want.</p></div>
     <div class="fcard"><h3>You don't know what they're buying now</h3><p>Buy boxes move. The flipper who wanted cosmetic rehabs last year wants lots this year, and you find that out in conversation, not in a blast email.</p></div>
     <div class="fcard"><h3>The lenders decide what closes</h3><p>A buyer who can't fund can't close. The lenders working this metro are in the same building — knowing who actually funds what changes which deals you chase.</p></div>
   </div>
 </div></section>
 
-<section class="block tint"><div class="wrap">
+<section class="block proof-band"><div class="wrap">
   <div class="sec-head center"><div class="eyebrow">// Where The Room Is Open</div><h2>The Shape Of The Day</h2><p>The reason to come is the time between things. Here is where the day actually leaves room to work — and who is standing in it.</p></div>
   <div class="grid3">
         <div class="fcard"><h3>The exhibitor floor, open all day</h3><p>Not a corridor you pass through twice. It runs the length of the day, so a conversation that starts at the coffee table can finish properly at lunch.</p></div>
@@ -222,9 +251,9 @@
 <div class="wrap"><div class="center" style="margin-top:26px"><a href="/sponsors/" class="btn btn-ghost">Exhibit Or Sponsor</a></div></div>
 </section>
 
-<section class="block"><div class="wrap">
+<section class="block tint"><div class="wrap">
   <div class="sec-head center"><div class="eyebrow">// Your Ticket</div><h2>Everything Included</h2></div>
-  <div class="grid3">
+  <div class="grid3 incl-grid">
     <div class="fcard"><h3>The Full Day</h3><p>Three keynotes — see the deal, leverage it, scale it — plus the
       expert panel Q&amp;A on the Oklahoma City market.</p></div>
     <div class="fcard"><h3>Two Things You Take Home</h3><p>The <b>Oklahoma Investor Funding Manual</b> —

@@ -154,6 +154,35 @@
   <div class="mobile-menu" id="mm"><a href="/">Home</a><a href="/about/">About</a><a href="/speakers/">Speakers</a><a href="/agenda/">Agenda</a><a href="/venue/">Venue</a><a href="/sponsors/">Sponsors</a><a href="/contact/">Contact</a><a href="https://registration.breakthroughokc.com/check-out">Register →</a></div>
 </header>
 
+<style>
+  /* ---- persona page visual system ----
+     The problem before this: seven sections running white / tint / white / tint / white / white
+     / red — five near-identical light blocks and the only color arriving last. */
+
+  /* PROBLEMS — numbered so three cards read as a sequence, not three identical boxes */
+  .prob-grid{counter-reset:prob}
+  .prob-grid .fcard{position:relative;padding-top:56px;border-top:3px solid var(--red)}
+  .prob-grid .fcard:before{counter-increment:prob;content:counter(prob,decimal-leading-zero);
+    position:absolute;top:16px;left:24px;font-family:var(--font-head);font-weight:900;
+    font-size:40px;line-height:1;color:var(--red);opacity:.9}
+
+  /* PROOF — the payload section. Navy band, white text, red numerals: the loudest beat
+     on the page after the hero, which is where the substance actually is. */
+  .proof-band{background:var(--navy)}
+  .proof-band .eyebrow{color:#ff9d94}
+  .proof-band h2{color:#fff}
+  .proof-band .sec-head p{color:#c3cbe0}
+  .proof-band .fcard{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16)}
+  .proof-band .fcard h3{color:#fff}
+  .proof-band .fcard p{color:#dfe4ee}
+  .proof-band .fcard b{color:#fff}
+  .proof-band .fcard>div:first-child{color:var(--red) !important}   /* the stat numeral */
+  .proof-band .fcard a{color:#9fb2cc !important}
+
+  /* INCLUDED — red checks so it reads as a list of things you get, not more prose cards */
+  .incl-grid .fcard{border-left:3px solid var(--red)}
+  .incl-grid .fcard h3:before{content:"✓ ";color:var(--red);font-weight:900}
+</style>
 <section class="hero bg"><div class="wrap in">
   <div class="eyebrow">// For Real Estate Agents</div>
   <h1>An Investor Works Out In <span class="r">One Conversation</span> Whether You Can Read A Deal.</h1>
@@ -166,14 +195,14 @@
 
 <section class="block"><div class="wrap">
   <div class="sec-head center"><div class="eyebrow">// The Problem</div><h2>Why Investors Don't Call You Back</h2></div>
-  <div class="grid3">
+  <div class="grid3 prob-grid">
         <div class="fcard"><h3>A retail client transacts once</h3><p>Then disappears for five years. An investor transacts, refers, sells and comes back. Same license, completely different business, and almost nobody makes the switch on purpose.</p></div>
     <div class="fcard"><h3>You're sending listings</h3><p>They already have alerts. They already ran the numbers. Forwarding inventory they've seen is the exact behavior that says you're not in this with them.</p></div>
     <div class="fcard"><h3>You have nothing they don't have</h3><p>They read the market. They know their lenders. The gap you can fill is the thing they don't have time to go find — and nobody's shown you where that is either.</p></div>
   </div>
 </div></section>
 
-<section class="block tint"><div class="wrap">
+<section class="block proof-band"><div class="wrap">
   <div class="sec-head center"><div class="eyebrow">// The Evidence</div><h2>Three Things You Can Say On Monday</h2><p>Every figure below is published, dated and linked. Learn the sources, not just the numbers — knowing where a figure comes from is what separates an agent who reads the market from one who repeats it.</p></div>
   <div class="grid3">
         <div class="fcard"><div style="font-family:var(--font-head);font-weight:900;font-size:34px;color:var(--navy);line-height:1">+13,700</div><p style="margin-top:12px">Metro residents added in a year, 0.9% growth. The demand side of whatever strategy your client is running, and the first thing they'll test you on.</p><a href="https://fred.stlouisfed.org/series/OKCPOP" target="_blank" rel="noopener" style="font-family:var(--font-mono);font-size:11px;color:#6b7890;text-decoration:underline;display:inline-block;margin-top:12px">Source: U.S. Census Bureau, Vintage 2025 estimates · accessed Aug 27, 2026</a></div>
@@ -224,9 +253,9 @@
 <div class="wrap"><div class="center" style="margin-top:26px"><a href="/sponsors/" class="btn btn-ghost">Exhibit Or Sponsor</a></div></div>
 </section>
 
-<section class="block"><div class="wrap">
+<section class="block tint"><div class="wrap">
   <div class="sec-head center"><div class="eyebrow">// Your Ticket</div><h2>Everything Included</h2></div>
-  <div class="grid3">
+  <div class="grid3 incl-grid">
     <div class="fcard"><h3>The Full Day</h3><p>Three keynotes — see the deal, leverage it, scale it — plus the
       expert panel Q&amp;A on the Oklahoma City market.</p></div>
     <div class="fcard"><h3>Two Things You Take Home</h3><p>The <b>Oklahoma Investor Funding Manual</b> —

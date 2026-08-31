@@ -869,6 +869,35 @@ def build(p):
 {TOPBAR}
 {NAV}
 
+<style>
+  /* ---- persona page visual system ----
+     The problem before this: seven sections running white / tint / white / tint / white / white
+     / red — five near-identical light blocks and the only color arriving last. */
+
+  /* PROBLEMS — numbered so three cards read as a sequence, not three identical boxes */
+  .prob-grid{{counter-reset:prob}}
+  .prob-grid .fcard{{position:relative;padding-top:56px;border-top:3px solid var(--red)}}
+  .prob-grid .fcard:before{{counter-increment:prob;content:counter(prob,decimal-leading-zero);
+    position:absolute;top:16px;left:24px;font-family:var(--font-head);font-weight:900;
+    font-size:40px;line-height:1;color:var(--red);opacity:.9}}
+
+  /* PROOF — the payload section. Navy band, white text, red numerals: the loudest beat
+     on the page after the hero, which is where the substance actually is. */
+  .proof-band{{background:var(--navy)}}
+  .proof-band .eyebrow{{color:#ff9d94}}
+  .proof-band h2{{color:#fff}}
+  .proof-band .sec-head p{{color:#c3cbe0}}
+  .proof-band .fcard{{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16)}}
+  .proof-band .fcard h3{{color:#fff}}
+  .proof-band .fcard p{{color:#dfe4ee}}
+  .proof-band .fcard b{{color:#fff}}
+  .proof-band .fcard>div:first-child{{color:var(--red) !important}}   /* the stat numeral */
+  .proof-band .fcard a{{color:#9fb2cc !important}}
+
+  /* INCLUDED — red checks so it reads as a list of things you get, not more prose cards */
+  .incl-grid .fcard{{border-left:3px solid var(--red)}}
+  .incl-grid .fcard h3:before{{content:"✓ ";color:var(--red);font-weight:900}}
+</style>
 <section class="hero bg"><div class="wrap in">
   <div class="eyebrow">{p['eyebrow']}</div>
   <h1>{p['h1']}</h1>
@@ -881,12 +910,12 @@ def build(p):
 
 <section class="block"><div class="wrap">
   <div class="sec-head center"><div class="eyebrow">// The Problem</div><h2>{p['problem_head']}</h2></div>
-  <div class="grid3">
+  <div class="grid3 prob-grid">
     {chr(10).join('    ' + c for c in p['problems'])}
   </div>
 </div></section>
 
-<section class="block tint"><div class="wrap">
+<section class="block proof-band"><div class="wrap">
   <div class="sec-head center"><div class="eyebrow">{p.get('proof_eyebrow', '// The Evidence')}</div><h2>{p['proof_head']}</h2><p>{p['proof_lede']}</p></div>
   <div class="grid3">
     {chr(10).join('    ' + c for c in p['proof'])}
@@ -917,9 +946,9 @@ def build(p):
 
 {floor_block(p)}
 
-<section class="block"><div class="wrap">
+<section class="block tint"><div class="wrap">
   <div class="sec-head center"><div class="eyebrow">// Your Ticket</div><h2>Everything Included</h2></div>
-  <div class="grid3">
+  <div class="grid3 incl-grid">
     <div class="fcard"><h3>The Full Day</h3><p>Three keynotes — see the deal, leverage it, scale it — plus the
       expert panel Q&amp;A on the Oklahoma City market.</p></div>
     <div class="fcard"><h3>Two Things You Take Home</h3><p>The <b>Oklahoma Investor Funding Manual</b> —
