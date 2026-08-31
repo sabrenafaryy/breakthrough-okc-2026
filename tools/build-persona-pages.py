@@ -922,8 +922,10 @@ def build(p):
   <div class="grid3">
     <div class="fcard"><h3>The Full Day</h3><p>Three keynotes — see the deal, leverage it, scale it — plus the
       expert panel Q&amp;A on the Oklahoma City market.</p></div>
-    <div class="fcard"><h3>The Funding Manual</h3><p>30 verified programs, 12 dated funding windows into 2027,
-      application paths, direct contacts and a glossary.</p></div>
+    <div class="fcard"><h3>Two Things You Take Home</h3><p>The <b>Oklahoma Investor Funding Manual</b> —
+      30 verified programs, 12 dated funding windows into 2027, application paths, direct contacts and a
+      glossary. Plus <b>The Digital Wealth Building Playbook</b>, which you build your own plan in during
+      the day.</p></div>
     <div class="fcard"><h3>The Room</h3><p>Curated networking, a sponsor and exhibitor hall of contractors and
       lenders, plus light breakfast and lunch — served.</p></div>
   </div>
