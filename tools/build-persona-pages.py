@@ -50,6 +50,16 @@ NAV = NAV.replace('<a href="/" class="active">Home</a>', '<a href="/">Home</a>')
 FOOTER = slice_between(HOME, "<footer>", "</footer>")
 CHAT = slice_between(HOME, '<script src="https://widgets.leadconnectorhq.com/loader.js"', "</script>")
 PRICE_SWITCH = slice_between(HOME, "<!-- §4 price switch", "</script>")
+# The homepage version computes the cutoff itself. On persona pages the <head> snippet is the
+# single source of truth, so strip the duplicate computation and read its boolean instead —
+# otherwise the date lives in two places on one page and they can silently diverge.
+PRICE_SWITCH = PRICE_SWITCH.replace(
+    '    var RISE = new Date("2026-09-06T00:00:00-05:00").getTime();\n'
+    '    var post = Date.now() >= RISE;\n'
+    '    document.documentElement.classList.add(post ? "post-rise" : "pre-rise");\n'
+    '    window.btokcTicketPrice = post ? 197 : 175;\n',
+    '    var post = window.btokcPostRise;   // set in <head> — single source of truth\n')
+assert "var post = window.btokcPostRise" in PRICE_SWITCH, "price-switch rewrite failed"
 
 LOGO_ROW = slice_between(HOME, '<div class="logo-row">', "</div>\n  </div>")
 MARQUEE = slice_between(HOME, '<div class="marquee">', "</div></div>")
@@ -125,6 +135,30 @@ SRC_STYLE = (
     "text-decoration:underline;display:inline-block;margin-top:12px"
 )
 STAT_STYLE = "font-family:var(--font-head);font-weight:900;font-size:34px;color:var(--navy);line-height:1"
+
+
+# ── Blocks A / C / B — 2026-09-04 page-fix brief. Copy is fixed; do not reword per page.
+# Block A carries BOTH states in the markup and lets the existing .js-pre-rise /
+# .js-post-rise classes choose. That is why it flips itself on Sept 6 with nobody touching it.
+BLOCK_A = (
+    '<p class="dl">'
+    '<span class="js-pre-rise"><b>Price rises to $197 on Sunday.</b>'
+    '<span class="sub">$175 until then.</span></span>'
+    '<span class="js-post-rise"><b>$197</b> — and seats close when the room is full.</span>'
+    '</p>'
+)
+BLOCK_C = (
+    '<div class="tg"><p><b>Whatever else happens on the 26th, the Oklahoma Investor Funding '
+    'Manual is yours.</b> 29 Oklahoma funding programs, verified against the agencies\' own '
+    'documents, with deadlines, application paths and direct contacts. It\'s digital — so '
+    'it\'s on your phone when you\'re standing in front of a property, and it gets updated '
+    'when the programs change.</p></div>'
+)
+BLOCK_B = (
+    '<p class="pol">Seats are non-transferable and non-refundable. Catering, materials and '
+    'badges are confirmed in advance.</p>'
+)
+CTA_LEAD = BLOCK_A + "\n  " + BLOCK_C     # both sit above the button
 
 
 def stat_card(stat, body, *src_keys):
@@ -251,7 +285,11 @@ PERSONAS = [
         "desc": "A retail client transacts once. An investor transacts, refers and comes back — for the "
                 "agent who can read a deal. September 26, Oklahoma City.",
         "eyebrow": "// For Real Estate Agents",
-        "h1": 'An Investor Works Out In <span class="r">One Conversation</span> Whether You Can Read A Deal.',
+        # 2026-09-04: was "An Investor Works Out In One Conversation Whether You Can Read A Deal."
+        # — 14 words, third person, explained a mechanic. The two H1s carrying the account
+        # (fix-and-flip 21.4%, new-investors 9.6%) are short, second person, and name a private
+        # failure. This matches that pattern. ONE variable changed on this page — nothing else.
+        "h1": 'They Stopped Replying <span class="r">After The Second Listing.</span>',
         "lede": "Cap rate. ARV. What the rehab actually costs here. Which lenders close in Oklahoma. Miss "
                 "on that and they stop replying. Hit it and you're the one they call next time — and the "
                 "one they name when someone in their group asks who to use. September 26 is a day among "
@@ -867,6 +905,19 @@ def build(p):
 <meta name="twitter:title" content="{p['title']}" />
 <meta name="twitter:description" content="{p['desc']}" />
 <meta name="twitter:image" content="https://breakthroughokc.com/assets/og-image.jpg" />
+<style>.pre-rise .js-post-rise,.post-rise .js-pre-rise{{display:none !important}}</style>
+<script>
+  /* Deadline switch — runs in <head> so the correct Block A state is painted immediately.
+     Single source of truth for the cutoff; the §4 script at the foot of the page reads
+     window.btokcPostRise from here rather than recomputing it. */
+  (function(){{
+    var RISE = new Date("2026-09-06T00:00:00-05:00").getTime();
+    window.btokcPostRise = Date.now() >= RISE;
+    window.btokcTicketPrice = window.btokcPostRise ? 197 : 175;
+    var r = document.documentElement;
+    r.className += (r.className ? " " : "") + (window.btokcPostRise ? "post-rise" : "pre-rise");
+  }})();
+</script>
 {FONTS}
 <script type="application/ld+json">{ld}</script>
 {CLARITY}
@@ -900,6 +951,37 @@ def build(p):
   .proof-band .fcard b{{color:#fff}}
   .proof-band .fcard>div:first-child{{color:var(--red) !important}}   /* the stat numeral */
   .proof-band .fcard a{{color:#9fb2cc !important}}
+
+  /* ── BLOCKS A / C / B (2026-09-04 page-fix brief) ──
+     A = price deadline · C = take-home guarantee · B = policy line.
+     Order is A, C, [button], B. Block A's two states are driven by the existing
+     .js-pre-rise / .js-post-rise classes — no new date logic anywhere. */
+  .dl{{font-family:var(--font-head);font-weight:800;font-size:clamp(17px,2vw,21px);
+    line-height:1.3;margin:0 auto 16px;max-width:44ch;color:var(--navy)}}
+  .dl b{{color:var(--red)}}
+  .dl .sub{{display:block;font-family:var(--font-body);font-weight:500;font-size:15px;
+    color:#5b667f;margin-top:4px}}
+  .tg{{border:2px solid var(--navy);border-left:6px solid var(--red);border-radius:12px;
+    background:#fff;padding:20px 22px;max-width:640px;margin:0 auto 20px;text-align:left}}
+  .tg p{{margin:0;font-size:15px;line-height:1.55;color:var(--ink)}}
+  .tg b{{color:var(--navy)}}
+  .pol{{font-size:12.5px;line-height:1.5;color:#6b7890;max-width:52ch;
+    margin:14px auto 0;text-align:center}}
+  /* on the dark hero */
+  .hero .dl{{color:#fff}} .hero .dl b{{color:#ff9d94}} .hero .dl .sub{{color:#dfe4ee}}
+  .hero .tg{{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.3);
+    border-left-color:var(--red)}}
+  .hero .tg p{{color:#eef1f7}} .hero .tg b{{color:#fff}}
+  .hero .pol{{color:#c3cbe0}}
+  /* on the red closing band */
+  .ctaband .dl{{color:#fff}} .ctaband .dl b{{color:#fff;text-decoration:underline;
+    text-decoration-color:rgba(255,255,255,.55);text-underline-offset:3px}}
+  .ctaband .dl .sub{{color:#ffe4e1}}
+  .ctaband .tg{{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.45);
+    border-left-color:#fff}}
+  .ctaband .tg p{{color:#fff}} .ctaband .tg b{{color:#fff}}
+  .ctaband .pol{{color:#ffe4e1}}
+  @media(max-width:640px){{.tg{{padding:17px 18px}}.tg p{{font-size:14.5px}}}}
 
   /* THE TWO TAKE-HOMES — the strongest tangible thing in the offer, so it gets real size
      and an actual picture of the document rather than another prose card. */
@@ -938,7 +1020,9 @@ def build(p):
   <h1>{p['h1']}</h1>
   <p>{p['lede']}</p>
   <p class="presented">September 26, 2026 · Champion Convention Center, Oklahoma City</p>
+  {CTA_LEAD}
   <div class="cta2"><a href="{REG}" class="btn btn-lg">Claim Your Seat — $175 →</a><a href="/agenda/" class="btn btn-lg btn-ghost">See The Full Day</a></div>
+  {BLOCK_B}
   <p class="hero-takehomes"><b>Both take-homes come with your seat:</b> the Wealth Building Playbook you fill
     out live, and the Oklahoma Investor Funding Manual you'll still be using next year.</p>
 </div>
@@ -1019,7 +1103,9 @@ def build(p):
 <section class="block ctaband"><div class="wrap">
   <div class="eyebrow" style="color:#ffd8d3">// One Saturday</div>
   <h2>Ready To Claim Your Seat?</h2><p>Tickets $175<span class="js-pre-rise"> — price rises to $197 on September 6</span>.</p>
+  {CTA_LEAD}
   <a href="{REG}" class="btn btn-lg">Register Now →</a>
+  {BLOCK_B}
 </div></section>
 {FOOTER}
 {CHAT}
