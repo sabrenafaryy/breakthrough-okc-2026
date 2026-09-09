@@ -282,8 +282,8 @@ PERSONAS = [
         "nav": "Agents",
         "title": "For Real Estate Agents | Breakthrough OKC 2026",
         "desc": "Be the agent investors keep calling. Thirty verified Oklahoma funding programs and "
-                "the expert panel that runs them — the day you stop losing the investor conversation. "
-                "September 26, Oklahoma City.",
+                "the expert panel that runs them — the day you learn how a deal here actually gets "
+                "funded. September 26, Oklahoma City.",
         "eyebrow": "// For Real Estate Agents",
         # 2026-09-09 (Sabrena): the page agitated the problem three times and never resolved it.
         # The promise is "be the savvy real estate agent," and the answer was already sitting in
@@ -293,34 +293,41 @@ PERSONAS = [
         # Rejected: "…Knows What The Lenders Know" (read as though the agent should be a lender).
         # Previous H1: 'They Stopped Replying <span class="r">After The Second Listing.</span>'
         "h1": 'Be The Savvy Agent <span class="r">Investors Keep Calling.</span>',
-        "lede": "Cap rate. ARV. What the rehab actually costs here. Which lenders close in Oklahoma. Miss "
-                "on that and they stop replying. The fix isn't another listing alert — it's knowing the "
-                "funding layer your investor clients are trying to navigate, down to the thirty public "
-                "programs and who runs them. September 26 is the day you learn it from the people who do.",
-        "problem_head": "Why Investors Don't Call You Back",
+        "lede": "Cap rate. ARV. What the rehab actually costs here. Which lenders close in Oklahoma. Get "
+                "those right and you're the agent an investor keeps — and the one they name when someone "
+                "in their group asks who to use. September 26 is the day you learn the funding layer "
+                "behind all of it, from the people who run it.",
+        # 2026-09-09 (Sabrena): "Why Investors Don't Call You Back" was cut — the whole section
+        # was negative, and it told agents they were failing directly under a headline promising
+        # they could be the savvy one. Replaced with the upside: what investor business is worth
+        # to an agent. Keep this section positive.
+        "problem_eyebrow": "// Why Agents Come",
+        "problem_head": "What Investor Clients Do For Your Business",
         "problems": [
             plain_card(
-                "A retail client transacts once",
-                "Then disappears for five years. An investor transacts, refers, sells and comes back. Same "
-                "license, completely different business, and almost nobody makes the switch on purpose.",
+                "One client, years of closings",
+                "An investor buys, sells, refinances and buys again — then introduces you to the person "
+                "sitting next to them. Build a handful of those relationships and your pipeline stops "
+                "starting over every January.",
             ),
             plain_card(
-                "You're sending listings",
-                "They already have alerts. They already ran the numbers. Forwarding inventory they've seen "
-                "is the exact behavior that says you're not in this with them.",
+                "You get to be the one with the answer",
+                "When a client asks how a deal like this actually gets funded in Oklahoma, you name the "
+                "program, the deadline and the person to call. That's the moment an investor decides "
+                "you're worth keeping.",
             ),
             plain_card(
-                "You have nothing they don't have",
-                "They read the market. They have their own lenders. What almost nobody at that table has "
-                "is the public funding layer — city, state and federal money with real deadlines and a "
-                "named person to call. That's the gap you can own, and it's what September 26 hands you.",
+                "You leave with the network, not just notes",
+                "The lenders, title people and contractors your investor clients already use are in the "
+                "exhibitor hall, and the people who run Oklahoma's state and city housing money are on "
+                "the expert panel taking questions live.",
             ),
         ],
         "proof_head": "Three Things You Can Say On Monday",
         "proof_lede": "This is what savvy actually looks like: not repeating a number, but knowing where "
                       "it came from and what money sits behind it. Every figure below is published, dated "
-                      "and linked — learn the sources and you stop sounding like the other agents calling "
-                      "the same client.",
+                      "and linked — learn the sources and you're the one in the conversation who can back "
+                      "it up.",
         "proof": [
             stat_card(
                 "+13,700",
@@ -366,10 +373,10 @@ PERSONAS = [
                 "The city layer. She implements Oklahoma City's housing strategy, so what the city is working on in housing is a question you can put to her directly — and stop guessing at when a client asks.",
             ),
         ],
-        "takehome": "Bring the client conversation you keep losing. Leave able to have it — the thirty "
-                    "programs written down, the vocabulary, and the direct contacts. The savvy agent in "
-                    "the room isn't the one with more listings. It's the one who knows where the money "
-                    "comes from.",
+        "takehome": "Bring the investor client you want to win. Leave able to have that conversation — "
+                    "the thirty programs written down, the vocabulary, and the direct contacts. The savvy "
+                    "agent in the room isn't the one with more listings. It's the one who knows where the "
+                    "money comes from.",
     },
     {
         "slug": "buy-and-hold",
@@ -870,6 +877,9 @@ def floor_block(p):
 def build(p):
     # 3 cards look wrong in a 2-col grid (orphan on row 2); 4 look wrong in a 3-col grid.
     spk_cls = "" if len(p["speakers"]) == 3 else " two"
+    # Per-page label for the second section. Six pages diagnose a problem; /for/agents/
+    # makes an offer instead, so it needs its own eyebrow. Default keeps the other six as-is.
+    prob_eyebrow = p.get("problem_eyebrow", "// The Problem")
     url = f"https://breakthroughokc.com/for/{p['slug']}/"
     ld = (
         '{"@context":"https://schema.org","@type":"Event",'
@@ -1036,7 +1046,7 @@ def build(p):
 </section>
 
 <section class="block"><div class="wrap">
-  <div class="sec-head center"><div class="eyebrow">// The Problem</div><h2>{p['problem_head']}</h2></div>
+  <div class="sec-head center"><div class="eyebrow">{prob_eyebrow}</div><h2>{p['problem_head']}</h2></div>
   <div class="grid3 prob-grid">
     {chr(10).join('    ' + c for c in p['problems'])}
   </div>
