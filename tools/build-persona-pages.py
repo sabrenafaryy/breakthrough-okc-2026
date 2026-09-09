@@ -281,16 +281,18 @@ PERSONAS = [
         "utm": "persona-agent",
         "nav": "Agents",
         "title": "For Real Estate Agents | Breakthrough OKC 2026",
-        "desc": "Know what the lenders know. Thirty verified Oklahoma funding programs and the expert "
-                "panel that runs them — the day that makes investors call you back. September 26, "
-                "Oklahoma City.",
+        "desc": "Be the agent investors keep calling. Thirty verified Oklahoma funding programs and "
+                "the expert panel that runs them — the day you stop losing the investor conversation. "
+                "September 26, Oklahoma City.",
         "eyebrow": "// For Real Estate Agents",
         # 2026-09-09 (Sabrena): the page agitated the problem three times and never resolved it.
-        # The promise is "be the savvy agent — know what the lenders know," and the answer was
-        # already sitting in the page's own materials (Darrell = state money, Shannon = city
-        # layer, the funding manual). H1 now carries the resolution; the lede keeps the problem.
+        # The promise is "be the savvy real estate agent," and the answer was already sitting in
+        # the page's own materials (Darrell = state money, Shannon = city layer, the funding
+        # manual). H1 now carries the resolution; the lede keeps the problem.
+        # ⚠️ The reader IS the agent, working with investor CLIENTS — never framed as a lender.
+        # Rejected: "…Knows What The Lenders Know" (read as though the agent should be a lender).
         # Previous H1: 'They Stopped Replying <span class="r">After The Second Listing.</span>'
-        "h1": 'Be The Agent Who Knows <span class="r">What The Lenders Know.</span>',
+        "h1": 'Be The Savvy Agent <span class="r">Investors Keep Calling.</span>',
         "lede": "Cap rate. ARV. What the rehab actually costs here. Which lenders close in Oklahoma. Miss "
                 "on that and they stop replying. The fix isn't another listing alert — it's knowing the "
                 "funding layer your investor clients are trying to navigate, down to the thirty public "
