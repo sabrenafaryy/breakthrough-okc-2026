@@ -148,7 +148,7 @@ BLOCK_A = (
 )
 BLOCK_C = (
     '<div class="tg"><p><b>Whatever else happens on the 26th, the Oklahoma Investor Funding '
-    'Manual is yours.</b> 29 Oklahoma funding programs, verified against the agencies\' own '
+    'Manual is yours.</b> 30 Oklahoma funding programs, verified against the agencies\' own '
     'documents, with deadlines, application paths and direct contacts. It\'s digital — so '
     'it\'s on your phone when you\'re standing in front of a property, and it gets updated '
     'when the programs change.</p></div>'
@@ -281,18 +281,20 @@ PERSONAS = [
         "utm": "persona-agent",
         "nav": "Agents",
         "title": "For Real Estate Agents | Breakthrough OKC 2026",
-        "desc": "A retail client transacts once. An investor transacts, refers and comes back — for the "
-                "agent who can read a deal. September 26, Oklahoma City.",
+        "desc": "Know what the lenders know. Thirty verified Oklahoma funding programs and the expert "
+                "panel that runs them — the day that makes investors call you back. September 26, "
+                "Oklahoma City.",
         "eyebrow": "// For Real Estate Agents",
-        # 2026-09-04: was "An Investor Works Out In One Conversation Whether You Can Read A Deal."
-        # — 14 words, third person, explained a mechanic. The two H1s carrying the account
-        # (fix-and-flip 21.4%, new-investors 9.6%) are short, second person, and name a private
-        # failure. This matches that pattern. ONE variable changed on this page — nothing else.
-        "h1": 'They Stopped Replying <span class="r">After The Second Listing.</span>',
+        # 2026-09-09 (Sabrena): the page agitated the problem three times and never resolved it.
+        # The promise is "be the savvy agent — know what the lenders know," and the answer was
+        # already sitting in the page's own materials (Darrell = state money, Shannon = city
+        # layer, the funding manual). H1 now carries the resolution; the lede keeps the problem.
+        # Previous H1: 'They Stopped Replying <span class="r">After The Second Listing.</span>'
+        "h1": 'Be The Agent Who Knows <span class="r">What The Lenders Know.</span>',
         "lede": "Cap rate. ARV. What the rehab actually costs here. Which lenders close in Oklahoma. Miss "
-                "on that and they stop replying. Hit it and you're the one they call next time — and the "
-                "one they name when someone in their group asks who to use. September 26 is a day among "
-                "the people who decide that.",
+                "on that and they stop replying. The fix isn't another listing alert — it's knowing the "
+                "funding layer your investor clients are trying to navigate, down to the thirty public "
+                "programs and who runs them. September 26 is the day you learn it from the people who do.",
         "problem_head": "Why Investors Don't Call You Back",
         "problems": [
             plain_card(
@@ -307,14 +309,16 @@ PERSONAS = [
             ),
             plain_card(
                 "You have nothing they don't have",
-                "They read the market. They know their lenders. The gap you can fill is the thing they "
-                "don't have time to go find — and nobody's shown you where that is either.",
+                "They read the market. They have their own lenders. What almost nobody at that table has "
+                "is the public funding layer — city, state and federal money with real deadlines and a "
+                "named person to call. That's the gap you can own, and it's what September 26 hands you.",
             ),
         ],
         "proof_head": "Three Things You Can Say On Monday",
-        "proof_lede": "Every figure below is published, dated and linked. Learn the sources, not just the "
-                      "numbers — knowing where a figure comes from is what separates an agent who reads "
-                      "the market from one who repeats it.",
+        "proof_lede": "This is what savvy actually looks like: not repeating a number, but knowing where "
+                      "it came from and what money sits behind it. Every figure below is published, dated "
+                      "and linked — learn the sources and you stop sounding like the other agents calling "
+                      "the same client.",
         "proof": [
             stat_card(
                 "+13,700",
@@ -335,11 +339,11 @@ PERSONAS = [
                 "rent",
             ),
             plain_card(
-                "Thirty programs they've never heard of",
+                "Thirty programs you'll be the one to name",
                 "Every seat includes the Oklahoma Investor Funding Manual: 30 public funding programs "
                 "across city, state and federal layers, verified against the agencies' own documents, "
-                "with the deadline calendar and direct contacts. Being the agent who knows this exists is "
-                "the kind of thing an investor client remembers.",
+                "with the deadline calendar and direct contacts. When a client asks how a deal like this "
+                "gets funded in Oklahoma, you answer it instead of referring it out.",
             ),
         ],
         "speakers_head": "The Three Sessions That Change The Conversation",
@@ -360,9 +364,10 @@ PERSONAS = [
                 "The city layer. She implements Oklahoma City's housing strategy, so what the city is working on in housing is a question you can put to her directly — and stop guessing at when a client asks.",
             ),
         ],
-        "takehome": "Bring the client conversation you keep losing. Leave able to have it — with the "
-                    "funding manual, the vocabulary, and a day's worth of introductions to people who buy "
-                    "for a living.",
+        "takehome": "Bring the client conversation you keep losing. Leave able to have it — the thirty "
+                    "programs written down, the vocabulary, and the direct contacts. The savvy agent in "
+                    "the room isn't the one with more listings. It's the one who knows where the money "
+                    "comes from.",
     },
     {
         "slug": "buy-and-hold",
