@@ -57,7 +57,7 @@ PRICE_SWITCH = PRICE_SWITCH.replace(
     '    var RISE = new Date("2026-09-06T00:00:00-05:00").getTime();\n'
     '    var post = Date.now() >= RISE;\n'
     '    document.documentElement.classList.add(post ? "post-rise" : "pre-rise");\n'
-    '    window.btokcTicketPrice = post ? 197 : 175;\n',
+    '    window.btokcTicketPrice = 197;\n',
     '    var post = window.btokcPostRise;   // set in <head> — single source of truth\n')
 assert "var post = window.btokcPostRise" in PRICE_SWITCH, "price-switch rewrite failed"
 
@@ -138,13 +138,12 @@ STAT_STYLE = "font-family:var(--font-head);font-weight:900;font-size:34px;color:
 
 
 # ── Blocks A / C / B — 2026-09-04 page-fix brief. Copy is fixed; do not reword per page.
-# Block A carries BOTH states in the markup and lets the existing .js-pre-rise /
-# .js-post-rise classes choose. That is why it flips itself on Sept 6 with nobody touching it.
+# The Sept 6 rise has happened and GHL now charges $197, so Block A states the
+# standing price outright. The .js-pre-rise / .js-post-rise harness is left in place
+# but carries no price copy any more.
 BLOCK_A = (
     '<p class="dl">'
-    '<span class="js-pre-rise"><b>Price rises to $197 on Sunday.</b>'
-    '<span class="sub">$175 until then.</span></span>'
-    '<span class="js-post-rise"><b>$197</b> — and seats close when the room is full.</span>'
+    '<b>$197</b> — and seats close when the room is full.'
     '</p>'
 )
 BLOCK_C = (
@@ -876,8 +875,8 @@ def build(p):
         '"postalCode":"73108","addressCountry":"US"}},'
         '"image":["https://breakthroughokc.com/assets/og-image.jpg"],'
         f'"description":"{p["desc"]}",'
-        '"offers":{"@type":"Offer","price":"175","priceCurrency":"USD",'
-        '"availability":"https://schema.org/InStock","validThrough":"2026-09-05",'
+        '"offers":{"@type":"Offer","price":"197","priceCurrency":"USD",'
+        '"availability":"https://schema.org/InStock",'
         '"url":"https://breakthroughokc.com/tickets/"},'
         '"organizer":{"@type":"Organization",'
         '"name":"Oklahoma City Real Estate Investors Association (OKC REIA)",'
@@ -913,7 +912,7 @@ def build(p):
   (function(){{
     var RISE = new Date("2026-09-06T00:00:00-05:00").getTime();
     window.btokcPostRise = Date.now() >= RISE;
-    window.btokcTicketPrice = window.btokcPostRise ? 197 : 175;
+    window.btokcTicketPrice = 197;
     var r = document.documentElement;
     r.className += (r.className ? " " : "") + (window.btokcPostRise ? "post-rise" : "pre-rise");
   }})();
@@ -1021,7 +1020,7 @@ def build(p):
   <p>{p['lede']}</p>
   <p class="presented">September 26, 2026 · Champion Convention Center, Oklahoma City</p>
   {CTA_LEAD}
-  <div class="cta2"><a href="{REG}" class="btn btn-lg">Claim Your Seat — $175 →</a><a href="/agenda/" class="btn btn-lg btn-ghost">See The Full Day</a></div>
+  <div class="cta2"><a href="{REG}" class="btn btn-lg">Claim Your Seat — $197 →</a><a href="/agenda/" class="btn btn-lg btn-ghost">See The Full Day</a></div>
   {BLOCK_B}
   <p class="hero-takehomes"><b>Both take-homes come with your seat:</b> the Wealth Building Playbook you fill
     out live, and the Oklahoma Investor Funding Manual you'll still be using next year.</p>
@@ -1063,8 +1062,8 @@ def build(p):
     </div>
   </div>
   <div class="th-band">The Playbook turns the day into your plan.<br />The Manual makes the money findable after.</div>
-  <div class="center" style="margin-top:30px"><a href="{REG}" class="btn btn-lg">Claim Your Seat — $175 →</a>
-    <div class="js-pre-rise" style="font-family:var(--font-mono);font-size:12px;color:#6b7890;margin-top:12px">$175 until September 5, 11:59 p.m. · $197 from September 6</div>
+  <div class="center" style="margin-top:30px"><a href="{REG}" class="btn btn-lg">Claim Your Seat — $197 →</a>
+    
   </div>
 </div></section>
 
@@ -1102,7 +1101,7 @@ def build(p):
 {optin(p['slug'])}
 <section class="block ctaband"><div class="wrap">
   <div class="eyebrow" style="color:#ffd8d3">// One Saturday</div>
-  <h2>Ready To Claim Your Seat?</h2><p>Tickets $175<span class="js-pre-rise"> — price rises to $197 on September 6</span>.</p>
+  <h2>Ready To Claim Your Seat?</h2><p>Tickets $197.</p>
   {CTA_LEAD}
   <a href="{REG}" class="btn btn-lg">Register Now →</a>
   {BLOCK_B}
@@ -1113,11 +1112,11 @@ def build(p):
 <!-- Meta pixel: ViewContent on load, Lead on registration-CTA click. Value follows the current
      price. Delegated so attribution v2's stamped links are never rewritten. -->
 <script>
-  if (typeof fbq === "function") fbq("track","ViewContent",{{content_name:"Breakthrough OKC 2026 — {p['slug']}",content_category:"Event",value:(window.btokcTicketPrice||175),currency:"USD"}});
+  if (typeof fbq === "function") fbq("track","ViewContent",{{content_name:"Breakthrough OKC 2026 — {p['slug']}",content_category:"Event",value:(window.btokcTicketPrice||197),currency:"USD"}});
   document.addEventListener("click", function(e){{
     var a = e.target && e.target.closest ? e.target.closest("a") : null;
     if (!a || !a.href || a.href.indexOf("registration.breakthroughokc.com") === -1) return;
-    if (typeof fbq === "function") fbq("track", "Lead", {{value: window.btokcTicketPrice || 175, currency: "USD"}});
+    if (typeof fbq === "function") fbq("track", "Lead", {{value: window.btokcTicketPrice || 197, currency: "USD"}});
   }}, true);
 </script>
 </body>
