@@ -56,22 +56,42 @@
   var WINANSI_EXTRA = [0x20AC,0x201A,0x0192,0x201E,0x2026,0x2020,0x2021,0x02C6,0x2030,0x0160,
                        0x2039,0x0152,0x017D,0x2018,0x2019,0x201C,0x201D,0x2022,0x2013,0x2014,
                        0x02DC,0x2122,0x0161,0x203A,0x0153,0x017E,0x0178];
-  function safe(str) {
-    var out = '', i, ch, cp;
+  function safe(str, report) {
+    var out = '', i, ch, cp, lost = 0;
     for (i = 0; i < str.length; i++) {
       ch = str[i];
       if (SWAP[ch] != null) { out += SWAP[ch]; continue; }
       cp = str.codePointAt(i);
       if (ch === '\n' || ch === '\r') { out += ch; continue; }
+      if (ch === '\t') { out += ' '; continue; }
       if ((cp >= 0x20 && cp <= 0x7E) || (cp >= 0xA0 && cp <= 0xFF) || WINANSI_EXTRA.indexOf(cp) !== -1) {
         out += ch;
-      } else if (cp > 0xFFFF) { i++; }   // skip the low surrogate of an astral pair (emoji)
+        continue;
+      }
+      lost++;
+      if (cp > 0xFFFF) i++;   // skip the low surrogate of an astral pair (emoji)
     }
+    if (lost && report) report.lost += lost;
     return out;
   }
 
-  function v(d, k) { return (d[k] == null ? '' : String(d[k])).trim(); }
-  function n(d, k) { var x = parseFloat(String(d[k]).replace(/[^0-9.\-]/g, '')); return isFinite(x) ? x : 0; }
+  function v(d, k) {
+    var x = d[k];
+    if (x == null || typeof x === 'object' || typeof x === 'boolean') return '';
+    return String(x).trim();
+  }
+  /* People type "$180,000" and "1,800". The page and the PDF must read that the same way, or the
+     screen says one rate and the downloaded PDF says another. Anything that isn't a plain number
+     (with optional $, commas, decimals) reads as 0 rather than being silently coerced. */
+  function parseNum(raw) {
+    if (raw == null || typeof raw === 'object' || typeof raw === 'boolean') return 0;
+    var s = String(raw).replace(/[$\s]/g, '');
+    if (!/\d/.test(s)) return 0;
+    if (!/^-?(\d{1,3}(,\d{3})+|\d*)(\.\d+)?$/.test(s)) return 0;
+    var x = parseFloat(s.replace(/,/g, ''));
+    return isFinite(x) ? x : 0;
+  }
+  function n(d, k) { return parseNum(d[k]); }
   function money(x) { return '$' + Math.round(x).toLocaleString('en-US'); }
 
   /* Everything the web page works out on the fly — the hourly rate, the trade verdict,
@@ -82,7 +102,7 @@
     if (net > 0 && hrs > 0) { rate = net / hrs; out.c_rate = money(rate) + ' /hr'; }
 
     var th = n(d, 'c_trade_hrs'), tc = n(d, 'c_trade_cost'), mine = rate * th;
-    if (rate && th) {
+    if (rate > 0 && th > 0) {
       out.c_trade_mine = money(mine) + ' /mo';
       if (tc) { out[mine > tc ? 'c_trade_verdict_1' : 'c_trade_verdict_2'] = true; }
     }
@@ -132,7 +152,7 @@
 
     Object.keys(CHECKS).forEach(function (group) {
       CHECKS[group].forEach(function (webKey, i) {
-        if (data[webKey]) checks[group + '_' + (i + 1)] = true;
+        if (data[webKey] === true) checks[group + '_' + (i + 1)] = true;
       });
     });
 
@@ -156,11 +176,11 @@
   async function buildPdf(templateBytes, data, PDFLib) {
     var pdf = await PDFLib.PDFDocument.load(templateBytes);
     var form = pdf.getForm();
-    var mapped = mapFields(data), missing = [], truncated = [];
+    var mapped = mapFields(data), missing = [], truncated = [], report = { lost: 0 };
 
     Object.keys(mapped.text).forEach(function (name) {
       try {
-        var f = form.getTextField(name), val = safe(mapped.text[name]);
+        var f = form.getTextField(name), val = safe(mapped.text[name], report);
         /* Belt and braces: if a field still carries a length cap, trim to it rather than let
            pdf-lib throw and drop the whole answer. Losing the tail beats losing the lot. */
         var cap = f.getMaxLength && f.getMaxLength();
@@ -179,8 +199,10 @@
 
     if (missing.length && root.console) console.warn('Playbook: fields that failed', missing);
     if (truncated.length && root.console) console.warn('Playbook: truncated to field cap', truncated);
-    return { bytes: await pdf.save(), filled: Object.keys(mapped.text).length, missing: missing, truncated: truncated };
+    return { bytes: await pdf.save(), filled: Object.keys(mapped.text).length, missing: missing,
+             truncated: truncated, lostChars: report.lost };
   }
 
-  root.PlaybookFill = { mapFields: mapFields, buildPdf: buildPdf, DIRECT: DIRECT, TABLES: TABLES, CHECKS: CHECKS };
+  root.PlaybookFill = { mapFields: mapFields, buildPdf: buildPdf, parseNum: parseNum,
+                        DIRECT: DIRECT, TABLES: TABLES, CHECKS: CHECKS };
 })(typeof window !== 'undefined' ? window : globalThis);

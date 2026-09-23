@@ -664,7 +664,13 @@ footer{padding:28px 0 40px;color:var(--muted);font-size:13px}
 
   var fields=[].slice.call(document.querySelectorAll('[data-k]'));
   function val(k){ return (data[k]==null?'':String(data[k])).trim(); }
-  function num(k){ var v=parseFloat(data[k]); return isFinite(v)?v:0; }
+  /* same parser as the PDF builder — typing "$180,000" must not give one answer on screen
+     and a different one in the downloaded file */
+  function num(k){
+    if(window.PlaybookFill && window.PlaybookFill.parseNum) return window.PlaybookFill.parseNum(data[k]);
+    var v=parseFloat(String(data[k]==null?'':data[k]).replace(/[$,\s]/g,''));
+    return isFinite(v)?v:0;
+  }
   function money(v){ return '$'+Math.round(v).toLocaleString('en-US'); }
   function grow(el){ if(el.tagName==='TEXTAREA'){ el.style.height='auto'; el.style.height=el.scrollHeight+2+'px'; } }
 
@@ -735,9 +741,9 @@ footer{padding:28px 0 40px;color:var(--muted);font-size:13px}
     if(net>0 && hrs>0){ rate=net/hrs; document.getElementById('camRate').textContent=money(rate)+'/hr'; }
     else document.getElementById('camRate').textContent='\u2014';
     var tHrs=num('c_trade_hrs'), tCost=num('c_trade_cost'), yourCost=rate*tHrs;
-    document.getElementById('camCost').textContent = (rate&&tHrs) ? money(yourCost)+'/mo' : '\u2014';
+    document.getElementById('camCost').textContent = (rate>0&&tHrs>0) ? money(yourCost)+'/mo' : '\u2014';
     var vEl=document.getElementById('camVerdict'), nEl=document.getElementById('camVerdictNote');
-    if(rate&&tHrs&&tCost){
+    if(rate>0&&tHrs>0&&tCost>0){
       if(yourCost>tCost){ vEl.textContent='Easy trade';
         nEl.textContent='Hiring it out costs '+money(tCost)+'. Doing it yourself costs '+money(yourCost)+'. You buy back '+(+tHrs.toFixed(1))+' hours.'; }
       else { vEl.textContent='Not yet';
