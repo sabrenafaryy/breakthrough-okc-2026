@@ -238,6 +238,11 @@ footer{padding:28px 0 40px;color:var(--muted);font-size:13px}
     <p class="hint">One sentence. You'll see it again at the end of the day.</p>
     <textarea id="worth" data-k="worth" rows="2"></textarea>
   </div>
+  <div class="card">
+    <h3>Anything else from this session</h3>
+    <textarea data-k="n_start" rows="7" style="min-height:150px"></textarea>
+  </div>
+
 </section>
 
 <!-- ============ KATIE ============ -->
@@ -256,53 +261,73 @@ footer{padding:28px 0 40px;color:var(--muted);font-size:13px}
   is the method she teaches: walk the blocks before you run the numbers.</p>
 
   <div class="card">
-    <h3>Take Back Your Town, as she teaches it</h3>
-    <p class="hint">Capture each step of the method in your own words while Katie walks through it. Write it the
-    way you'd explain it to a friend, not word for word.</p>
-    <div class="num"><span>1</span><textarea data-k="k_step1" rows="1"></textarea></div>
-    <div class="num"><span>2</span><textarea data-k="k_step2" rows="1"></textarea></div>
-    <div class="num"><span>3</span><textarea data-k="k_step3" rows="1"></textarea></div>
-    <div class="num"><span>4</span><textarea data-k="k_step4" rows="1"></textarea></div>
-    <div class="num"><span>5</span><textarea data-k="k_step5" rows="1"></textarea></div>
+    <h3>The Redevelopment Advantage Framework</h3>
+    <p class="hint">Her three pillars. Catch what she says about each one, then answer it for your own block.</p>
+    <label class="f">Market Leverage &mdash; what she says</label><textarea data-k="k_ml_said" rows="2"></textarea>
+    <label class="f">Market Leverage &mdash; on my block</label><textarea data-k="k_ml_mine" rows="2"></textarea>
+    <label class="f">Value Stack &mdash; what she says</label><textarea data-k="k_vs_said" rows="2"></textarea>
+    <label class="f">Value Stack &mdash; on my block</label><textarea data-k="k_vs_mine" rows="2"></textarea>
+    <label class="f">Community Momentum &mdash; what she says</label><textarea data-k="k_cm_said" rows="2"></textarea>
+    <label class="f">Community Momentum &mdash; on my block</label><textarea data-k="k_cm_mine" rows="2"></textarea>
   </div>
 
   <div class="card">
-    <h3>The case study</h3>
-    <p class="hint">Katie shares someone who got past a real barrier. Get the shape of it down.</p>
-    <label class="f">Who, or what project?</label><input type="text" data-k="k_case_who">
-    <label class="f">What stood in the way?</label><textarea data-k="k_case_barrier" rows="2"></textarea>
-    <label class="f">What got them past it?</label><textarea data-k="k_case_fix" rows="2"></textarea>
+    <h3>The Gateway, in numbers</h3>
+    <p class="hint">717 Main in Bryan: on the market over two years, roof leaking, written off. Her
+    figures are on the left. Run a building you know down the right &mdash; the totals work themselves out.</p>
+    <div class="tw"><table class="t">
+      <thead><tr><th>The line</th><th>Hers</th><th>Yours</th></tr></thead>
+      <tbody>
+        <tr><td class="lbl">Purchase price</td><td class="his">$200,000</td><td data-label="Yours"><input type="number" min="0" data-k="kd_purchase"></td></tr>
+        <tr><td class="lbl">Renovation</td><td class="his">$220,000</td><td data-label="Yours"><input type="number" min="0" data-k="kd_reno"></td></tr>
+        <tr><td class="lbl">Holding cost</td><td class="his">$20,000</td><td data-label="Yours"><input type="number" min="0" data-k="kd_hold"></td></tr>
+        <tr><td class="lbl">Loan</td><td class="his">$395,000 hard money</td><td data-label="Yours"><input type="number" min="0" data-k="kd_loan"></td></tr>
+        <tr><td class="lbl">Cash in the deal</td><td class="his">$45,000</td><td data-label="Yours"><input type="number" min="0" data-k="kd_cash"></td></tr>
+        <tr><td class="lbl">Grant or incentive</td><td class="his">$36,000 city grant</td><td data-label="Yours"><input type="number" min="0" data-k="kd_grant"></td></tr>
+      </tbody>
+    </table></div>
+    <div class="totals">
+      <div class="tot"><span class="mono">All-in cost</span><b id="kAllin">&mdash;</b></div>
+      <div class="tot hot"><span class="mono">Cash left in the deal</span><b id="kLeft">&mdash;</b><small>Hers came down to $9,000.</small></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>What it produced</h3>
+    <p class="hint">The same building, once it was full. This is the arithmetic that turns a written-off
+    building into an asset.</p>
+    <div class="tw"><table class="t">
+      <thead><tr><th>The line</th><th>Hers</th><th>Yours</th></tr></thead>
+      <tbody>
+        <tr><td class="lbl">Rent, per month</td><td class="his">$5,300 from 2 tenants</td><td data-label="Yours"><input type="number" min="0" data-k="kr_rent"></td></tr>
+        <tr><td class="lbl">Operating cost + reserves</td><td class="his">about $1,500</td><td data-label="Yours"><input type="number" min="0" data-k="kr_opex"></td></tr>
+        <tr><td class="lbl">Cap rate %</td><td class="his">7.5%</td><td data-label="Yours"><input type="number" min="0" step="0.1" data-k="kr_cap"></td></tr>
+      </tbody>
+    </table></div>
+    <div class="totals">
+      <div class="tot"><span class="mono">NOI per month</span><b id="kNoi">&mdash;</b></div>
+      <div class="tot"><span class="mono">Value at your cap rate</span><b id="kValue">&mdash;</b></div>
+      <div class="tot hot"><span class="mono">Equity (value &minus; loan)</span><b id="kEquity">&mdash;</b><small>Hers: about $200,000.</small></div>
+    </div>
   </div>
 
   <div class="card">
     <h3>The block you're watching</h3>
-    <p class="hint">Pick one street, block or small area you know. Run it through what you just heard.</p>
+    <p class="hint">Her closing question is &ldquo;whatcha got?&rdquo; &mdash; pick one street, block or
+    building you already know and run it through what you just heard.</p>
     <label class="f">Where is it?</label><input type="text" data-k="k_block">
-    <label class="f">What's changing there right now?</label>
-    <p class="hint">New businesses, vacant buildings, city projects, new traffic, who's buying.</p>
-    <textarea data-k="k_block_change" rows="2"></textarea>
-    <label class="f">What would you need to know before the comps move?</label>
-    <textarea data-k="k_block_know" rows="2"></textarea>
+    <label class="f">What's changing there right now?</label><textarea data-k="k_block_change" rows="2"></textarea>
+    <label class="f">What would you need to know before the comps move?</label><textarea data-k="k_block_know" rows="2"></textarea>
     <label class="f">Who could tell you?</label><input type="text" data-k="k_block_who">
   </div>
 
   <div class="card">
-    <h3>Her three practical steps, and yours</h3>
-    <p class="hint">Katie closes with three steps. Write each one down, then what you'll actually do with it.</p>
-    <div class="tw"><table class="t">
-      <thead><tr><th style="width:4%"></th><th>Katie's step</th><th>What I'll do with it</th></tr></thead>
-      <tbody data-repeat="3" data-prefix="k3">
-        <template><tr><td class="lbl">{n}</td><td><input type="text" data-k="k3_{i}_hers"></td><td><input type="text" data-k="k3_{i}_mine"></td></tr></template>
-      </tbody>
-    </table></div>
+    <h3>What you'd do first</h3>
+    <p class="hint">Three things she says to do, or three you decide on while she's talking.</p>
+    <div class="num"><span>1</span><input type="text" data-k="k_step1"></div>
+    <div class="num"><span>2</span><input type="text" data-k="k_step2"></div>
+    <div class="num"><span>3</span><input type="text" data-k="k_step3"></div>
   </div>
-
-  <div class="card">
-    <h3>Your edge</h3>
-    <label class="f">Where are you competing with bigger money, and where do you have an edge they can't buy?</label>
-    <textarea data-k="k_edge" rows="3"></textarea>
-  </div>
-</section>
 
 <!-- ============ PANEL ============ -->
 <section class="s" id="panel">
@@ -364,6 +389,16 @@ footer{padding:28px 0 40px;color:var(--muted);font-size:13px}
   </div>
   <div class="note"><b>Tonight:</b> check each program you wrote down against your Oklahoma Investor
   Funding Manual. It has the deadlines, application paths and direct contacts.</div>
+  <div class="card">
+    <h3>Anything else from this session</h3>
+    <textarea data-k="n_katie" rows="7" style="min-height:150px"></textarea>
+  </div>
+
+  <div class="card">
+    <h3>Anything else from this session</h3>
+    <textarea data-k="n_panel" rows="7" style="min-height:150px"></textarea>
+  </div>
+
 </section>
 
 <!-- ============ ROOM ============ -->
@@ -382,6 +417,11 @@ footer{padding:28px 0 40px;color:var(--muted);font-size:13px}
       </tbody>
     </table></div>
   </div>
+  <div class="card">
+    <h3>Anything else from this session</h3>
+    <textarea data-k="n_room" rows="7" style="min-height:150px"></textarea>
+  </div>
+
 </section>
 
 <!-- ============ CAMERON ============ -->
@@ -502,6 +542,11 @@ footer{padding:28px 0 40px;color:var(--muted);font-size:13px}
     <h3>The line you're writing down</h3>
     <textarea data-k="c_rule" rows="2"></textarea>
   </div>
+  <div class="card">
+    <h3>Anything else from this session</h3>
+    <textarea data-k="n_cam" rows="7" style="min-height:150px"></textarea>
+  </div>
+
 </section>
 
 <!-- ============ BEN ============ -->
@@ -588,6 +633,11 @@ footer{padding:28px 0 40px;color:var(--muted);font-size:13px}
     <p class="hint">Katie, Cameron and Ben back on stage together. What do you still want to ask?</p>
     <textarea data-k="atr_q" rows="2"></textarea>
   </div>
+  <div class="card">
+    <h3>Anything else from this session</h3>
+    <textarea data-k="n_ben" rows="7" style="min-height:150px"></textarea>
+  </div>
+
 </section>
 </main>
 
@@ -760,6 +810,17 @@ footer{padding:28px 0 40px;color:var(--muted);font-size:13px}
     document.getElementById('ohCut').textContent=money(ohC);
     document.getElementById('ohYear').textContent= ohC ? "That's your raise: "+money(ohC*12)+' a year.' : "That's your raise.";
 
+    // Katie's deal: all-in, cash left in, NOI, value, equity
+    var kAll=num('kd_purchase')+num('kd_reno')+num('kd_hold');
+    var kLeft=num('kd_cash')-num('kd_grant');
+    document.getElementById('kAllin').textContent = kAll>0 ? money(kAll) : '\u2014';
+    document.getElementById('kLeft').textContent = (num('kd_cash')>0) ? money(kLeft) : '\u2014';
+    var kNoi=num('kr_rent')-num('kr_opex'), kCap=num('kr_cap');
+    document.getElementById('kNoi').textContent = (num('kr_rent')>0) ? money(kNoi)+'/mo' : '\u2014';
+    var kVal=(kNoi>0&&kCap>0) ? (kNoi*12)/(kCap/100) : 0;
+    document.getElementById('kValue').textContent = kVal>0 ? money(kVal) : '\u2014';
+    document.getElementById('kEquity').textContent = (kVal>0&&num('kd_loan')>0) ? money(kVal-num('kd_loan')) : '\u2014';
+
     // Monday page
     document.querySelectorAll('[data-mirror]').forEach(function(el){
       var v=val(el.dataset.mirror);
@@ -814,7 +875,7 @@ footer{padding:28px 0 40px;color:var(--muted);font-size:13px}
 
   // ---- a dot in the nav for each section you've written something in ------
   var SECTION_KEYS={
-    start:['name','worth'], katie:['k_step1','k_block','k_edge','k_case_who'],
+    start:['name','worth'], katie:['k_ml_said','k_ml_mine','kd_purchase','k_block','k_step1','n_katie'],
     panel:['p_where','p_q1','prog_1_name','call_1_name'], room:['ppl_1_name'],
     cameron:['c_missing','c_net','c_first','task_1_what','c_kpi','c_rule'],
     ben:['b_tuesday','oh_1_what','sw_worst','atr_q'], monday:['m_did','m_one']

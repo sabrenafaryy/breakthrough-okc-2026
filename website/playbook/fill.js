@@ -8,10 +8,15 @@
   var DIRECT = {
     name: 'name', worth: 'worth',
     k_step1: 'k_step_1', k_step2: 'k_step_2', k_step3: 'k_step_3',
-    k_step4: 'k_step_4', k_step5: 'k_step_5',
-    k_case_who: 'k_case_who', k_case_barrier: 'k_case_wall', k_case_fix: 'k_case_past',
     k_block: 'k_block', k_block_change: 'k_change', k_block_know: 'k_know', k_block_who: 'k_ask',
     k_edge: 'k_edge',
+    k_ml_said: 'k_ml_said', k_ml_mine: 'k_ml_mine', k_vs_said: 'k_vs_said', k_vs_mine: 'k_vs_mine',
+    k_cm_said: 'k_cm_said', k_cm_mine: 'k_cm_mine',
+    kd_purchase: 'kd_purchase', kd_reno: 'kd_reno', kd_hold: 'kd_hold', kd_loan: 'kd_loan',
+    kd_cash: 'kd_cash', kd_grant: 'kd_grant',
+    kr_rent: 'kr_rent', kr_opex: 'kr_opex', kr_cap: 'kr_cap',
+    n_start: 'n_start', n_katie: 'n_katie', n_panel: 'n_panel', n_room: 'n_room',
+    n_cam: 'n_cam', n_ben: 'n_ben',
     p_where: 'p_where', p_size: 'p_size',
     p_q1: 'p_q_1', p_q2: 'p_q_2', p_q3: 'p_q_3',
     c_missing: 'c_missing', c_missing_how: 'c_missing_how',
@@ -38,7 +43,6 @@
 
   // repeated table rows: pdfPrefix -> [webSuffix per column], rows
   var TABLES = [
-    { pdf: 'k_prac', web: 'k3', cols: ['hers', 'mine'], rows: 3 },
     { pdf: 'prog', web: 'prog', cols: ['name', 'lvl', 'why', 'next'], rows: 5 },
     { pdf: 'call', web: 'call', cols: ['name', 'org', 'ask'], rows: 4 },
     { pdf: 'ppl', web: 'ppl', cols: ['name', 'what', 'why'], rows: 8 },
@@ -108,6 +112,17 @@
     }
 
     for (var i = 1; i <= 6; i++) if (v(d, 'sw_' + i)) out['swap_' + i + '_3'] = v(d, 'sw_' + i);
+
+    var kAll = n(d,'kd_purchase') + n(d,'kd_reno') + n(d,'kd_hold');
+    if (kAll > 0) out.kd_allin = money(kAll);
+    if (n(d,'kd_cash') > 0) out.kd_left = money(n(d,'kd_cash') - n(d,'kd_grant'));
+    var kNoi = n(d,'kr_rent') - n(d,'kr_opex'), kCap = n(d,'kr_cap');
+    if (n(d,'kr_rent') > 0) out.kr_noi = money(kNoi) + '/mo';
+    if (kNoi > 0 && kCap > 0) {
+      var kVal = (kNoi * 12) / (kCap / 100);
+      out.kr_value = money(kVal);
+      if (n(d,'kd_loan') > 0) out.kr_equity = money(kVal - n(d,'kd_loan'));
+    }
 
     // the Monday page, written out the way the web version assembles it
     out.m_life = v(d, 'b_tuesday');
