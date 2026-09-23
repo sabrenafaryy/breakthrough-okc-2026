@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>The Wealth Building Playbook | Breakthrough OKC</title>
+<link rel="icon" href="../assets/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:Boldonse;src:url(../assets/boldonse.woff2) format('woff2');font-display:swap}
+:root{--navy:#243150;--navy-dk:#1A2540;--red:#e64437;--light:#efefef;--ink:#243150;--muted:#5c6478;--line:#d6d9e0;--card:#fff;--pink:#ff9d94}
+*{box-sizing:border-box}
+html{scroll-padding-top:64px}
+body{margin:0;background:var(--light);color:var(--ink);font:16px/1.55 'DM Sans',system-ui,sans-serif;letter-spacing:-.01em;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:Boldonse,'Archivo Black',Impact,sans-serif;font-weight:400;text-transform:uppercase;line-height:1.3;margin:0}
+.mono{font-family:'Space Mono',monospace;text-transform:uppercase;letter-spacing:.14em;font-size:11px}
+.chip{display:inline-block;background:var(--red);color:#fff;padding:5px 10px}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px}
+
+/* top bar */
+.bar{position:sticky;top:0;z-index:20;background:var(--navy);color:#fff;box-shadow:0 2px 12px rgba(0,0,0,.18)}
+.bar .wrap{display:flex;align-items:center;gap:14px;height:56px}
+.bar .brand{font-family:Boldonse,sans-serif;font-size:13px;text-transform:uppercase;white-space:nowrap}
+.bar nav{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;flex:1}
+.bar nav::-webkit-scrollbar{display:none}
+.bar nav a{color:#c9d0de;text-decoration:none;font:600 13px 'DM Sans',sans-serif;padding:6px 10px;border-radius:99px;white-space:nowrap}
+.bar nav a:hover,.bar nav a.on{background:rgba(255,255,255,.12);color:#fff}
+.saved{font-size:10px;color:var(--pink);white-space:nowrap;opacity:0;transition:opacity .3s}
+.saved.show{opacity:1}
+
+/* hero */
+.hero{background:var(--navy);color:#fff;padding:56px 0 64px;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;right:-140px;top:-120px;width:380px;height:380px;border-radius:50%;background:var(--red);opacity:.9}
+.hero .wrap{position:relative;z-index:1}
+.hero h1{font-size:clamp(28px,5.4vw,46px);margin:18px 0 16px;max-width:14ch}
+.hero p.lede{font-size:18px;color:#d5dbe7;max-width:56ch;margin:0}
+.how{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:30px}
+.how div{background:rgba(255,255,255,.08);padding:14px 16px;font-size:14px;color:#d5dbe7;border-top:3px solid var(--red)}
+.how b{display:block;color:#fff;font-size:14px;margin-bottom:2px}
+
+/* sections */
+section.s{padding:56px 0 8px}
+.s-head{display:flex;gap:18px;align-items:flex-start;margin-bottom:22px}
+.s-head img{width:84px;height:84px;border-radius:50%;object-fit:cover;border:3px solid var(--red);background:var(--red);flex:0 0 84px}
+.s-head .when{color:var(--red)}
+.s-head h2{font-size:clamp(20px,3.4vw,28px);margin:6px 0 4px;line-height:1.42}
+.s-head .talk{font-weight:700;font-size:16px}
+.stand{font-size:17px;color:var(--muted);margin:0 0 24px;max-width:62ch}
+.quote{border-left:4px solid var(--red);padding:6px 0 6px 18px;margin:0 0 26px;font-size:20px;font-weight:600;line-height:1.4}
+.quote cite{display:block;font:400 11px 'Space Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:8px;font-style:normal}
+
+.card{background:var(--card);padding:24px 24px 20px;margin-bottom:18px;border-radius:4px;box-shadow:0 1px 0 rgba(36,49,80,.06)}
+.card h3{font-size:15px;margin-bottom:6px;line-height:1.45}
+.card .hint{color:var(--muted);font-size:14px;margin:0 0 14px}
+label.f{display:block;font-weight:600;font-size:14px;margin:14px 0 6px}
+label.f:first-of-type{margin-top:4px}
+input[type=text],input[type=number],textarea,select{width:100%;font:16px 'DM Sans',sans-serif;color:var(--ink);background:#f7f8fa;border:1px solid var(--line);border-radius:3px;padding:10px 12px;outline:none;transition:border-color .15s,background .15s}
+input:focus,textarea:focus,select:focus{border-color:var(--navy);background:#fff}
+textarea{resize:vertical;min-height:46px;overflow:hidden}
+.num{display:flex;gap:10px;align-items:flex-start;margin-bottom:8px}
+.num span{flex:0 0 28px;height:28px;margin-top:9px;border-radius:50%;background:var(--navy);color:#fff;font:700 13px 'Space Mono',monospace;display:flex;align-items:center;justify-content:center}
+
+/* chips */
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips label{cursor:pointer}
+.chips input{position:absolute;opacity:0;pointer-events:none}
+.chips span{display:inline-block;padding:8px 14px;border:1.5px solid var(--line);border-radius:99px;font-size:14px;font-weight:600;background:#f7f8fa;user-select:none}
+.chips input:checked+span{background:var(--navy);border-color:var(--navy);color:#fff}
+.chips input:focus-visible+span{outline:2px solid var(--red);outline-offset:2px}
+
+/* tables */
+.tw{overflow-x:auto;margin:0 -4px}
+table.t{width:100%;border-collapse:collapse;min-width:560px}
+table.t th{font:700 10.5px 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:0 4px 8px}
+table.t td{padding:3px 4px;vertical-align:top}
+table.t td.lbl{font-weight:700;font-size:14px;padding-top:12px;width:22%}
+table.t td.his{font-size:14px;color:var(--muted);padding-top:12px;width:30%}
+table.t input,table.t select{padding:8px 10px;font-size:15px}
+.totals{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px}
+.tot{flex:1 1 180px;background:#f3f4f7;padding:12px 16px;border-radius:3px}
+.tot .mono{color:var(--muted);font-size:10px}
+.tot b{display:block;font-family:Boldonse,sans-serif;font-size:22px;margin-top:4px}
+.tot.hot{background:var(--navy);color:#fff}
+.tot.hot .mono{color:var(--pink)}
+.tot.hot small{display:block;color:#c9d0de;font-size:13px;margin-top:2px}
+
+.pull{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:6px 0 18px}
+.pull div{background:var(--navy);color:#fff;padding:20px}
+.pull b{display:block;font-family:Boldonse,sans-serif;font-size:14px;text-transform:uppercase;line-height:1.4;margin-bottom:8px}
+.pull p{margin:0;color:#c9d0de;font-size:14px}
+.note{background:#fff4f2;border-left:4px solid var(--red);padding:14px 18px;font-size:14.5px;margin-bottom:18px}
+
+.divider{height:1px;background:var(--line);margin:40px 0 0}
+
+/* monday */
+.monday{background:var(--navy);color:#fff;margin-top:56px;padding:56px 0 64px}
+.monday h2{font-size:clamp(24px,4.4vw,36px);margin:14px 0 10px}
+.monday .stand{color:#c9d0de}
+.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.mcard{background:rgba(255,255,255,.07);padding:18px 20px;border-top:3px solid var(--red)}
+.mcard .mono{color:var(--pink);font-size:10px}
+.mcard .from{float:right;color:#8c96ad;font-size:10px}
+.mcard .v{margin-top:8px;font-size:16px;white-space:pre-wrap;min-height:24px}
+.mcard .v.empty{color:#7c87a0;font-style:italic}
+.mcard ul{margin:8px 0 0;padding-left:18px}
+.mcard.wide{grid-column:1/-1}
+.monday .card{background:#fff;color:var(--ink);margin-top:14px}
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.btn{font:700 15px 'DM Sans',sans-serif;border:0;border-radius:3px;padding:14px 22px;cursor:pointer}
+.btn.primary{background:var(--red);color:#fff}
+.btn.ghost{background:transparent;color:#c9d0de;border:1.5px solid rgba(255,255,255,.3)}
+/* warnings, top-bar download, start block */
+.alert{display:none;background:#fff4f2;border-bottom:3px solid var(--red);color:var(--ink);
+padding:12px 0;font-size:14.5px;line-height:1.5}
+.alert.on{display:block}
+.alert .wrap{display:flex;gap:10px;align-items:flex-start}
+.alert .x{margin-left:auto;background:none;border:0;font-size:20px;line-height:1;cursor:pointer;color:var(--muted);padding:0 4px}
+.bar .dltop{background:var(--red);color:#fff;border:0;border-radius:99px;padding:7px 13px;
+font:700 13px 'DM Sans',sans-serif;cursor:pointer;white-space:nowrap}
+.bar .dltop[disabled]{opacity:.6;cursor:default}
+.bar nav a.done:after{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;
+background:var(--pink);margin-left:5px;vertical-align:middle}
+.start{background:#fff;border-left:4px solid var(--red);padding:20px 22px;margin:0 0 22px;border-radius:0 4px 4px 0}
+.start h3{font-size:15px;margin-bottom:10px}
+.start ol{margin:0;padding-left:20px;color:var(--muted);font-size:14.5px;line-height:1.62}
+.start li{margin-bottom:6px}
+.start b{color:var(--ink)}
+@media(max-width:640px){.bar .brand{display:none}.bar .dltop{padding:7px 11px}}
+.dlnote{margin:14px 0 0;color:#c9d0de;font-size:13px;max-width:52ch}
+.dlnote.err{color:#ffd9d4}
+.btn[disabled]{opacity:.65;cursor:default}
+footer{padding:28px 0 40px;color:var(--muted);font-size:13px}
+
+@media (max-width:640px){
+  .how,.pull,.mgrid{grid-template-columns:1fr}
+  .card{padding:20px 16px 16px}
+  .s-head img{width:64px;height:64px;flex-basis:64px}
+  .bar .brand{display:none}
+  .tw{overflow:visible;margin:0}
+  table.t{min-width:0}
+  table.t thead{display:none}
+  table.t tr{display:block;border:1px solid var(--line);border-radius:4px;padding:10px 12px 12px;margin-bottom:10px;background:#fbfbfc}
+  table.t td{display:block;padding:4px 0;width:auto!important}
+  table.t td[data-label]:not(.lbl):not(.his):before{content:attr(data-label);display:block;font:700 10px 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:4px 0 4px}
+  table.t td.lbl{padding-top:0;font-size:15px}
+  table.t td.his{padding-top:2px}
+}
+@media print{
+  @page{margin:.5in}
+  body{background:#fff;font-size:11pt}
+  .bar,.actions,.hero:after,.how,.noprint{display:none!important}
+  .hero,.monday{background:#fff!important;color:var(--ink)!important;padding:0 0 10px}
+  .hero p.lede,.monday .stand{color:var(--muted)!important}
+  .mcard{background:#fff;border:1px solid var(--line);border-top:3px solid var(--red);break-inside:avoid;color:var(--ink)}
+  .mcard .v.empty{color:#999}
+  section.s{padding-top:22px;break-before:page}
+  .monday{break-before:page}
+  .card{box-shadow:none;border:1px solid var(--line);break-inside:avoid}
+  input,textarea,select{background:#fff!important;border:1px solid #ccc}
+  .pull div,.tot.hot{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+
+<div class="alert" id="alertApp"><div class="wrap">
+  <div><b>You&#39;re in an app&#39;s mini browser.</b> Your answers may not be saved here. Tap the
+  <b>&hellip;</b> or arrow icon in the corner and choose <b>Open in Safari</b> or
+  <b>Open in Chrome</b>, then come back to this page.</div>
+  <button class="x" type="button" data-close="alertApp" aria-label="Dismiss">&times;</button>
+</div></div>
+<div class="alert" id="alertStore"><div class="wrap">
+  <div><b>This browser isn&#39;t saving your work.</b> You&#39;re probably in a private window. Switch to a
+  normal tab, or download your playbook before you close this page.</div>
+  <button class="x" type="button" data-close="alertStore" aria-label="Dismiss">&times;</button>
+</div></div>
+<div class="bar"><div class="wrap">
+  <span class="brand">Breakthrough OKC</span>
+  <nav id="nav">
+    <a href="#start">Start</a><a href="#katie">Katie</a><a href="#panel">Panel</a><a href="#room">The Room</a>
+    <a href="#cameron">Cameron</a><a href="#ben">Ben</a><a href="#monday">Monday</a>
+  </nav>
+  <button class="dltop" type="button" id="dlTop">Download</button>
+  <span class="saved mono" id="saved">Saved</span>
+</div></div>
+
+<header class="hero"><div class="wrap">
+  <span class="chip mono">Breakthrough OKC &middot; September 26, 2026</span>
+  <h1>The Wealth Building Playbook</h1>
+  <p class="lede">Your plan for the day, built as you go. Fill in each section during the session it
+  belongs to. At the end of the day, it turns into your plan for Monday.</p>
+  <div class="how">
+    <div><b>It saves as you type</b>Everything stays in this browser. Use the same device all day.</div>
+    <div><b>It's private</b>Nothing you write is sent to us or anyone else.</div>
+    <div><b>Keep a copy</b>Before you leave, tap <i>Save as PDF</i> at the bottom.</div>
+  </div>
+</div></header>
+
+<main class="wrap">
+
+<!-- ============ START ============ -->
+<section class="s" id="start">
+  <div class="s-head"><div>
+    <span class="mono when">Before 9:00 AM</span>
+    <h2>Before We Start</h2>
+  </div></div>
+  <div class="start">
+    <h3>Before you start &mdash; 30 seconds</h3>
+    <ol>
+      <li><b>Leave this tab open all day.</b> Same browser, same device &mdash; that is where your
+      answers live.</li>
+      <li><b>Don&#39;t use a private or incognito tab.</b> Those throw everything away when you close them.</li>
+      <li><b>Type as you go.</b> It saves every word by itself. There is no save button, and
+      refreshing won&#39;t lose anything.</li>
+      <li><b>Before you leave, hit Download.</b> You get the full 12-page playbook with your answers
+      in it, as a PDF you keep. Until you do, everything lives only in this browser.</li>
+    </ol>
+    <p id="offlineOk" style="display:none;margin:12px 0 0;font:700 13px 'DM Sans',sans-serif;color:#0f7a43">
+      &#10003; Saved to this device &mdash; this page now works even with no signal.</p>
+  </div>
+  <div class="card">
+    <label class="f" for="name">Your name</label>
+    <input type="text" id="name" data-k="name" autocomplete="name">
+    <label class="f">What kind of investing do you do?</label>
+    <div class="chips">
+      <label><input type="checkbox" data-k="type_new"><span>New investor</span></label>
+      <label><input type="checkbox" data-k="type_flip"><span>Fix &amp; flip</span></label>
+      <label><input type="checkbox" data-k="type_hold"><span>Buy &amp; hold</span></label>
+      <label><input type="checkbox" data-k="type_wholesale"><span>Wholesaling</span></label>
+      <label><input type="checkbox" data-k="type_build"><span>Building / developing</span></label>
+      <label><input type="checkbox" data-k="type_agent"><span>Agent</span></label>
+      <label><input type="checkbox" data-k="type_capital"><span>Lender / capital</span></label>
+    </div>
+    <label class="f" for="worth">What would make today worth it?</label>
+    <p class="hint">One sentence. You'll see it again at the end of the day.</p>
+    <textarea id="worth" data-k="worth" rows="2"></textarea>
+  </div>
+</section>
+
+<!-- ============ KATIE ============ -->
+<section class="s" id="katie">
+  <div class="s-head">
+    <img src="../assets/katie.webp" alt="Katie Neason">
+    <div>
+      <span class="mono when">9:20 AM &middot; Opening Keynote</span>
+      <h2>Katie Neason</h2>
+      <div class="talk">Take Back Your Town: Profitable Redevelopment</div>
+    </div>
+  </div>
+  <p class="stand">Twenty years ago Katie bought a $17,000 condo. It pulled her out of commercial
+  banking and into rebuilding her hometown &mdash; today a $20M portfolio of boutique apartments,
+  mixed-use buildings, townhomes and cottage clusters in downtown Bryan, Texas. Take Back Your Town
+  is the method she teaches: walk the blocks before you run the numbers.</p>
+
+  <div class="card">
+    <h3>Take Back Your Town, as she teaches it</h3>
+    <p class="hint">Capture each step of the method in your own words while Katie walks through it. Write it the
+    way you'd explain it to a friend, not word for word.</p>
+    <div class="num"><span>1</span><textarea data-k="k_step1" rows="1"></textarea></div>
+    <div class="num"><span>2</span><textarea data-k="k_step2" rows="1"></textarea></div>
+    <div class="num"><span>3</span><textarea data-k="k_step3" rows="1"></textarea></div>
+    <div class="num"><span>4</span><textarea data-k="k_step4" rows="1"></textarea></div>
+    <div class="num"><span>5</span><textarea data-k="k_step5" rows="1"></textarea></div>
+  </div>
+
+  <div class="card">
+    <h3>The case study</h3>
+    <p class="hint">Katie shares someone who got past a real barrier. Get the shape of it down.</p>
+    <label class="f">Who, or what project?</label><input type="text" data-k="k_case_who">
+    <label class="f">What stood in the way?</label><textarea data-k="k_case_barrier" rows="2"></textarea>
+    <label class="f">What got them past it?</label><textarea data-k="k_case_fix" rows="2"></textarea>
+  </div>
+
+  <div class="card">
+    <h3>The block you're watching</h3>
+    <p class="hint">Pick one street, block or small area you know. Run it through what you just heard.</p>
+    <label class="f">Where is it?</label><input type="text" data-k="k_block">
+    <label class="f">What's changing there right now?</label>
+    <p class="hint">New businesses, vacant buildings, city projects, new traffic, who's buying.</p>
+    <textarea data-k="k_block_change" rows="2"></textarea>
+    <label class="f">What would you need to know before the comps move?</label>
+    <textarea data-k="k_block_know" rows="2"></textarea>
+    <label class="f">Who could tell you?</label><input type="text" data-k="k_block_who">
+  </div>
+
+  <div class="card">
+    <h3>Her three practical steps, and yours</h3>
+    <p class="hint">Katie closes with three steps. Write each one down, then what you'll actually do with it.</p>
+    <div class="tw"><table class="t">
+      <thead><tr><th style="width:4%"></th><th>Katie's step</th><th>What I'll do with it</th></tr></thead>
+      <tbody data-repeat="3" data-prefix="k3">
+        <template><tr><td class="lbl">{n}</td><td><input type="text" data-k="k3_{i}_hers"></td><td><input type="text" data-k="k3_{i}_mine"></td></tr></template>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="card">
+    <h3>Your edge</h3>
+    <label class="f">Where are you competing with bigger money, and where do you have an edge they can't buy?</label>
+    <textarea data-k="k_edge" rows="3"></textarea>
+  </div>
+</section>
+
+<!-- ============ PANEL ============ -->
+<section class="s" id="panel">
+  <div class="s-head"><div>
+    <span class="mono when">10:55 AM &middot; The Expert Panel</span>
+    <h2>Funding Oklahoma Investors Can Leverage</h2>
+    <div class="talk">Hosted by Katie Neason, with Darrell Beavers (Oklahoma Housing Finance Agency)
+    and Shannon Entz (City of Oklahoma City)</div>
+  </div></div>
+  <p class="stand">City and state programs exist for Oklahoma investors, but most are built for a
+  specific kind of project. This section is how you find out which ones fit yours, and who to call.</p>
+
+  <div class="card">
+    <h3>Before it starts: your project</h3>
+    <p class="hint">Most programs depend on what you're doing and where. Knowing this is what makes
+    your question answerable.</p>
+    <label class="f">What are you doing?</label>
+    <div class="chips">
+      <label><input type="checkbox" data-k="p_new"><span>Building new</span></label>
+      <label><input type="checkbox" data-k="p_rehab"><span>Rehabbing</span></label>
+      <label><input type="checkbox" data-k="p_rent"><span>Buying to rent</span></label>
+      <label><input type="checkbox" data-k="p_flip"><span>Buying to flip</span></label>
+      <label><input type="checkbox" data-k="p_home"><span>Homes for owner-occupants</span></label>
+      <label><input type="checkbox" data-k="p_unsure"><span>Not sure yet</span></label>
+    </div>
+    <label class="f">Where? City or county</label><input type="text" data-k="p_where">
+    <label class="f">How big? Homes or units</label><input type="text" data-k="p_size">
+  </div>
+
+  <div class="card">
+    <h3>Your questions for the panel</h3>
+    <p class="hint">Write them now, so you're ready when the mic comes around.</p>
+    <div class="num"><span>1</span><textarea data-k="p_q1" rows="1"></textarea></div>
+    <div class="num"><span>2</span><textarea data-k="p_q2" rows="1"></textarea></div>
+    <div class="num"><span>3</span><textarea data-k="p_q3" rows="1"></textarea></div>
+  </div>
+
+  <div class="card">
+    <h3>Programs that might fit you</h3>
+    <p class="hint">Every time a program comes up that could fit your project, write it here.</p>
+    <div class="tw"><table class="t">
+      <thead><tr><th>Program</th><th style="width:17%">Level</th><th>Why it might fit</th><th>Next step</th></tr></thead>
+      <tbody data-repeat="5" data-prefix="prog">
+        <template><tr><td><input type="text" data-k="prog_{i}_name"></td>
+        <td><select data-k="prog_{i}_lvl"><option value=""></option><option>City</option><option>State</option><option>Federal</option></select></td>
+        <td><input type="text" data-k="prog_{i}_why"></td><td><input type="text" data-k="prog_{i}_next"></td></tr></template>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="card">
+    <h3>Who to call</h3>
+    <div class="tw"><table class="t">
+      <thead><tr><th>Name</th><th>Agency or office</th><th>What to ask</th></tr></thead>
+      <tbody data-repeat="4" data-prefix="call">
+        <template><tr><td><input type="text" data-k="call_{i}_name"></td><td><input type="text" data-k="call_{i}_org"></td><td><input type="text" data-k="call_{i}_ask"></td></tr></template>
+      </tbody>
+    </table></div>
+  </div>
+  <div class="note"><b>Tonight:</b> check each program you wrote down against your Oklahoma Investor
+  Funding Manual. It has the deadlines, application paths and direct contacts.</div>
+</section>
+
+<!-- ============ ROOM ============ -->
+<section class="s" id="room">
+  <div class="s-head"><div>
+    <span class="mono when">Breaks &middot; Lunch &middot; The Exhibitor Hall</span>
+    <h2>The Room</h2>
+  </div></div>
+  <p class="stand">Half the value of today is who you meet. Write them down while you still remember
+  what you talked about.</p>
+  <div class="card">
+    <div class="tw"><table class="t">
+      <thead><tr><th>Name</th><th>What they do</th><th>Why follow up</th></tr></thead>
+      <tbody data-repeat="8" data-prefix="ppl">
+        <template><tr><td><input type="text" data-k="ppl_{i}_name"></td><td><input type="text" data-k="ppl_{i}_what"></td><td><input type="text" data-k="ppl_{i}_why"></td></tr></template>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- ============ CAMERON ============ -->
+<section class="s" id="cameron">
+  <div class="s-head">
+    <img src="../assets/cameron.webp" alt="Cameron Burke">
+    <div>
+      <span class="mono when">1:45 PM &middot; Keynote</span>
+      <h2>Cameron Burke</h2>
+      <div class="talk">Leverage: Marketing, Systems &amp; Delegation To Scale</div>
+    </div>
+  </div>
+  <p class="stand">Cameron started at 18 with a license, a little saved cash and no leverage &mdash;
+  and went nine months without a closing. What changed was not effort. It was finding one piece of
+  real leverage, then stacking another on top of it, and another. This section is where you find
+  yours.</p>
+  <blockquote class="quote">Small force or resource to gain a larger advantage.<cite>Cameron Burke &middot; what leverage actually means</cite></blockquote>
+
+  <div class="card">
+    <h3>The eight forms &mdash; which one are you missing?</h3>
+    <p class="hint">He walks all eight. Some get you in the door; some multiply what you already have.
+    Tick the ones genuinely working in your business today. The blank ones are the point.</p>
+    <div class="chips"><label><input type="checkbox" data-k="lev_uv"><span>Unique value</span></label><label><input type="checkbox" data-k="lev_cash"><span>Cash</span></label><label><input type="checkbox" data-k="lev_mktg"><span>Marketing</span></label><label><input type="checkbox" data-k="lev_debt"><span>Debt</span></label><label><input type="checkbox" data-k="lev_ppl"><span>People</span></label><label><input type="checkbox" data-k="lev_brand"><span>Brand</span></label><label><input type="checkbox" data-k="lev_sys"><span>Systems</span></label><label><input type="checkbox" data-k="lev_ai"><span>AI</span></label></div>
+    <label class="f">The one I'm missing that would change the most</label><input type="text" data-k="c_missing">
+    <label class="f">What it would actually take to put it in place</label><textarea data-k="c_missing_how" rows="2"></textarea>
+  </div>
+
+  <div class="card">
+    <h3>Your number</h3>
+    <p class="hint">His litmus test before hiring anyone: know your dollar per hour. <b>Net, not
+    gross.</b> Last 12 months' net, divided by the hours you actually worked.</p>
+    <label class="f">Your net, last 12 months</label><input type="number" min="0" step="1000" inputmode="numeric" data-k="c_net">
+    <label class="f">Hours you actually worked in those 12 months</label><input type="number" min="0" step="10" inputmode="numeric" data-k="c_hours">
+    <div class="totals">
+      <div class="tot hot"><span class="mono">Your dollar per hour</span><b id="camRate">&mdash;</b><small>Every hour you spend on low-value work costs you this.</small></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>The trade</h3>
+    <p class="hint">His example: a transaction coordinator at $3,500 a month, against $6,000 a month
+    of his own time doing admin. Easy trade. Run yours.</p>
+    <label class="f">The work you'd hand off</label><input type="text" data-k="c_trade_what">
+    <label class="f">What it would cost to hire out, per month</label><input type="number" min="0" step="100" inputmode="numeric" data-k="c_trade_cost">
+    <label class="f">Hours a month that work takes you</label><input type="number" min="0" step="1" inputmode="numeric" data-k="c_trade_hrs">
+    <div class="totals">
+      <div class="tot"><span class="mono">What those hours cost you</span><b id="camCost">&mdash;</b></div>
+      <div class="tot hot"><span class="mono">The verdict</span><b id="camVerdict">&mdash;</b><small id="camVerdictNote">Fill in your number above first.</small></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Your week, honestly</h3>
+    <p class="hint">Income-producing work is high leverage &mdash; finding deals, making offers,
+    talking to sellers. Everything else is a candidate to hand off. List your week, then decide.</p>
+    <div class="tw"><table class="t">
+      <thead><tr><th>Task I do every week</th><th style="width:16%">Hours / week</th><th style="width:24%">Keep, delegate, or automate?</th></tr></thead>
+      <tbody data-repeat="8" data-prefix="task">
+        <template><tr><td><input type="text" data-k="task_{i}_what"></td><td><input type="number" min="0" step="0.5" inputmode="decimal" data-k="task_{i}_hrs"></td>
+        <td><select data-k="task_{i}_do"><option value=""></option><option>Keep</option><option>Delegate</option><option>Automate</option></select></td></tr></template>
+      </tbody>
+    </table></div>
+    <div class="totals">
+      <div class="tot"><span class="mono">Hours a week, total</span><b id="hrsTotal">0</b></div>
+      <div class="tot hot"><span class="mono">Hours you could hand off</span><b id="hrsOff">0</b><small>That's time back.</small></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Hand one thing off properly</h3>
+    <p class="hint">He hired a transaction coordinator before he had systems, and called the result
+    chaos. Handing work over is not the same as handing over a closed loop.</p>
+    <label class="f">The first thing you'd hand over</label><input type="text" data-k="c_first">
+    <label class="f">Who would own it?</label><input type="text" data-k="c_who">
+    <label class="f">How will you know it got done, without checking yourself?</label><textarea data-k="c_loop" rows="2"></textarea>
+    <label class="f">What happens when it doesn't?</label><textarea data-k="c_fail" rows="2"></textarea>
+  </div>
+
+  <div class="card">
+    <h3>Start where the chaos is</h3>
+    <p class="hint">His answer to "which system do I build first" is whatever feels like chaos right
+    now. His own contract-to-close system fits on one page: who does what, in what order.</p>
+    <label class="f">What feels like chaos in my business right now</label><textarea data-k="c_chaos" rows="2"></textarea>
+    <label class="f">The first system I'll write down</label><input type="text" data-k="c_system">
+    <label class="f">Who runs it once it exists?</label><input type="text" data-k="c_system_who">
+  </div>
+
+  <div class="card">
+    <h3>Your buy box, in three numbers</h3>
+    <p class="hint">Every deal he buys runs through the same three. Write yours &mdash; and if you
+    don't have them yet, that's the takeaway.</p>
+    <div class="tw"><table class="t">
+      <thead><tr><th style="width:26%">The number</th><th style="width:28%">His</th><th>Yours</th></tr></thead>
+      <tbody>
+        <tr><td class="lbl">All-in cost</td><td class="his">Under 70% of ARV</td><td><input type="text" data-k="c_bb_arv"></td></tr>
+        <tr><td class="lbl">Cash-on-cash</td><td class="his">25% minimum</td><td><input type="text" data-k="c_bb_coc"></td></tr>
+        <tr><td class="lbl">Exit</td><td class="his">Has to be refinanceable</td><td><input type="text" data-k="c_bb_refi"></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="card">
+    <h3>Data is leverage</h3>
+    <p class="hint">His words: it shows you the pulse of the business, so you know which lever to
+    pull. Pick the one number you'll actually watch every week.</p>
+    <label class="f">The one number you'll watch</label><input type="text" data-k="c_kpi">
+  </div>
+
+  <div class="card">
+    <h3>Two things that stop people</h3>
+    <p class="hint">He names both: fear that outweighs your goals, and lifestyle creep that eats the
+    leverage you just built. Be honest on one line each.</p>
+    <label class="f">The fear that's currently bigger than my goal</label><textarea data-k="c_fear" rows="2"></textarea>
+    <label class="f">Where lifestyle creep is showing up for me</label><textarea data-k="c_creep" rows="2"></textarea>
+  </div>
+
+  <div class="card">
+    <h3>The line you're writing down</h3>
+    <textarea data-k="c_rule" rows="2"></textarea>
+  </div>
+</section>
+
+<!-- ============ BEN ============ -->
+<section class="s" id="ben">
+  <div class="s-head">
+    <img src="../assets/ben.webp" alt="Ben Allgeyer">
+    <div>
+      <span class="mono when">3:15 PM &middot; Closing Keynote</span>
+      <h2>Ben Allgeyer</h2>
+      <div class="talk">How I Lost $1M Scaling Wrong, And Built A Lean System That Works</div>
+    </div>
+  </div>
+  <p class="stand">Ben has done 500+ deals in eight years across all 50 states and runs six companies.
+  His session is both halves: what scaling the wrong way cost him, and the lean system he runs now.</p>
+  <blockquote class="quote">My business scaled the moment my life simplified.<cite>Ben Allgeyer</cite></blockquote>
+
+  <div class="card">
+    <h3>A good Tuesday, five years out</h3>
+    <p class="hint">Not the one that impresses people. The one that feeds you.</p>
+    <label class="f">What does a good Tuesday look like in five years?</label><textarea data-k="b_tuesday" rows="2"></textarea>
+    <label class="f">What would have to be true about your business for that Tuesday to happen?</label>
+    <div class="num"><span>1</span><input type="text" data-k="b_true1"></div>
+    <div class="num"><span>2</span><input type="text" data-k="b_true2"></div>
+    <div class="num"><span>3</span><input type="text" data-k="b_true3"></div>
+    <label class="f">What are you building instead?</label><input type="text" data-k="b_instead">
+  </div>
+
+  <div class="card">
+    <h3>The overhead audit</h3>
+    <p class="hint">List every recurring cost in your business. For each one, name what it made you
+    last month, in dollars. If you can't name it, that's your answer.</p>
+    <div class="tw"><table class="t">
+      <thead><tr><th>What it is</th><th style="width:17%">Monthly cost $</th><th style="width:20%">What it made me last month $</th><th style="width:15%">Keep or cut?</th></tr></thead>
+      <tbody data-repeat="8" data-prefix="oh">
+        <template><tr><td><input type="text" data-k="oh_{i}_what"></td><td><input type="number" min="0" inputmode="decimal" data-k="oh_{i}_cost"></td>
+        <td><input type="number" min="0" inputmode="decimal" data-k="oh_{i}_made"></td>
+        <td><select data-k="oh_{i}_do"><option value=""></option><option>Keep</option><option>Cut</option></select></td></tr></template>
+      </tbody>
+    </table></div>
+    <div class="totals">
+      <div class="tot"><span class="mono">Monthly overhead</span><b id="ohTotal">$0</b></div>
+      <div class="tot hot"><span class="mono">What you marked cut</span><b id="ohCut">$0</b><small id="ohYear">That's your raise.</small></div>
+    </div>
+    <label class="f">What are you keeping purely out of ego?</label><input type="text" data-k="b_ego">
+  </div>
+
+  <div class="card">
+    <h3>Support systems</h3>
+    <p class="hint">These three are the ceiling on your business. Rate each one honestly.</p>
+    <div class="tw"><table class="t">
+      <thead><tr><th></th><th>His line</th><th style="width:13%">Rate 1&ndash;10</th><th>One thing I'll change</th></tr></thead>
+      <tbody>
+        <tr><td class="lbl">Health</td><td class="his">You can't out-CRM a body that's falling apart.</td><td><input type="number" min="1" max="10" data-k="ss_h_r"></td><td><input type="text" data-k="ss_h_c"></td></tr>
+        <tr><td class="lbl">Relationships</td><td class="his">The most expensive thing to get wrong.</td><td><input type="number" min="1" max="10" data-k="ss_r_r"></td><td><input type="text" data-k="ss_r_c"></td></tr>
+        <tr><td class="lbl">Mind</td><td class="his">Every bad deal I did, I did tired, scared, or both.</td><td><input type="number" min="1" max="10" data-k="ss_m_r"></td><td><input type="text" data-k="ss_m_c"></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="card">
+    <h3>The swap table</h3>
+    <p class="hint">What Ben did, what works, and where you are right now.</p>
+    <div class="tw"><table class="t">
+      <thead><tr><th>What he did</th><th>What works</th><th>Where I am right now</th></tr></thead>
+      <tbody>
+        <tr><td class="lbl">One exit strategy</td><td class="his">Multiple exits, higher conversion</td><td><input type="text" data-k="sw_1"></td></tr>
+        <tr><td class="lbl">Big fixed overhead</td><td class="his">Minimal fixed costs, less stress</td><td><input type="text" data-k="sw_2"></td></tr>
+        <tr><td class="lbl">Big team</td><td class="his">Small elite team, real accountability</td><td><input type="text" data-k="sw_3"></td></tr>
+        <tr><td class="lbl">Business first, life later</td><td class="his">Life vision first, business fits inside it</td><td><input type="text" data-k="sw_4"></td></tr>
+        <tr><td class="lbl">Fast</td><td class="his">Slow and intentional</td><td><input type="text" data-k="sw_5"></td></tr>
+        <tr><td class="lbl">Reactive</td><td class="his">Daily habits: meditation, reflection, alignment</td><td><input type="text" data-k="sw_6"></td></tr>
+      </tbody>
+    </table></div>
+    <label class="f">Which row costs you the most right now?</label><input type="text" data-k="sw_worst">
+  </div>
+
+  <div class="pull">
+    <div><b>You marry someone in seconds. You divorce them in years.</b><p>Don't give away equity because you're impatient.</p></div>
+    <div><b>Paper saves partnerships.</b><p>Documentation isn't distrust. It's how you protect the relationship.</p></div>
+  </div>
+
+  <div class="card">
+    <h3>Ask The Room &middot; 4:20 PM</h3>
+    <p class="hint">Katie, Cameron and Ben back on stage together. What do you still want to ask?</p>
+    <textarea data-k="atr_q" rows="2"></textarea>
+  </div>
+</section>
+</main>
+
+<!-- ============ MONDAY ============ -->
+<section class="monday" id="monday"><div class="wrap">
+  <span class="chip mono">Your plan</span>
+  <h2>Monday, September 28</h2>
+  <p class="stand">This page fills itself in from what you wrote today. Read it Monday morning,
+  before you open your email.</p>
+
+  <div class="mgrid">
+    <div class="mcard wide"><span class="mono">The life you're building toward</span><span class="mono from">Ben</span><div class="v" data-mirror="b_tuesday"></div></div>
+    <div class="mcard"><span class="mono">What you're cutting</span><span class="mono from">Ben</span><div class="v" id="mCut"></div></div>
+    <div class="mcard"><span class="mono">The first thing you're handing off</span><span class="mono from">Cameron</span><div class="v" id="mHand"></div></div>
+    <div class="mcard"><span class="mono">Programs to look up</span><span class="mono from">The Panel</span><div class="v" id="mProg"></div></div>
+    <div class="mcard"><span class="mono">People to follow up with</span><span class="mono from">The Room</span><div class="v" id="mPpl"></div></div>
+    <div class="mcard"><span class="mono">The block you're watching</span><span class="mono from">Katie</span><div class="v" data-mirror="k_block"></div></div>
+    <div class="mcard"><span class="mono">The number you'll watch</span><span class="mono from">Cameron</span><div class="v" data-mirror="c_kpi"></div></div>
+    <div class="mcard"><span class="mono">The leverage you're missing</span><span class="mono from">Cameron</span><div class="v" data-mirror="c_missing"></div></div>
+    <div class="mcard wide"><span class="mono">This morning, you said today would be worth it if&hellip;</span><div class="v" data-mirror="worth"></div></div>
+  </div>
+
+  <div class="card">
+    <h3>Three things you'll actually do this week</h3>
+    <p class="hint">Not goals. Actions, each with a day on it and a person who'll notice if you don't.</p>
+    <div class="tw"><table class="t">
+      <thead><tr><th>The action</th><th style="width:24%">By when</th><th style="width:28%">Who I told</th></tr></thead>
+      <tbody data-repeat="3" data-prefix="act">
+        <template><tr><td><input type="text" data-k="act_{i}_1"></td><td><input type="text" data-k="act_{i}_2"></td><td><input type="text" data-k="act_{i}_3"></td></tr></template>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="card">
+    <label class="f" for="did">Was it?</label>
+    <textarea id="did" data-k="m_did" rows="2"></textarea>
+    <label class="f" for="one">One change you'll make this week</label>
+    <textarea id="one" data-k="m_one" rows="2"></textarea>
+  </div>
+
+  <div class="actions">
+    <button class="btn primary" type="button" id="dl">Download my playbook</button>
+    <button class="btn ghost" type="button" onclick="window.print()">Print this page</button>
+    <button class="btn ghost" type="button" id="clear">Clear my answers</button>
+  </div>
+  <p class="dlnote" id="dlnote">You get the full 12-page playbook with everything you typed, as a PDF
+  you keep. It stays editable, and nothing is sent anywhere.</p>
+</div></section>
+
+<footer><div class="wrap">
+  Breakthrough OKC &middot; Hosted by OKC REIA &middot; breakthroughokc.com<br>
+  Your answers are stored only in this browser. Nothing is sent to us.
+</div></footer>
+
+<script src="fill.js"></script>
+<script>
+(function(){
+  var KEY='bokc_playbook_2026', data={};
+  try{ data=JSON.parse(localStorage.getItem(KEY)||'{}')||{}; }catch(e){ data={}; }
+
+  // expand repeated table rows from their <template>
+  document.querySelectorAll('tbody[data-repeat]').forEach(function(tb){
+    var tpl=tb.querySelector('template').innerHTML, n=+tb.dataset.repeat, html='';
+    for(var i=1;i<=n;i++) html+=tpl.replace(/\{i\}/g,i).replace(/\{n\}/g,i);
+    tb.insertAdjacentHTML('beforeend',html);
+  });
+
+  document.querySelectorAll('table.t').forEach(function(tb){
+    var heads=[].map.call(tb.querySelectorAll('thead th'),function(th){return th.textContent.trim();});
+    tb.querySelectorAll('tbody tr').forEach(function(tr){
+      [].forEach.call(tr.children,function(td,i){ if(heads[i]) td.setAttribute('data-label',heads[i]); });
+    });
+  });
+
+  var fields=[].slice.call(document.querySelectorAll('[data-k]'));
+  function val(k){ return (data[k]==null?'':String(data[k])).trim(); }
+  function num(k){ var v=parseFloat(data[k]); return isFinite(v)?v:0; }
+  function money(v){ return '$'+Math.round(v).toLocaleString('en-US'); }
+  function grow(el){ if(el.tagName==='TEXTAREA'){ el.style.height='auto'; el.style.height=el.scrollHeight+2+'px'; } }
+
+  fields.forEach(function(el){
+    var k=el.dataset.k;
+    if(el.type==='checkbox') el.checked=!!data[k]; else if(data[k]!=null) el.value=data[k];
+    grow(el);
+  });
+
+  var savedEl=document.getElementById('saved'), t;
+  /* Merge on write, never overwrite wholesale. Two tabs open on the same phone (very common:
+     someone re-scans the QR after lunch) would otherwise clobber each other — the last tab to
+     type would wipe everything the other one saved. */
+  function persist(){
+    try{
+      var stored={};
+      try{ stored=JSON.parse(localStorage.getItem(KEY)||'{}')||{}; }catch(e){ stored={}; }
+      for(var k in data) stored[k]=data[k];
+      data=stored;
+      localStorage.setItem(KEY,JSON.stringify(data));
+      savedEl.textContent='Saved';
+    }
+    catch(e){ savedEl.textContent='Not saving'; showAlert('alertStore'); }
+    savedEl.classList.add('show'); clearTimeout(t); t=setTimeout(function(){savedEl.classList.remove('show');},1400);
+  }
+
+  /* and pick up what another tab wrote, without stealing the box you are typing in */
+  function repaint(){
+    fields.forEach(function(el){
+      if(el===document.activeElement) return;
+      var k=el.dataset.k;
+      if(el.type==='checkbox') el.checked=!!data[k];
+      else el.value = data[k]==null ? '' : data[k];
+      grow(el);
+    });
+    recompute();
+  }
+  window.addEventListener('storage', function(e){
+    if(e.key!==KEY) return;
+    try{ data=JSON.parse(e.newValue||'{}')||{}; }catch(err){ return; }
+    repaint();
+  });
+  document.addEventListener('visibilitychange', function(){
+    if(document.visibilityState!=='visible') return;
+    try{
+      var stored=JSON.parse(localStorage.getItem(KEY)||'{}')||{};
+      var changed=false, k;
+      for(k in stored) if(stored[k]!==data[k]) changed=true;
+      if(changed){ data=stored; repaint(); }
+    }catch(e){}
+  });
+
+  function list(el,items){
+    el.innerHTML='';
+    if(!items.length){ el.textContent='Fill this in during the session.'; el.classList.add('empty'); return; }
+    el.classList.remove('empty');
+    var ul=document.createElement('ul');
+    items.forEach(function(s){ var li=document.createElement('li'); li.textContent=s; ul.appendChild(li); });
+    el.appendChild(ul);
+  }
+
+  function recompute(){
+    var tot=0, off=0;
+    for(var i=1;i<=8;i++){ var h=num('task_'+i+'_hrs'); tot+=h; if(/Delegate|Automate/.test(val('task_'+i+'_do'))) off+=h; }
+    document.getElementById('hrsTotal').textContent=+tot.toFixed(1);
+
+    var rate=0, net=num('c_net'), hrs=num('c_hours');
+    if(net>0 && hrs>0){ rate=net/hrs; document.getElementById('camRate').textContent=money(rate)+'/hr'; }
+    else document.getElementById('camRate').textContent='\u2014';
+    var tHrs=num('c_trade_hrs'), tCost=num('c_trade_cost'), yourCost=rate*tHrs;
+    document.getElementById('camCost').textContent = (rate&&tHrs) ? money(yourCost)+'/mo' : '\u2014';
+    var vEl=document.getElementById('camVerdict'), nEl=document.getElementById('camVerdictNote');
+    if(rate&&tHrs&&tCost){
+      if(yourCost>tCost){ vEl.textContent='Easy trade';
+        nEl.textContent='Hiring it out costs '+money(tCost)+'. Doing it yourself costs '+money(yourCost)+'. You buy back '+(+tHrs.toFixed(1))+' hours.'; }
+      else { vEl.textContent='Not yet';
+        nEl.textContent='At '+money(rate)+'/hr those hours cost you '+money(yourCost)+' \u2014 less than the '+money(tCost)+' to hire out. Raise your number or hand off something bigger.'; }
+    } else { vEl.textContent='\u2014'; nEl.textContent='Fill in your number above first.'; }
+    document.getElementById('hrsOff').textContent=+off.toFixed(1);
+
+    var ohT=0, ohC=0, cut=[];
+    for(i=1;i<=8;i++){
+      var c=num('oh_'+i+'_cost'); ohT+=c;
+      if(val('oh_'+i+'_do')==='Cut'){ ohC+=c; cut.push((val('oh_'+i+'_what')||'Unnamed cost')+(c?' ('+money(c)+'/mo)':'')); }
+    }
+    document.getElementById('ohTotal').textContent=money(ohT);
+    document.getElementById('ohCut').textContent=money(ohC);
+    document.getElementById('ohYear').textContent= ohC ? "That's your raise: "+money(ohC*12)+' a year.' : "That's your raise.";
+
+    // Monday page
+    document.querySelectorAll('[data-mirror]').forEach(function(el){
+      var v=val(el.dataset.mirror);
+      el.textContent=v||'Fill this in during the session.'; el.classList.toggle('empty',!v);
+    });
+    list(document.getElementById('mCut'), cut.length ? cut.concat(ohC?['Total: '+money(ohC)+' a month']:[]) : []);
+    var hand=[]; if(val('c_first')) hand.push(val('c_first')+(val('c_who')?' → '+val('c_who'):''));
+    if(off) hand.push(+off.toFixed(1)+' hours a week you could hand off');
+    list(document.getElementById('mHand'), hand);
+    var prog=[]; for(i=1;i<=5;i++) if(val('prog_'+i+'_name')) prog.push(val('prog_'+i+'_name')+(val('prog_'+i+'_lvl')?' ('+val('prog_'+i+'_lvl')+')':''));
+    list(document.getElementById('mProg'), prog);
+    var ppl=[]; for(i=1;i<=6;i++) if(val('ppl_'+i+'_name')) ppl.push(val('ppl_'+i+'_name')+(val('ppl_'+i+'_why')?': '+val('ppl_'+i+'_why'):''));
+    list(document.getElementById('mPpl'), ppl);
+    marks();
+  }
+
+  // a wheel gesture over a number field should scroll the page, never change the number
+  // ---- banners -----------------------------------------------------------
+  function showAlert(id){
+    var el=document.getElementById(id); if(!el) return;
+    try{ if(sessionStorage.getItem('hid_'+id)) return; }catch(e){}
+    el.classList.add('on');
+  }
+  document.addEventListener('click', function(e){
+    var b=e.target.closest && e.target.closest('[data-close]'); if(!b) return;
+    var el=document.getElementById(b.dataset.close);
+    if(el) el.classList.remove('on');
+    try{ sessionStorage.setItem('hid_'+b.dataset.close,'1'); }catch(err){}
+  });
+
+  // Is this an app's built-in browser (Gmail, Facebook, Instagram, LinkedIn)? Those keep their own
+  // storage and some wipe it when the app closes, so it's worth telling people up front.
+  (function(){
+    var ua=navigator.userAgent||'';
+    var inApp=/(FBAN|FBAV|FB_IAB|Instagram|LinkedInApp|Twitter|Line\/|MicroMessenger|Snapchat|Pinterest|GSA\/)/i.test(ua);
+    if(!inApp && /iPhone|iPad|iPod/i.test(ua)){
+      // iOS webviews run WebKit without Safari's own token
+      inApp = /AppleWebKit/.test(ua) && !/Safari/.test(ua) && !/CriOS|FxiOS|EdgiOS/.test(ua);
+    }
+    if(!inApp && /Android/i.test(ua)) inApp = /; wv\)/.test(ua);
+    if(inApp) showAlert('alertApp');
+  })();
+
+  // Does storage actually work? Private windows throw, or silently discard.
+  (function(){
+    try{
+      var k='__pb_probe'; localStorage.setItem(k,'1');
+      if(localStorage.getItem(k)!=='1') throw new Error('not persisted');
+      localStorage.removeItem(k);
+    }catch(e){ showAlert('alertStore'); }
+  })();
+
+  // ---- a dot in the nav for each section you've written something in ------
+  var SECTION_KEYS={
+    start:['name','worth'], katie:['k_step1','k_block','k_edge','k_case_who'],
+    panel:['p_where','p_q1','prog_1_name','call_1_name'], room:['ppl_1_name'],
+    cameron:['c_missing','c_net','c_first','task_1_what','c_kpi','c_rule'],
+    ben:['b_tuesday','oh_1_what','sw_worst','atr_q'], monday:['m_did','m_one']
+  };
+  function marks(){
+    Object.keys(SECTION_KEYS).forEach(function(id){
+      var any=SECTION_KEYS[id].some(function(k){ return val(k); });
+      var a=document.querySelector('.bar nav a[href="#'+id+'"]');
+      if(a) a.classList.toggle('done', any);
+    });
+  }
+
+  document.addEventListener('wheel', function(e){
+    var el=e.target;
+    if(el && el.tagName==='INPUT' && el.type==='number'){
+      if(document.activeElement===el) el.blur();
+    }
+  }, {passive:true, capture:true});
+
+  document.addEventListener('input',onChange); document.addEventListener('change',onChange);
+  function onChange(e){
+    var el=e.target; if(!el.dataset || !el.dataset.k) return;
+    data[el.dataset.k]= el.type==='checkbox' ? el.checked : el.value;
+    lastEdit=Date.now(); markStale();
+    grow(el); recompute(); persist();
+  }
+
+  // ---- download the filled playbook -------------------------------------
+  var dlBtn=document.getElementById('dl'), dlNote=document.getElementById('dlnote'), tplBytes=null;
+  function note(msg,err){ dlNote.textContent=msg; dlNote.classList.toggle('err',!!err); }
+  var DEFAULT_NOTE=dlNote ? dlNote.textContent : '';
+
+  async function template(){
+    if(tplBytes) return tplBytes;
+    var res=await fetch('playbook-template.pdf',{cache:'force-cache'});
+    if(!res.ok) throw new Error('template '+res.status);
+    tplBytes=await res.arrayBuffer();
+    return tplBytes;
+  }
+
+  var dlTop=document.getElementById('dlTop');
+  var lastDownload=0, lastEdit=0;
+  try{ lastDownload=+localStorage.getItem(KEY+'_dl')||0; }catch(e){}
+  function markStale(){
+    var stale = lastDownload && lastEdit > lastDownload;
+    if(dlTop) dlTop.textContent = stale ? 'Download update' : 'Download';
+    if(dlBtnNote && stale) dlBtnNote.style.display='block';
+  }
+  var dlBtnNote=null;
+  /* 516KB of PDF machinery that nobody needs until they hit Download. Fetched on first use, and
+     quietly pre-cached by the service worker in the background, so by the end of the day it is
+     already on the device even if the wifi has given up. */
+  var pdfLibLoading=null;
+  function loadPdfLib(){
+    if(window.PDFLib) return Promise.resolve(window.PDFLib);
+    if(pdfLibLoading) return pdfLibLoading;
+    pdfLibLoading=new Promise(function(resolve,reject){
+      var s=document.createElement('script');
+      s.src='pdf-lib.min.js';
+      s.onload=function(){ window.PDFLib ? resolve(window.PDFLib) : reject(new Error('pdf-lib did not load')); };
+      s.onerror=function(){ pdfLibLoading=null; reject(new Error('could not fetch the PDF builder')); };
+      document.head.appendChild(s);
+    });
+    return pdfLibLoading;
+  }
+
+  async function runDownload(btn){
+    if(!window.PlaybookFill){ note('The download tool did not load. Use Print this page instead.',1); return; }
+    var buttons=[dlBtn,dlTop].filter(Boolean), labels=buttons.map(function(b){return b.textContent;});
+    buttons.forEach(function(b,i){ b.disabled=true; b.textContent = b===dlTop ? 'Building\u2026' : 'Building your PDF\u2026'; });
+    try{
+      var lib=await loadPdfLib();
+      var out=await window.PlaybookFill.buildPdf(await template(), data, lib);
+      var blob=new Blob([out.bytes],{type:'application/pdf'});
+      var url=URL.createObjectURL(blob), a=document.createElement('a');
+      var who=(data.name||'').trim().replace(/[^A-Za-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,40);
+      var d=new Date(), p2=function(x){return (x<10?'0':'')+x;};
+      var stamp=d.getFullYear()+'-'+p2(d.getMonth()+1)+'-'+p2(d.getDate())+'-'+p2(d.getHours())+p2(d.getMinutes());
+      a.href=url; a.download=(who?who+'-':'')+'Wealth-Building-Playbook-'+stamp+'.pdf';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      setTimeout(function(){ URL.revokeObjectURL(url); },4000);
+      if(out.missing && out.missing.length){
+        note('Downloaded \u2014 but '+out.missing.length+' answer'+(out.missing.length>1?'s':'')+
+             ' could not be written into the PDF. Tell Sabrena, and keep this browser tab open.',1);
+        if(window.console) console.warn('Playbook fields that failed:', out.missing);
+      } else {
+        note('Downloaded. Check your Downloads or Files app \u2014 that copy is yours, and you can keep typing in it.');
+      }
+      try{ localStorage.setItem(KEY+'_dl', Date.now()); }catch(e){}
+      lastDownload=Date.now(); markStale();
+    }catch(e){
+      note('Could not build the PDF ('+((e&&e.message)||e)+'). Use Print this page instead \u2014 your answers are safe.',1);
+    }finally{ buttons.forEach(function(b,i){ b.disabled=false; b.textContent=labels[i]; }); }
+  }
+  if(dlTop) dlTop.addEventListener('click', function(){ runDownload(dlTop); });
+    if(dlBtn) dlBtn.addEventListener('click', function(){ runDownload(dlBtn); });
+
+  document.getElementById('clear').addEventListener('click',function(){
+    if(!confirm('Clear everything you have written in this Playbook? This cannot be undone.')) return;
+    data={}; try{ localStorage.setItem(KEY,'{}'); }catch(e){}
+    fields.forEach(function(el){ if(el.type==='checkbox') el.checked=false; else el.value=''; grow(el); });
+    recompute();
+  });
+
+  // highlight the section you're in
+  var links=[].slice.call(document.querySelectorAll('#nav a'));
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(en){ if(en.isIntersecting){
+      links.forEach(function(a){ a.classList.toggle('on',a.getAttribute('href')==='#'+en.target.id); });
+      var on=document.querySelector('#nav a.on'); if(on) on.scrollIntoView({block:'nearest',inline:'center'});
+    }});
+  },{rootMargin:'-45% 0px -50% 0px'});
+  document.querySelectorAll('section[id]').forEach(function(s){ io.observe(s); });
+
+  window.addEventListener('beforeprint',function(){ fields.forEach(grow); });
+  recompute();
+})();
+</script>
+<script>
+/* Cache everything on first load so the workbook keeps working when the ballroom wifi doesn't.
+   Service workers only run on https (or localhost), which is also where this will live. */
+if('serviceWorker' in navigator && (location.protocol==='https:' || location.hostname==='localhost')){
+  window.addEventListener('load', function(){
+    navigator.serviceWorker.register('sw.js').then(function(reg){
+      function ready(){
+        var el=document.getElementById('offlineOk');
+        if(el && (navigator.serviceWorker.controller || (reg.active && reg.active.state==='activated'))){
+          el.style.display='block';
+        }
+      }
+      ready();
+      navigator.serviceWorker.addEventListener('controllerchange', ready);
+      if(reg.installing) reg.installing.addEventListener('statechange', ready);
+    }).catch(function(){ /* no offline cache; the page still works normally */ });
+  });
+}
+</script>
+</body>
+</html>
