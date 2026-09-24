@@ -329,6 +329,12 @@ footer{padding:28px 0 40px;color:var(--muted);font-size:13px}
     <div class="num"><span>3</span><input type="text" data-k="k_step3"></div>
   </div>
 
+  <div class="card">
+    <h3>Anything else from this session</h3>
+    <textarea data-k="n_katie" rows="7" style="min-height:150px"></textarea>
+  </div>
+</section>
+
 <!-- ============ PANEL ============ -->
 <section class="s" id="panel">
   <div class="s-head"><div>
@@ -389,11 +395,6 @@ footer{padding:28px 0 40px;color:var(--muted);font-size:13px}
   </div>
   <div class="note"><b>Tonight:</b> check each program you wrote down against your Oklahoma Investor
   Funding Manual. It has the deadlines, application paths and direct contacts.</div>
-  <div class="card">
-    <h3>Anything else from this session</h3>
-    <textarea data-k="n_katie" rows="7" style="min-height:150px"></textarea>
-  </div>
-
   <div class="card">
     <h3>Anything else from this session</h3>
     <textarea data-k="n_panel" rows="7" style="min-height:150px"></textarea>
@@ -564,80 +565,94 @@ footer{padding:28px 0 40px;color:var(--muted);font-size:13px}
   <blockquote class="quote">My business scaled the moment my life simplified.<cite>Ben Allgeyer</cite></blockquote>
 
   <div class="card">
-    <h3>A good Tuesday, five years out</h3>
-    <p class="hint">Not the one that impresses people. The one that feeds you.</p>
-    <label class="f">What does a good Tuesday look like in five years?</label><textarea data-k="b_tuesday" rows="2"></textarea>
-    <label class="f">What would have to be true about your business for that Tuesday to happen?</label>
+    <h3>Why do you want to grow your business?</h3>
+    <p class="hint">One sentence. If the answer is about impressing anyone, rewrite it.</p>
+    <textarea data-k="b_why" rows="2"></textarea>
+  </div>
+
+  <div class="card">
+    <h3>Your ideal Tuesday, five years out</h3>
+    <p class="hint">Not the one that impresses people. The one that feeds you. Write it in detail.</p>
+    <label class="f">What does that Tuesday look like, hour by hour?</label><textarea data-k="b_tuesday" rows="3"></textarea>
+    <label class="f">What would have to be true in your business for that Tuesday to happen?</label>
     <div class="num"><span>1</span><input type="text" data-k="b_true1"></div>
     <div class="num"><span>2</span><input type="text" data-k="b_true2"></div>
     <div class="num"><span>3</span><input type="text" data-k="b_true3"></div>
-    <label class="f">What are you building instead?</label><input type="text" data-k="b_instead">
+  </div>
+
+  <div class="card">
+    <h3>The two numbers</h3>
+    <p class="hint">If you can&rsquo;t fill these in from memory, that&rsquo;s the assignment.</p>
+    <label class="f">Average net profit per deal <span style="font-weight:400;color:var(--muted)">&mdash; net, not gross</span></label><input type="number" min="0" data-k="b_npd">
+    <label class="f">Total monthly overhead <span style="font-weight:400;color:var(--muted)">&mdash; everything that goes out whether you close or not</span></label><input type="number" min="0" data-k="b_moh">
   </div>
 
   <div class="card">
     <h3>The overhead audit</h3>
-    <p class="hint">List every recurring cost in your business. For each one, name what it made you
-    last month, in dollars. If you can't name it, that's your answer.</p>
+    <p class="hint">Every recurring cost in your business. For each one, name what it made you last month,
+    in dollars. Anything you can&rsquo;t defend gets cancelled.</p>
     <div class="tw"><table class="t">
-      <thead><tr><th>What it is</th><th style="width:17%">Monthly cost $</th><th style="width:20%">What it made me last month $</th><th style="width:15%">Keep or cut?</th></tr></thead>
+      <thead><tr><th>What it is</th><th style="width:16%">Cost / month</th><th style="width:24%">What it made me last month</th><th style="width:18%">Keep or cut?</th></tr></thead>
       <tbody data-repeat="8" data-prefix="oh">
-        <template><tr><td><input type="text" data-k="oh_{i}_what"></td><td><input type="number" min="0" inputmode="decimal" data-k="oh_{i}_cost"></td>
-        <td><input type="number" min="0" inputmode="decimal" data-k="oh_{i}_made"></td>
+        <template><tr><td><input type="text" data-k="oh_{i}_what"></td><td><input type="number" min="0" data-k="oh_{i}_cost"></td>
+        <td><input type="text" data-k="oh_{i}_made"></td>
         <td><select data-k="oh_{i}_do"><option value=""></option><option>Keep</option><option>Cut</option></select></td></tr></template>
       </tbody>
     </table></div>
     <div class="totals">
       <div class="tot"><span class="mono">Monthly overhead</span><b id="ohTotal">$0</b></div>
-      <div class="tot hot"><span class="mono">What you marked cut</span><b id="ohCut">$0</b><small id="ohYear">That's your raise.</small></div>
+      <div class="tot hot"><span class="mono">What you marked cut</span><b id="ohCut">$0</b><small id="ohYear">That&rsquo;s your raise.</small></div>
     </div>
-    <label class="f">What are you keeping purely out of ego?</label><input type="text" data-k="b_ego">
+    <label class="f">What are you keeping purely out of ego?</label><textarea data-k="b_ego" rows="2"></textarea>
   </div>
 
   <div class="card">
     <h3>Support systems</h3>
-    <p class="hint">These three are the ceiling on your business. Rate each one honestly.</p>
+    <p class="hint">These three are the ceiling on your business. Rate each one honestly, 1&ndash;10, then
+    name one thing you&rsquo;ll change.</p>
     <div class="tw"><table class="t">
-      <thead><tr><th></th><th>His line</th><th style="width:13%">Rate 1&ndash;10</th><th>One thing I'll change</th></tr></thead>
+      <thead><tr><th style="width:20%">What it is</th><th>His line</th><th style="width:14%">Rate 1&ndash;10</th><th style="width:30%">One thing I&rsquo;ll change</th></tr></thead>
       <tbody>
-        <tr><td class="lbl">Health</td><td class="his">You can't out-CRM a body that's falling apart.</td><td><input type="number" min="1" max="10" data-k="ss_h_r"></td><td><input type="text" data-k="ss_h_c"></td></tr>
-        <tr><td class="lbl">Relationships</td><td class="his">The most expensive thing to get wrong.</td><td><input type="number" min="1" max="10" data-k="ss_r_r"></td><td><input type="text" data-k="ss_r_c"></td></tr>
-        <tr><td class="lbl">Mind</td><td class="his">Every bad deal I did, I did tired, scared, or both.</td><td><input type="number" min="1" max="10" data-k="ss_m_r"></td><td><input type="text" data-k="ss_m_c"></td></tr>
+        <tr><td class="lbl">Health</td><td class="his">You can&rsquo;t out-CRM a body that&rsquo;s falling apart.</td><td data-label="Rate"><input type="number" min="0" max="10" data-k="ss_h_r"></td><td data-label="Change"><input type="text" data-k="ss_h_c"></td></tr>
+        <tr><td class="lbl">Relationships</td><td class="his">The most expensive thing to get wrong.</td><td data-label="Rate"><input type="number" min="0" max="10" data-k="ss_r_r"></td><td data-label="Change"><input type="text" data-k="ss_r_c"></td></tr>
+        <tr><td class="lbl">Mind</td><td class="his">Every bad deal I did, I did tired, scared, or both.</td><td data-label="Rate"><input type="number" min="0" max="10" data-k="ss_m_r"></td><td data-label="Change"><input type="text" data-k="ss_m_c"></td></tr>
       </tbody>
     </table></div>
   </div>
 
   <div class="card">
     <h3>The swap table</h3>
-    <p class="hint">What Ben did, what works, and where you are right now.</p>
+    <p class="hint">Six rows, the old way against the new way. Tick where you actually are today on each row.</p>
     <div class="tw"><table class="t">
-      <thead><tr><th>What he did</th><th>What works</th><th>Where I am right now</th></tr></thead>
+      <thead><tr><th style="width:30%">The old way</th><th>What works instead</th><th style="width:26%">Where I am today</th></tr></thead>
       <tbody>
-        <tr><td class="lbl">One exit strategy</td><td class="his">Multiple exits, higher conversion</td><td><input type="text" data-k="sw_1"></td></tr>
-        <tr><td class="lbl">Big fixed overhead</td><td class="his">Minimal fixed costs, less stress</td><td><input type="text" data-k="sw_2"></td></tr>
-        <tr><td class="lbl">Big team</td><td class="his">Small elite team, real accountability</td><td><input type="text" data-k="sw_3"></td></tr>
-        <tr><td class="lbl">Business first, life later</td><td class="his">Life vision first, business fits inside it</td><td><input type="text" data-k="sw_4"></td></tr>
-        <tr><td class="lbl">Fast</td><td class="his">Slow and intentional</td><td><input type="text" data-k="sw_5"></td></tr>
-        <tr><td class="lbl">Reactive</td><td class="his">Daily habits: meditation, reflection, alignment</td><td><input type="text" data-k="sw_6"></td></tr>
+        <tr><td class="lbl">One exit strategy</td><td class="his">Multiple exits, higher conversion</td><td data-label="Where I am today"><select data-k="sw_1"><option value=""></option><option>Old way</option><option>New way</option></select></td></tr>
+        <tr><td class="lbl">Big fixed overhead</td><td class="his">Minimal fixed costs, less stress</td><td data-label="Where I am today"><select data-k="sw_2"><option value=""></option><option>Old way</option><option>New way</option></select></td></tr>
+        <tr><td class="lbl">Big team</td><td class="his">Small elite team, real accountability</td><td data-label="Where I am today"><select data-k="sw_3"><option value=""></option><option>Old way</option><option>New way</option></select></td></tr>
+        <tr><td class="lbl">Business first, life later</td><td class="his">Life vision first, business fits inside it</td><td data-label="Where I am today"><select data-k="sw_4"><option value=""></option><option>Old way</option><option>New way</option></select></td></tr>
+        <tr><td class="lbl">Fast</td><td class="his">Slow and intentional</td><td data-label="Where I am today"><select data-k="sw_5"><option value=""></option><option>Old way</option><option>New way</option></select></td></tr>
+        <tr><td class="lbl">Reactive</td><td class="his">Daily habits: meditation, reflection, alignment</td><td data-label="Where I am today"><select data-k="sw_6"><option value=""></option><option>Old way</option><option>New way</option></select></td></tr>
       </tbody>
     </table></div>
-    <label class="f">Which row costs you the most right now?</label><input type="text" data-k="sw_worst">
-  </div>
-
-  <div class="pull">
-    <div><b>You marry someone in seconds. You divorce them in years.</b><p>Don't give away equity because you're impatient.</p></div>
-    <div><b>Paper saves partnerships.</b><p>Documentation isn't distrust. It's how you protect the relationship.</p></div>
   </div>
 
   <div class="card">
-    <h3>Ask The Room &middot; 4:20 PM</h3>
-    <p class="hint">Katie, Cameron and Ben back on stage together. What do you still want to ask?</p>
-    <textarea data-k="atr_q" rows="2"></textarea>
+    <h3>The one row you&rsquo;re moving in the next 90 days</h3>
+    <p class="hint">Pick one. Not all six.</p>
+    <label class="f">Which row</label><input type="text" data-k="b_move">
+    <label class="f">The first thing you&rsquo;ll do about it, and by when</label><textarea data-k="b_move_step" rows="2"></textarea>
   </div>
+
+  <div class="card">
+    <h3>Ask The Room &middot; 4:15 PM</h3>
+    <p class="hint">Katie, Cameron and Ben back on stage together. What do you still want to ask?</p>
+    <textarea data-k="atr_q" rows="3"></textarea>
+  </div>
+
   <div class="card">
     <h3>Anything else from this session</h3>
     <textarea data-k="n_ben" rows="7" style="min-height:150px"></textarea>
   </div>
-
 </section>
 </main>
 

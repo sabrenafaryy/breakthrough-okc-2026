@@ -26,7 +26,8 @@
     c_chaos: 'c_chaos', c_system: 'c_system', c_system_who: 'c_system_who',
     c_bb_arv: 'c_bb_arv', c_bb_coc: 'c_bb_coc', c_bb_refi: 'c_bb_refi',
     c_kpi: 'c_kpi', c_fear: 'c_fear', c_creep: 'c_creep', c_rule: 'c_rule',
-    b_tuesday: 'b_tuesday', b_instead: 'b_instead', b_ego: 'b_ego', sw_worst: 'b_row',
+    b_tuesday: 'b_tuesday', b_ego: 'b_ego', b_why: 'b_why',
+    b_npd: 'b_npd', b_moh: 'b_moh', b_move: 'b_move', b_move_step: 'b_move_step',
     atr_q: 'atr_q', m_did: 'm_did', m_one: 'm_one',
     b_true1: 'b_true_1', b_true2: 'b_true_2', b_true3: 'b_true_3',
     ss_h_r: 'b_health_r', ss_h_c: 'b_health_c',
@@ -111,7 +112,21 @@
       if (tc) { out[mine > tc ? 'c_trade_verdict_1' : 'c_trade_verdict_2'] = true; }
     }
 
-    for (var i = 1; i <= 6; i++) if (v(d, 'sw_' + i)) out['swap_' + i + '_3'] = v(d, 'sw_' + i);
+    for (var i = 1; i <= 6; i++) {
+      var pos = v(d, 'sw_' + i);
+      if (pos === 'Old way') out['sw_' + i + '_old'] = true;
+      else if (pos === 'New way') out['sw_' + i + '_new'] = true;
+    }
+
+    /* the overhead totals the page shows live, written into the PDF as text */
+    var ohT = 0, ohC = 0;
+    for (i = 1; i <= 8; i++) {
+      var c2 = n(d, 'oh_' + i + '_cost');
+      ohT += c2;
+      if (v(d, 'oh_' + i + '_do') === 'Cut') ohC += c2;
+    }
+    if (ohT > 0) out.b_oh_total = money(ohT) + '/mo';
+    if (ohC > 0) { out.b_oh_cut = money(ohC) + '/mo'; out.b_oh_year = money(ohC * 12) + ' a year'; }
 
     var kAll = n(d,'kd_purchase') + n(d,'kd_reno') + n(d,'kd_hold');
     if (kAll > 0) out.kd_allin = money(kAll);
