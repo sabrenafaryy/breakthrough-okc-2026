@@ -181,7 +181,7 @@ footer{padding:28px 0 40px;color:var(--muted);font-size:13px}
   <span class="brand">Breakthrough OKC</span>
   <nav id="nav">
     <a href="#start">Start</a><a href="#katie">Katie</a><a href="#panel">Panel</a><a href="#room">The Room</a>
-    <a href="#cameron">Cameron</a><a href="#ben">Ben</a><a href="#monday">Monday</a>
+    <a href="#cameron">Cameron</a><a href="#ben">Ben</a><a href="#ask">Ask</a><a href="#monday">Monday</a>
   </nav>
   <button class="dltop" type="button" id="dlTop">Download</button>
   <span class="saved mono" id="saved">Saved</span>
@@ -644,16 +644,46 @@ footer{padding:28px 0 40px;color:var(--muted);font-size:13px}
   </div>
 
   <div class="card">
-    <h3>Ask The Room &middot; 4:15 PM</h3>
-    <p class="hint">Katie, Cameron and Ben back on stage together. What do you still want to ask?</p>
-    <textarea data-k="atr_q" rows="3"></textarea>
-  </div>
-
-  <div class="card">
     <h3>Anything else from this session</h3>
     <textarea data-k="n_ben" rows="7" style="min-height:150px"></textarea>
   </div>
 </section>
+
+<!-- ============ ASK THE ROOM ============ -->
+<section class="s" id="ask">
+  <div class="s-head"><div>
+    <span class="mono when">4:15 PM &middot; All three speakers</span>
+    <h2>Ask The Room</h2>
+    <div class="talk">Katie Neason, Cameron Burke and Ben Allgeyer, back on stage together</div>
+  </div></div>
+  <p class="stand">Rapid fire, short questions and short answers &mdash; which is exactly where the
+  offhand remark you remember for a year tends to come from. Catch them as they land.</p>
+
+  <div class="card">
+    <h3>What do you still want to ask?</h3>
+    <p class="hint">Write it before the mic comes round. A question you have written down is a question
+    you actually ask.</p>
+    <textarea data-k="atr_q" rows="3"></textarea>
+  </div>
+
+  <div class="card">
+    <h3>Nuggets and takeaways</h3>
+    <p class="hint">One line each. The things you want to still have next week &mdash; from any of the
+    three of them, or from anything else today.</p>
+    <div class="num"><span>1</span><input type="text" data-k="atr_n_1"></div>
+    <div class="num"><span>2</span><input type="text" data-k="atr_n_2"></div>
+    <div class="num"><span>3</span><input type="text" data-k="atr_n_3"></div>
+    <div class="num"><span>4</span><input type="text" data-k="atr_n_4"></div>
+    <div class="num"><span>5</span><input type="text" data-k="atr_n_5"></div>
+    <div class="num"><span>6</span><input type="text" data-k="atr_n_6"></div>
+  </div>
+
+  <div class="card">
+    <h3>Anything else from this session</h3>
+    <textarea data-k="n_ask" rows="7" style="min-height:150px"></textarea>
+  </div>
+</section>
+
 </main>
 
 <!-- ============ MONDAY ============ -->
@@ -893,7 +923,9 @@ footer{padding:28px 0 40px;color:var(--muted);font-size:13px}
     start:['name','worth'], katie:['k_ml_said','k_ml_mine','kd_purchase','k_block','k_step1','n_katie'],
     panel:['p_where','p_q1','prog_1_name','call_1_name'], room:['ppl_1_name'],
     cameron:['c_missing','c_net','c_first','task_1_what','c_kpi','c_rule'],
-    ben:['b_tuesday','oh_1_what','sw_worst','atr_q'], monday:['m_did','m_one']
+
+    ben:['b_why','b_tuesday','oh_1_what','b_move','n_ben'],
+    ask:['atr_q','atr_n_1','n_ask'], monday:['m_did','m_one']
   };
   function marks(){
     Object.keys(SECTION_KEYS).forEach(function(id){
