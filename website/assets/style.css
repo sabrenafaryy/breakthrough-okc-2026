@@ -249,3 +249,51 @@ footer .fine{border-top:1px solid rgba(255,255,255,.12);padding-top:20px;font-fa
 
 /* hero "presented by" credit */
 .hero .presented{margin-top:16px;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.13em;font-size:11.5px;color:rgba(255,255,255,.82);font-weight:700}
+
+/* agenda: the four numbers people ask for, the timeline, and the day-of details */
+.keyfacts{display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:#fff;border:1.5px solid #e7e7ea;
+border-radius:14px;overflow:hidden;margin:0 0 26px;box-shadow:0 10px 30px -22px rgba(36,49,80,.5)}
+.keyfacts div{padding:18px 16px;text-align:center;border-left:1px solid #ececed}
+.keyfacts div:first-child{border-left:0}
+.keyfacts .kf-l{font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.12em;font-size:10.5px;color:#6b7280}
+.keyfacts .kf-v{font-family:var(--font-head);font-weight:900;font-size:26px;color:var(--navy);line-height:1.15;margin:4px 0 2px}
+.keyfacts .kf-v.red{color:var(--red)}
+.keyfacts .kf-s{font-size:13px;color:#6b7280}
+.dayof{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:26px}
+.dayof .card{background:#fff;border:1.5px solid #e7e7ea;border-left:4px solid var(--red);border-radius:12px;padding:18px 20px}
+.dayof h4{font-family:var(--font-head);font-weight:900;text-transform:uppercase;font-size:14px;color:var(--navy);margin:0 0 10px}
+.dayof dl{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin:0;font-size:14px}
+.dayof dt{font-family:var(--font-mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--red);padding-top:3px}
+.dayof dd{margin:0;color:#374151;line-height:1.5}
+.dayof dd b{color:var(--navy)}
+@media(max-width:860px){.keyfacts{grid-template-columns:repeat(2,1fr)}.keyfacts div:nth-child(3){border-left:0}
+.keyfacts div:nth-child(n+3){border-top:1px solid #ececed}
+.dayof{grid-template-columns:1fr}}
+
+/* agenda: vertical run of the day */
+.tl{position:relative;margin:0 0 8px;padding-left:96px}
+.tl:before{content:"";position:absolute;left:78px;top:10px;bottom:10px;width:2px;background:#e7e7ea}
+.tl-row{position:relative;padding:12px 0 12px 22px;border-bottom:1px solid #f0f0f2}
+.tl-row:last-child{border-bottom:0}
+.tl-time{position:absolute;left:-96px;top:12px;width:74px;text-align:right}
+.tl-time b{display:block;font-family:var(--font-head);font-weight:900;font-size:17px;color:var(--navy);line-height:1.1}
+.tl-time span{font-family:var(--font-mono);font-size:10px;color:#9aa0ab;letter-spacing:.08em}
+.tl-row:before{content:"";position:absolute;left:-23px;top:17px;width:11px;height:11px;border-radius:50%;
+background:#fff;border:2.5px solid var(--navy)}
+.tl-row.hot:before{border-color:var(--red);background:var(--red)}
+.tl-row.brk:before{border-color:#c9ccd4}
+.tl-w{font-family:var(--font-head);font-weight:900;text-transform:uppercase;font-size:14.5px;color:var(--navy);line-height:1.2}
+.tl-row.brk .tl-w{color:#6b7280}
+.tl-s{font-size:13.5px;color:#6b7280;margin-top:3px;line-height:1.45}
+@media(max-width:640px){.tl{padding-left:74px}.tl:before{left:58px}.tl-time{left:-74px;width:56px}
+.tl-time b{font-size:15px}.tl-row:before{left:-22px}}
+
+/* ── 2026-09-26: online registration closed, door price $215 ── */
+.closed-note{display:inline-block;background:#FFF4F2;border:2px solid var(--red);
+ color:var(--navy);padding:15px 22px;border-radius:9px;font-size:16px;line-height:1.55;
+ max-width:600px;text-align:left}
+.closed-note b{color:var(--red);font-weight:700}
+.btn-closed{display:inline-block;background:#fff!important;color:var(--navy)!important;
+ border:2px solid var(--red)!important;cursor:default;pointer-events:none;font-weight:700}
+.nav-closed{color:#9aa3b5;font-weight:600;white-space:nowrap}
+.topbar b{color:#fff}
